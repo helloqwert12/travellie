@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "407770496523-2urrlojplgsj7808n7nnj8d53dlj94ki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobile.absoluke.travellie",
+            "certificate_hash": "f4c40d9a5f47c544a9265862654ac1ebab1682ef"
+          }
+        },
+        {
           "client_id": "407770496523-j3kg1460a17k9d28lqavgroh1rmv7293.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

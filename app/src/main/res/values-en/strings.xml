@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Travellie</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+</resources>

@@ -2,6 +2,11 @@
 <resources>
     <string name="app_name">Travellie</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="intro">
+        <font color="white">Find incredible\nplaces you\nwill</font>
+        <font color="#f9d641">love</font>
+    </string>
+    <string name="sub_intro">Explore the world searching\nby location, interests and\nmore on the go.</string>
 </resources>

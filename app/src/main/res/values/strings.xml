@@ -4,7 +4,8 @@
 
     <!-- Strings related to login -->
     <string name="intro">
-        <font color="white">Find incredible places you will</font>
+        <font color="white">Find incredible\nplaces you\nwill</font>
         <font color="#f9d641">love</font>
     </string>
+    <string name="sub_intro">Cùng Travelie khám phá bất kì nơi đâu bạn muốn đến</string>
 </resources>

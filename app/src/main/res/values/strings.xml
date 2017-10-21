@@ -2,6 +2,10 @@
     <string name="app_name" translatable="false">Travellie</string>
     <string name="title_activity_login">Đăng nhập</string>
 
+    <!--facebook string-->
+    <string name="facebook_app_id">122046885142484</string>
+    <string name="fb_login_protocol_scheme">fb122046885142484</string>
+
     <!-- Strings related to login -->
     <string name="intro">
         <font color="white">Find incredible\nplaces you\nwill</font>

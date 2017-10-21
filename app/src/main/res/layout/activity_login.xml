@@ -67,7 +67,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <Button
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_sign_in_button"
             style="@style/sign_in_btn"
             android:background="@drawable/round_btn"
@@ -82,6 +82,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
         <!--android:textColor="#39579b"-->
+
         <Button
             android:id="@+id/gg_sign_in_button"
             style="@style/sign_in_btn"

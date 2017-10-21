@@ -7,8 +7,6 @@
     android:background="@drawable/bg"
     tools:context="com.mobile.absoluke.travellie.LoginActivity">
 
-    <!--Login screen sample-->
-
     <!-- Login progress -->
 
     <ImageView
@@ -70,31 +68,36 @@
         <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_sign_in_button"
             style="@style/sign_in_btn"
+            android:layout_marginTop="8dp"
             android:background="@drawable/round_btn"
-            android:fontFamily="sans-serif"
+            android:elevation="5dp"
+            android:stateListAnimator="@null"
             android:text="       Facebook"
-            android:textAlignment="center"
             android:textColor="#39579b"
+            android:translationZ="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        <!--android:textColor="#39579b"-->
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_text" />
 
         <Button
             android:id="@+id/gg_sign_in_button"
             style="@style/sign_in_btn"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/round_btn"
+            android:elevation="5dp"
+            android:stateListAnimator="@null"
             android:text="       Google"
             android:textColor="#db4437"
+            android:translationZ="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/fb_sign_in_button"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_text" />
 
         <ImageView
             android:id="@+id/fb_logo"
@@ -103,7 +106,8 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
-            android:elevation="2dp"
+            android:elevation="6dp"
+            android:translationZ="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fb_sign_in_button"
             app:layout_constraintTop_toTopOf="@+id/fb_sign_in_button"
@@ -117,7 +121,8 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
-            android:elevation="2dp"
+            android:elevation="6dp"
+            android:translationZ="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/gg_sign_in_button"
             app:layout_constraintTop_toTopOf="@+id/gg_sign_in_button"
@@ -128,6 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign in with"
+            android:textColor="@color/com_facebook_button_border_color_focused"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

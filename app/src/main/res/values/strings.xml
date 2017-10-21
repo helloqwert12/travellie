@@ -12,4 +12,10 @@
         <font color="#f9d641">love</font>
     </string>
     <string name="sub_intro">Cùng Travelie khám phá bất kì nơi đâu bạn muốn đến</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

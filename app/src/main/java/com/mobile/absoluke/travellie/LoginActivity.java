@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -23,6 +26,13 @@ import com.facebook.login.CustomTabLoginMethodHandler;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,10 +40,10 @@ import java.security.NoSuchAlgorithmException;
 public class LoginActivity extends AppCompatActivity {
 
     //Debug
-    String TAG = "Facebook";
-
-    LoginButton fbSignInBtn;
-    CallbackManager mCallbackManager;
+    private String TAG = "Facebook";
+    private LoginButton fbSignInBtn;
+    private CallbackManager mCallbackManager;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +55,26 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        //Anh xa component
         matchComponents();
+
+        //Init FirebaseAuth
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    //See if the user had already logged in
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+
+        }
+        else{
+
+        }
+        //updateUI(currentUser);
     }
 
     @Override
@@ -63,6 +92,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
+
+                //Xu ly
+                handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
@@ -76,5 +108,36 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void handleFacebookAccessToken(AccessToken token){
+        Log.d(TAG, "handleFacebookAccessToken: " + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+
+                            //check if the user had account
+                            if (currentUser != null){
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else{
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
     }
 }

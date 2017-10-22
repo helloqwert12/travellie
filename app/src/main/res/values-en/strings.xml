@@ -13,4 +13,13 @@
         <font color="#f9d641">love</font>
     </string>
     <string name="sub_intro">Explore the world searching\nby location, interests and\nmore on the go.</string>
+
+    <!-- Strings related to register -->
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
 </resources>

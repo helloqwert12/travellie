@@ -3,15 +3,27 @@
     <string name="title_activity_login">Đăng nhập</string>
 
     <!--facebook string-->
-    <string name="facebook_app_id">122046885142484</string>
-    <string name="fb_login_protocol_scheme">fb122046885142484</string>
+    <string name="facebook_app_id" translatable="false">122046885142484</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb122046885142484</string>
 
     <!-- Strings related to login -->
     <string name="intro">
-        <font color="white">Find incredible\nplaces you\nwill</font>
-        <font color="#f9d641">love</font>
+        <font color="white">Khám phá\n những điểm đến\n</font>
+        <font color="#f9d641">chất</font>
     </string>
-    <string name="sub_intro">Cùng Travelie khám phá bất kì nơi đâu bạn muốn đến</string>
+    <string name="sub_intro">Cùng chia sẻ kinh nghiệm phượt thú vị hơn bao giờ hết với Travelie</string>
+
+    <!-- Strings related to register -->
+    <string name="first_name">Tên</string>
+    <string name="last_name">Họ</string>
+    <string name="date_of_birth">Ngày sinh</string>
+    <string name="gender">Giới tính</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="other">Khác</string>
+
+
+    <!-- Strings related to main -->
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>

@@ -6,7 +6,7 @@ package dataobject;
  */
 
 public class Share extends Interaction {
-    private String shareid;
+    //private String shareid;
 
     public Share(){
 
@@ -14,11 +14,11 @@ public class Share extends Interaction {
 
     public Share(String pid, String uid, String sid){
         super(pid, uid);
-        shareid = sid;
+        //shareid = sid;
     }
 
     //Get-Set
-    public String getShareid() { return shareid; }
+    //public String getShareid() { return shareid; }
 
-    public void setShareid(String value) { shareid = value; }
+    //public void setShareid(String value) { shareid = value; }
 }

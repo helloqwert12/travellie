@@ -4,17 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import dataobject.UserInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterActivity extends AppCompatActivity {
+    //Debug
+    String TAG = "RegisterActivity";
+
     TextInputEditText etFirstName;
     TextInputEditText etLastName;
     EditText etDayOfBirth;
@@ -25,6 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     //DataObject
     UserInfo userInfo;
+
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +99,13 @@ public class RegisterActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (hasNull()){
+                    Log.e(TAG, "Component has null value");
+                    Toast.makeText(RegisterActivity.this, R.string.has_null_value, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    //Push data to database
+                }
             }
         });
 
@@ -110,5 +123,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean hasNull(){
+        if (etFirstName.getText() == null) return true;
+        if (etLastName.getText() == null) return true;
+        if (etDayOfBirth.getText() == null) return true;
+        //Check gender spinner here!
+
+        return false;
     }
 }

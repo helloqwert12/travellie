@@ -23,6 +23,7 @@
     <string name="female">Nữ</string>
     <string name="other">Khác</string>
     <string name="update_profile">Cập nhật</string>
+    <string name="has_null_value">Vui lòng điền đầy đủ thông tin</string>
 
     <!-- Strings related to main -->
     <string name="title_activity_main">MainActivity</string>

@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class Comment extends Interaction {
-    private String commentid;
+    //private String commentid;
     private String content;
     private List<String> tags;
     private List<String> links;
@@ -20,10 +20,10 @@ public class Comment extends Interaction {
         super();
     }
 
-    public Comment(String pid, String uid, String cmtid, String cnt,
+    public Comment(String pid, String uid, String cnt,
                    List<String> tgs, List<String> lks, Image img){
         super(pid, uid);
-        commentid = cmtid;
+        //commentid = cmtid;
         content = cnt;
         tags = tgs;
         links = lks;
@@ -31,13 +31,13 @@ public class Comment extends Interaction {
     }
 
     //Get-Set
-    public String getCommentid() { return  commentid; }
+    //public String getCommentid() { return  commentid; }
     public String getContent() { return content; }
     public List<String> getTags() { return tags; }
     public List<String> getLinks() { return links; }
     public Image getImage() { return image; }
 
-    public void setCommentid(String value) { commentid = value; }
+    //public void setCommentid(String value) { commentid = value; }
     public void setContent(String value) { content = value; }
     public void setTags(List<String> value) { tags = value; }
     public void setLinks(List<String> value) { links = value; }

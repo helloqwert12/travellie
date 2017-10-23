@@ -24,4 +24,5 @@
     <string name="female">Female</string>
     <string name="other">Other</string>
     <string name="update_profile">Update profile</string>
+    <string name="has_null_value">Please complete all fields</string>
 </resources>

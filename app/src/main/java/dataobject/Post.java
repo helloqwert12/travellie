@@ -11,9 +11,9 @@ import java.util.List;
 
 
 public class Post {
-    private String postid;
+    //private String postid;
     private String content;
-    private List<Image> images;
+    private List<String> imageLinks;
     private String userid;
     private String timestamp;
     private List<String> links;
@@ -27,11 +27,11 @@ public class Post {
         //default constructor for firebase
     }
 
-    public Post(String pid, String ctn, List<Image> imgs, String uid, String ts, List<String> lk,
+    public Post(String ctn, List<String> imglinks, String uid, String ts, List<String> lk,
                 List<String> tg, List<String> lik, List<String> shrs, List<String> cmts, POST_TYPE tp){
-        postid = pid;
+        //postid = pid;
         content = ctn;
-        images = imgs;
+        imageLinks = imglinks;
         userid = uid;
         timestamp = ts;
         links = lk;
@@ -43,9 +43,9 @@ public class Post {
     }
 
     //Get-set
-    public String getPostid() { return postid; }
+    //public String getPostid() { return postid; }
     public String getContent() { return content; }
-    public List<Image> getImages() { return images; }
+    public List<String> getImageLinks() { return imageLinks; }
     public String getUserid() { return userid; }
     public String getTimestamp() { return timestamp; }
     public List<String> getLinks() { return links; }
@@ -54,9 +54,9 @@ public class Post {
     public List<String> getShares() { return shares; }
     public List<String> getComments() { return comments; }
 
-    public void setPostid(String value) { postid = value; }
+    //public void setPostid(String value) { postid = value; }
     public void setContent(String value) { content = value; }
-    public void setImages(List<Image> value) { images = value; }
+    public void setImageLinks(List<String> value) { imageLinks = value; }
     public void setTimestamp(String value) { timestamp = value; }
     public void setUserid(String value) { userid = value; }
     public void setLinks(List<String> value) { links = value; }
@@ -67,7 +67,7 @@ public class Post {
     public void setType(POST_TYPE value) { type = value; }
 
     //add
-    public void addImage(Image element) { images.add(element); }
+    public void addImageLink(String element) { imageLinks.add(element); }
     public void addLink(String element) { links.add(element); }
     public void addTag(String element) { tags.add(element); }
     public void addLike(String element) { likes.add(element); }

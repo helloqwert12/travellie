@@ -37,6 +37,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import tool.Tool;
+
 public class LoginActivity extends AppCompatActivity {
 
     //Debug
@@ -69,12 +71,10 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
+            //Tool.changeActivity(this, RegisterActivity.class);
 
         }
-        else{
 
-        }
-        //updateUI(currentUser);
     }
 
     @Override
@@ -124,7 +124,13 @@ public class LoginActivity extends AppCompatActivity {
 
                             //check if the user had account
                             if (currentUser != null){
-
+                                Bundle bundle = new Bundle();
+                                bundle.putString("ID", currentUser.getUid());
+                                bundle.putString("NAME", currentUser.getDisplayName());
+                                bundle.putString("EMAIL", currentUser.getEmail());
+                                bundle.putString("PHONE", currentUser.getPhoneNumber());
+                                bundle.putString("IMAGE", currentUser.getPhotoUrl().toString());
+                                Tool.pushDataAndChangeActivity(LoginActivity.this, RegisterActivity.class, bundle);
                             }
                             else
                             {

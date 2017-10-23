@@ -11,11 +11,11 @@ import java.util.List;
 
 public class UserInfo {
     private String userid;
-    private String username;
+    //private String username;
     private String firstname;
     private String lastname;
     private String dateofbirth;
-    private Image avatar;
+    private String avatarLink;
     private boolean male; //true: male - false: female
     private String email;
     private String description;
@@ -27,14 +27,14 @@ public class UserInfo {
     }
 
     public UserInfo(String uid, String usrn, String fname,
-                    String lname, String dob, Image avt,
+                    String lname, String dob, String avt,
                     boolean m, String em, String des, String rk, List<String> frd){
         userid = uid;
-        username = usrn;
+        //username = usrn;
         firstname = fname;
         lastname = lname;
         dateofbirth = dob;
-        avatar = avt;
+        avatarLink = avt;
         male = m;
         email = em;
         description = des;
@@ -44,11 +44,11 @@ public class UserInfo {
 
     //Get-Set
     public String getUserid() { return userid; }
-    public String getUsername() { return username; }
+    //public String getUsername() { return username; }
     public String getFirstname() { return firstname; }
     public String getLastname() { return  lastname; }
     public String getDateofbirth() { return  dateofbirth; }
-    public Image getAvatar() { return avatar; }
+    public String getAvatar() { return avatarLink; }
     public boolean isMale() { return (male == true); }
     public String getEmail() { return email; }
     public String getDescription() { return description; }
@@ -56,11 +56,11 @@ public class UserInfo {
     public List<String> getFriends() { return friends; }
 
     public void setUserid(String value) { userid = value; }
-    public void setUsername(String value) { username = value; }
+    //public void setUsername(String value) { username = value; }
     public void setFirstname(String value) { firstname = value; }
     public void setLastname(String value) { lastname = value; }
     public void setDateofbirth(String value) { dateofbirth = value; }
-    public void setAvatar(Image value) { avatar = value; }
+    public void setAvatar(String value) { avatarLink = value; }
     public void setMale(boolean value) { male = value; }
     public void setEmail(String value) { email = value; }
     public void setDescription(String value) { description = value; }

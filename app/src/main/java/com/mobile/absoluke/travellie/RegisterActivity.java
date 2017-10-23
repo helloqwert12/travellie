@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import dataobject.UserInfo;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterActivity extends AppCompatActivity {
     TextInputEditText etFirstName;
@@ -19,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner spnGender;
     Button btnUpdate;
     ImageButton imgbtnTakePicture;
+    CircleImageView cimgvwChangeAvatar;
 
     //DataObject
     UserInfo userInfo;
@@ -72,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     protected void matchComponents(){
+        //Match components
         etFirstName = (TextInputEditText) findViewById(R.id.etFirstName);
         etLastName = (TextInputEditText) findViewById(R.id.etLastName);
         etDayOfBirth = (EditText) findViewById(R.id.etDayOfBirth);
@@ -81,5 +85,30 @@ public class RegisterActivity extends AppCompatActivity {
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
 
         imgbtnTakePicture = (ImageButton) findViewById(R.id.imgbtnTakePicture);
+
+        cimgvwChangeAvatar = (CircleImageView) findViewById(R.id.cimgvwChangeAvatar);
+
+        //Set event
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        imgbtnTakePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        cimgvwChangeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 }

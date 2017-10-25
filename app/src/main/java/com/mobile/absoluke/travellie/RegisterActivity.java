@@ -1,10 +1,8 @@
 package com.mobile.absoluke.travellie;
 
-import android.*;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -95,17 +92,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     protected void matchComponents(){
         //Match components
-        etFirstName = (TextInputEditText) findViewById(R.id.etFirstName);
-        etLastName = (TextInputEditText) findViewById(R.id.etLastName);
-        etDayOfBirth = (EditText) findViewById(R.id.etDayOfBirth);
+        etFirstName = findViewById(R.id.etFirstName);
+        etLastName = findViewById(R.id.etLastName);
+        etDayOfBirth = findViewById(R.id.etDayOfBirth);
 
-        spnGender = (Spinner) findViewById(R.id.spnGender);
+        spnGender = findViewById(R.id.spnGender);
 
-        btnUpdate = (Button) findViewById(R.id.btnUpdate);
+        btnUpdate = findViewById(R.id.btnUpdate);
 
-        imgbtnTakePicture = (ImageButton) findViewById(R.id.imgbtnTakePicture);
+        imgbtnTakePicture = findViewById(R.id.imgbtnTakePicture);
 
-        cimgvwChangeAvatar = (CircleImageView) findViewById(R.id.cimgvwChangeAvatar);
+        cimgvwChangeAvatar = findViewById(R.id.cimgvwChangeAvatar);
 
         //Set event
         btnUpdate.setOnClickListener(new View.OnClickListener() {

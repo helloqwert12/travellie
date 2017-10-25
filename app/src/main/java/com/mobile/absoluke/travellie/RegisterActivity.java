@@ -4,6 +4,8 @@ import android.*;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -19,11 +21,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import dataobject.UserInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CAMERA = 1;
+    private static final int REQUEST_CODE_FILE = 2;
     //Debug
     String TAG = "RegisterActivity";
 
@@ -126,6 +131,12 @@ public class RegisterActivity extends AppCompatActivity {
         cimgvwChangeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent()
+                        .addCategory(Intent.CATEGORY_OPENABLE)
+                        .setType("image/*")
+                        .setAction(Intent.ACTION_OPEN_DOCUMENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), REQUEST_CODE_FILE);
             }
         });
     }
@@ -150,7 +161,16 @@ public class RegisterActivity extends AppCompatActivity {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             cimgvwChangeAvatar.setImageBitmap(bitmap);
         }
-
+        else if(requestCode == REQUEST_CODE_FILE && resultCode == RESULT_OK && data != null) {
+            Uri selectedfile = data.getData(); //The uri with the location of the file
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            cimgvwChangeAvatar.setImageBitmap(bitmap);
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 

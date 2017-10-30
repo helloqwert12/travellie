@@ -2,7 +2,17 @@ package tool;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
 
 /**
  * Created by tranminhquan on 10/22/2017.
@@ -21,5 +31,6 @@ public class Tool {
         intent.putExtra("BUNDLE", data);
         a.startActivity(intent);
     }
+
 
 }

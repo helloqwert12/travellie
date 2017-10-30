@@ -3,22 +3,39 @@ package com.mobile.absoluke.travellie;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaCas;
+import android.media.tv.TvInputService;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.*;
+import com.facebook.HttpMethod;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import dataobject.UserInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -40,6 +57,9 @@ public class RegisterActivity extends AppCompatActivity {
     //DataObject
     UserInfo userInfo;
 
+    //Intent and bundle
+    Intent intent;
+    Bundle bundle;
     
 
     @Override
@@ -58,35 +78,20 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //Get data from previous intent
-        Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("BUNDLE");
+        intent = getIntent();
+        bundle = intent.getBundleExtra("BUNDLE");
 
-        //get data
-        String uid = bundle.getString("ID");
 
-        //Split name to firstname and lastname
-        String[] splits = bundle.getString("NAME").split(" ");
-        String firstName = splits[splits.length - 1];
-        String lastName="";
-        for(int i=0; i<splits.length-1;i++){
-            lastName += splits[i] + " ";
-        }
-        String phone = bundle.getString("PHONE");
-        String email = bundle.getString("EMAIL");
-        String imageLink = bundle.getString("IMAGE");
+        String firstName = Profile.getCurrentProfile().getFirstName();
+        String lastName = Profile.getCurrentProfile().getLastName() + " " + Profile.getCurrentProfile().getMiddleName();
 
-        //Init and set data for UserInfo instance
-        userInfo = new UserInfo();
-        //userInfo.setUserid(uid);
-        userInfo.setFirstname(firstName);
-        userInfo.setLastname(lastName);
-        userInfo.setEmail(email);
-
-        //[!!!!!!!] Con thieu setImage va setPhone
-
-        //Display on activity
+        Uri profileUri = Profile.getCurrentProfile().getProfilePictureUri(200,200);
         etFirstName.setText(firstName);
         etLastName.setText(lastName);
+
+        Picasso.with(RegisterActivity.this).load(profileUri).into(cimgvwChangeAvatar);
+
+
 
     }
 
@@ -108,12 +113,29 @@ public class RegisterActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Toast.makeText(RegisterActivity.this, "Debug: Button update clicked!", Toast.LENGTH_SHORT).show();
                 if (hasNull()){
                     Log.e(TAG, "Component has null value");
                     Toast.makeText(RegisterActivity.this, R.string.has_null_value, Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    //Push data to database
+                    String uid = bundle.getString("ID");
+                    String phone = bundle.getString("PHONE");
+                    String email = bundle.getString("EMAIL");
+                    String imageLink = bundle.getString("IMAGE");
+
+                    //Push data to database:
+                    //Init and set data for UserInfo instance
+                    userInfo = new UserInfo();
+                    userInfo.setFirstname(etFirstName.getText().toString());
+                    userInfo.setLastname(etLastName.getText().toString());
+                    userInfo.setEmail(email);
+                    userInfo.setAvatarLink(imageLink);
+                    userInfo.setPhone(phone);
+                    userInfo.setDateofbirth(etDayOfBirth.getText().toString());
+
+                    //[!!!!!!!] Con thieu setImage va setPhone
+
                 }
             }
         });
@@ -121,7 +143,9 @@ public class RegisterActivity extends AppCompatActivity {
         imgbtnTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityCompat.requestPermissions(RegisterActivity.this, new String[] {android.Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
+                ActivityCompat.requestPermissions(RegisterActivity.this,
+                        new String[] {android.Manifest.permission.CAMERA},
+                        REQUEST_CODE_CAMERA);
             }
         });
 
@@ -154,6 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
     // Lấy hình vừa chụp được gán vào
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             cimgvwChangeAvatar.setImageBitmap(bitmap);
@@ -168,15 +193,18 @@ public class RegisterActivity extends AppCompatActivity {
             }
             cimgvwChangeAvatar.setImageBitmap(bitmap);
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    //Kiểm tra có components nào null hay không
     private boolean hasNull(){
-        if (etFirstName.getText() == null) return true;
-        if (etLastName.getText() == null) return true;
-        if (etDayOfBirth.getText() == null) return true;
+        if (etFirstName.getText().length() == 0) return true;
+        if (etLastName.getText().length() == 0) return true;
+        if (etDayOfBirth.getText().length() == 0) return true;
         //Check gender spinner here!
-
+        Log.i(TAG,"Has no null");
         return false;
     }
+
 }

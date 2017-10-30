@@ -120,8 +120,7 @@
         android:layout_width="84dp"
         android:layout_height="35dp"
         android:ems="10"
-        android:inputType="date"
-        android:text="08/10/1997"
+        android:inputType="datetime"
         android:theme="@style/TextLabel"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />

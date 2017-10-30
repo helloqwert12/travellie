@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.media.MediaCas;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,9 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.CustomTabLoginMethodHandler;
 import com.facebook.login.LoginManager;
@@ -33,6 +37,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -71,8 +79,17 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            //Tool.changeActivity(this, RegisterActivity.class);
 
+            //CAUTION: Code below only for testing!!!
+            Bundle bundle = new Bundle();
+            bundle.putString("ID", currentUser.getUid());
+            bundle.putString("NAME", currentUser.getDisplayName());
+            bundle.putString("EMAIL", currentUser.getEmail());
+            bundle.putString("PHONE", currentUser.getPhoneNumber());
+            bundle.putString("IMAGE", currentUser.getPhotoUrl().toString());
+
+
+            Tool.pushDataAndChangeActivity(LoginActivity.this, RegisterActivity.class, bundle);
         }
 
     }
@@ -93,6 +110,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
 
+
+
                 //Xu ly
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
@@ -110,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void handleFacebookAccessToken(AccessToken token){
+    private void handleFacebookAccessToken(final AccessToken token){
         Log.d(TAG, "handleFacebookAccessToken: " + token);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
@@ -118,26 +137,25 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser currentUser = mAuth.getCurrentUser();
 
                             //check if the user had account
-                            if (currentUser != null){
+                            if (currentUser != null) {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("ID", currentUser.getUid());
                                 bundle.putString("NAME", currentUser.getDisplayName());
                                 bundle.putString("EMAIL", currentUser.getEmail());
                                 bundle.putString("PHONE", currentUser.getPhoneNumber());
                                 bundle.putString("IMAGE", currentUser.getPhotoUrl().toString());
+
+
                                 Tool.pushDataAndChangeActivity(LoginActivity.this, RegisterActivity.class, bundle);
-                            }
-                            else
-                            {
+                            } else {
 
                             }
-                        }
-                        else{
+                        } else {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();

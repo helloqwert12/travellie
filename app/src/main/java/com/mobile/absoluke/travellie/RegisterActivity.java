@@ -31,8 +31,15 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.*;
 import com.facebook.HttpMethod;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,11 +54,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 
 import dataobject.UserInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 import tool.FirebaseStorageTool;
+import tool.Tool;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CAMERA = 1;
@@ -60,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
     //Debug
     String TAG = "RegisterActivity";
 
+    //Components
     TextInputEditText etFirstName;
     TextInputEditText etLastName;
     EditText etDayOfBirth;
@@ -78,6 +88,11 @@ public class RegisterActivity extends AppCompatActivity {
     
     int choice; //choice of gender
 
+    //Firebase
+    DatabaseReference userinfoRef;
+    FirebaseStorage storage = FirebaseStorage.getInstance("gs://travellie-5884f.appspot.com");
+    StorageReference storageRef = storage.getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,12 +100,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         matchComponents();
 
-//        Blurry.with(RegisterActivity.this)
-//                .radius(10)
-//                .sampling(8)
-//                .async()
-//                .animate(500)
-//                .onto(rootView);
+        //
+        //Init
+        //
+        userInfo = new UserInfo();
 
 
         //Get data from previous intent
@@ -117,6 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "Error when loading image", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     protected void matchComponents(){
@@ -171,21 +185,59 @@ public class RegisterActivity extends AppCompatActivity {
                     //Assign the link to imageLink
                     //(include avatar and cover)
                     //-Push avatar to storage and get link
-                    Uri avaLink = FirebaseStorageTool.uploadFromImageView(cimgvwChangeAvatar, "avatar", uid + "avatar");
-                    Uri coverLink = FirebaseStorageTool.uploadFromImageView(imageCover, "cover", uid + "cover");
+                    final Uri[] avatarLink = new Uri[1];
+                    StorageReference avatarRef = storageRef.child(uid + "/avatar" + "/" + Tool.generateImageKey("avatar"));
+                    byte[] avatarData = Tool.convertToBytes(cimgvwChangeAvatar);
+                    UploadTask uploadTaskAvatar = avatarRef.putBytes(avatarData);
+                    uploadTaskAvatar.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                            avatarLink[0] = taskSnapshot.getDownloadUrl();
+                        }
+                    });
+
+                    final Uri[] coverLink = new Uri[1];
+                    StorageReference coverRef = storageRef.child(uid + "/cover" + "/" + Tool.generateImageKey("cover"));
+                    byte[] coverData = Tool.convertToBytes(imageCover);
+                    UploadTask uploadTaskCover = coverRef.putBytes(coverData);
+                    uploadTaskCover.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                            coverLink[0] = taskSnapshot.getDownloadUrl();
+                        }
+                    });
 
                     //Push data to database:
-                    //Init and set data for UserInfo instance
-                    userInfo = new UserInfo();
+                    //-Init and set data for UserInfo instance
+
+                    userInfo.setUserid(uid);
                     userInfo.setFirstname(etFirstName.getText().toString());
                     userInfo.setLastname(etLastName.getText().toString());
                     userInfo.setEmail(email);
-                    userInfo.setAvatarLink(avaLink.toString());
+                    userInfo.setAvatarLink(avatarLink.toString());
+                    userInfo.setCoverLink(coverLink.toString());
                     userInfo.setPhone(phone);
                     userInfo.setDateofbirth(etDayOfBirth.getText().toString());
-                    userInfo.setCoverLink(coverLink.toString());
                     userInfo.setGender(choice);
                     userInfo.setRank("Beginner");
+
+                    //-Push to database
+                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                    userinfoRef = mDatabase.child("users_info");
+                    //userinfoRef.addChildEventListener(userInfoEventListener);
+                    userinfoRef.push().setValue(userInfo);
                 }
             }
         });
@@ -268,6 +320,33 @@ public class RegisterActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    ChildEventListener userInfoEventListener = new ChildEventListener() {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
 
     //Kiểm tra có components nào null hay không
     private boolean hasNull(){

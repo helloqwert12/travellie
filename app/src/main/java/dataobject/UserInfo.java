@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class UserInfo {
-    //private String userid;
+    private String userid;
     //private String username;
     private String firstname;
     private String lastname;
@@ -28,10 +28,10 @@ public class UserInfo {
         //Default constructor for firebase getting data return
     }
 
-    public UserInfo(String fname,
+    public UserInfo(String uid, String fname,
                     String lname, String dob, String avt, String cvr,
                     int gd, String em, String p, String des, String rk, List<String> frd){
-        //userid = uid;
+        userid = uid;
         //username = usrn;
         firstname = fname;
         lastname = lname;
@@ -47,7 +47,7 @@ public class UserInfo {
     }
 
     //Get-Set
-    //public String getUserid() { return userid; }
+    public String getUserid() { return userid; }
     //public String getUsername() { return username; }
     public String getFirstname() { return firstname; }
     public String getLastname() { return  lastname; }
@@ -61,7 +61,7 @@ public class UserInfo {
     public String getRank() { return rank; } //Chinh lai kieu du lieu sau
     public List<String> getFriends() { return friends; }
 
-    //public void setUserid(String value) { userid = value; }
+    public void setUserid(String value) { userid = value; }
     //public void setUsername(String value) { username = value; }
     public void setFirstname(String value) { firstname = value; }
     public void setLastname(String value) { lastname = value; }

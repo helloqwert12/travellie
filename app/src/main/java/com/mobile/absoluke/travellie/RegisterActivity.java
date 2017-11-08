@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.media.MediaCas;
 import android.media.tv.TvInputService;
 import android.net.Uri;
@@ -16,6 +17,8 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,21 +31,32 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.*;
 import com.facebook.HttpMethod;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import dataobject.UserInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
+import tool.FirebaseStorageTool;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CAMERA = 1;
-    private static final int REQUEST_CODE_FILE = 2;
+    private static final int REQUEST_CODE_FILE_AVATAR = 2;
+    private static final int REQUEST_CODE_FILE_COVER = 3;
     //Debug
     String TAG = "RegisterActivity";
 
@@ -53,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnUpdate;
     ImageButton imgbtnTakePicture;
     CircleImageView cimgvwChangeAvatar;
+    ImageView imageCover;
 
     //DataObject
     UserInfo userInfo;
@@ -61,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
     Intent intent;
     Bundle bundle;
     
+    int choice; //choice of gender
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,18 +97,26 @@ public class RegisterActivity extends AppCompatActivity {
         intent = getIntent();
         bundle = intent.getBundleExtra("BUNDLE");
 
-
         String firstName = Profile.getCurrentProfile().getFirstName();
         String lastName = Profile.getCurrentProfile().getLastName() + " " + Profile.getCurrentProfile().getMiddleName();
 
         Uri profileUri = Profile.getCurrentProfile().getProfilePictureUri(200,200);
+        Log.i(TAG, "Profile uri: " + profileUri);
+
         etFirstName.setText(firstName);
         etLastName.setText(lastName);
 
-        Picasso.with(RegisterActivity.this).load(profileUri).into(cimgvwChangeAvatar);
+        Picasso.with(RegisterActivity.this).load(profileUri).into(cimgvwChangeAvatar, new Callback() {
+            @Override
+            public void onSuccess() {
 
+            }
 
-
+            @Override
+            public void onError() {
+                Toast.makeText(RegisterActivity.this, "Error when loading image", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     protected void matchComponents(){
@@ -106,8 +130,27 @@ public class RegisterActivity extends AppCompatActivity {
         btnUpdate = findViewById(R.id.btnUpdate);
 
         imgbtnTakePicture = findViewById(R.id.imgbtnTakePicture);
-
         cimgvwChangeAvatar = findViewById(R.id.cimgvwChangeAvatar);
+        imageCover = findViewById(R.id.imageCover);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.gender_list, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spnGender.setAdapter(adapter);
+        spnGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                choice = spnGender.getSelectedItemPosition();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         //Set event
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +165,14 @@ public class RegisterActivity extends AppCompatActivity {
                     String uid = bundle.getString("ID");
                     String phone = bundle.getString("PHONE");
                     String email = bundle.getString("EMAIL");
-                    String imageLink = bundle.getString("IMAGE");
+
+                    //--TO DO:
+                    //Push data to storage and get the link
+                    //Assign the link to imageLink
+                    //(include avatar and cover)
+                    //-Push avatar to storage and get link
+                    Uri avaLink = FirebaseStorageTool.uploadFromImageView(cimgvwChangeAvatar, "avatar", uid + "avatar");
+                    Uri coverLink = FirebaseStorageTool.uploadFromImageView(imageCover, "cover", uid + "cover");
 
                     //Push data to database:
                     //Init and set data for UserInfo instance
@@ -130,12 +180,12 @@ public class RegisterActivity extends AppCompatActivity {
                     userInfo.setFirstname(etFirstName.getText().toString());
                     userInfo.setLastname(etLastName.getText().toString());
                     userInfo.setEmail(email);
-                    userInfo.setAvatarLink(imageLink);
+                    userInfo.setAvatarLink(avaLink.toString());
                     userInfo.setPhone(phone);
                     userInfo.setDateofbirth(etDayOfBirth.getText().toString());
-
-                    //[!!!!!!!] Con thieu setImage va setPhone
-
+                    userInfo.setCoverLink(coverLink.toString());
+                    userInfo.setGender(choice);
+                    userInfo.setRank("Beginner");
                 }
             }
         });
@@ -157,7 +207,19 @@ public class RegisterActivity extends AppCompatActivity {
                         .setType("image/*")
                         .setAction(Intent.ACTION_OPEN_DOCUMENT);
 
-                startActivityForResult(Intent.createChooser(intent, "Select a file"), REQUEST_CODE_FILE);
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), REQUEST_CODE_FILE_AVATAR);
+            }
+        });
+
+        imageCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent()
+                        .addCategory(Intent.CATEGORY_OPENABLE)
+                        .setType("image/*")
+                        .setAction(Intent.ACTION_OPEN_DOCUMENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), REQUEST_CODE_FILE_COVER);
             }
         });
     }
@@ -183,7 +245,7 @@ public class RegisterActivity extends AppCompatActivity {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             cimgvwChangeAvatar.setImageBitmap(bitmap);
         }
-        else if(requestCode == REQUEST_CODE_FILE && resultCode == RESULT_OK && data != null) {
+        else if(requestCode == REQUEST_CODE_FILE_AVATAR && resultCode == RESULT_OK && data != null) {
             Uri selectedfile = data.getData(); //The uri with the location of the file
             Bitmap bitmap = null;
             try {
@@ -192,6 +254,16 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             cimgvwChangeAvatar.setImageBitmap(bitmap);
+        }
+        else if (requestCode == REQUEST_CODE_FILE_COVER && resultCode == RESULT_OK && data != null){
+            Uri selectedfile = data.getData(); //The uri with the location of the file
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageCover.setImageBitmap(bitmap);
         }
 
         super.onActivityResult(requestCode, resultCode, data);

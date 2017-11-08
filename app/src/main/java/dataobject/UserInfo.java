@@ -17,7 +17,7 @@ public class UserInfo {
     private String dateofbirth;
     private String avatarLink;
     private String coverLink;
-    private boolean male; //true: male - false: female
+    private int gender; //0: male | 1: female | 2: other
     private String email;
     private String phone;
     private String description;
@@ -30,7 +30,7 @@ public class UserInfo {
 
     public UserInfo(String fname,
                     String lname, String dob, String avt, String cvr,
-                    boolean m, String em, String p, String des, String rk, List<String> frd){
+                    int gd, String em, String p, String des, String rk, List<String> frd){
         //userid = uid;
         //username = usrn;
         firstname = fname;
@@ -38,7 +38,7 @@ public class UserInfo {
         dateofbirth = dob;
         avatarLink = avt;
         coverLink = cvr;
-        male = m;
+        gender = gd;
         email = em;
         phone = p;
         description = des;
@@ -54,7 +54,7 @@ public class UserInfo {
     public String getDateofbirth() { return  dateofbirth; }
     public String getAvatarLink() { return avatarLink; }
     public String getCoverLink() { return coverLink; }
-    public boolean isMale() { return (male == true); }
+    public int getGender() { return gender; }
     public String getEmail() { return email; }
     public String getPhone() { return phone; }
     public String getDescription() { return description; }
@@ -68,7 +68,7 @@ public class UserInfo {
     public void setDateofbirth(String value) { dateofbirth = value; }
     public void setAvatarLink(String value) { avatarLink = value; }
     public void setCoverLink(String value) { coverLink = value; }
-    public void setMale(boolean value) { male = value; }
+    public void setGender(int value) { gender = value; }
     public void setEmail(String value) { email = value; }
     public void setPhone(String value) { phone = value; }
     public void setDescription(String value) { description = value; }

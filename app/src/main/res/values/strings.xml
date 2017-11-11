@@ -8,7 +8,7 @@
 
     <!-- Strings related to login -->
     <string name="intro">
-        <font color="white">Khám phá\n những điểm đến\n</font>
+        <font color="white">Khám phá\nnhững điểm đến\n</font>
         <font color="#f9d641">chất</font>
     </string>
     <string name="sub_intro">Cùng chia sẻ kinh nghiệm phượt thú vị hơn bao giờ hết với Travelie</string>

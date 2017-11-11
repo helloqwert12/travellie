@@ -12,7 +12,7 @@ public class ProfileActivity extends AppCompatActivity {
     private PagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private int[] tabIcons = {
-            R.drawable.ic_launcher_background,
+            R.drawable.map_unfocused,
             R.drawable.ic_launcher_background,
             R.drawable.ic_launcher_background,
             R.drawable.ic_launcher_background

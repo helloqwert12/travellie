@@ -17,7 +17,6 @@
     <!--android:layout_marginBottom="16dp"-->
     <!--android:src="@drawable/profile_bg"-->
     <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintHorizontal_bias="0.0"-->
     <!--app:layout_constraintLeft_toLeftOf="parent"-->
     <!--app:layout_constraintRight_toRightOf="parent" />-->
 
@@ -25,11 +24,8 @@
         android:id="@+id/imageCover"
         android:layout_width="411dp"
         android:layout_height="177dp"
-        android:elevation="5dp"
         android:scaleType="centerCrop"
         android:stateListAnimator="@null"
-        android:translationZ="5dp"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,18 +33,15 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cimgvwChangeAvatar"
-        android:layout_width="112dp"
-        android:layout_height="112dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
         android:layout_marginTop="156dp"
         android:background="@null"
-        android:elevation="5dp"
+        android:elevation="3dp"
         android:src="@drawable/img_placeholder"
         android:stateListAnimator="@null"
-        android:translationZ="5dp"
+        android:translationZ="3dp"
         app:layout_constraintEnd_toEndOf="@+id/imageCover"
-        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageCover"
@@ -58,7 +51,7 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Username"
         android:textColor="@android:color/black"
         android:textSize="22sp"
@@ -67,32 +60,44 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cimgvwChangeAvatar" />
 
-    <TextView
-        android:id="@+id/bio"
-        android:layout_width="315dp"
-        android:layout_height="35dp"
-        android:lines="2"
-        android:text="Bio"
-        android:textAlignment="center"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
-
-    <Button
-        android:id="@+id/btn_bio"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@null"
-        android:text="edit bio"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/tabs"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bio"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/username">
+
+        <TextView
+            android:id="@+id/bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:text="Bio"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:gravity="top|center"
+            android:text="edit bio"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bio" />
+
+    </android.support.constraint.ConstraintLayout>
 
 
     <!--<LinearLayout-->
@@ -104,7 +109,6 @@
     <!--android:weightSum="4"-->
     <!--app:layout_constraintBottom_toTopOf="@+id/frameContent"-->
     <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintHorizontal_bias="0.0"-->
     <!--app:layout_constraintStart_toStartOf="parent">-->
 
     <!--<Button-->
@@ -162,50 +166,19 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameContent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:tabIndicatorHeight="0dp"
-        tools:ignore="MissingConstraints">
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/tabItem1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_text_1" />
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/tabItem2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_text_2" />
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/tabItem3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_text_3" />
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/tabItem4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_text_4" />
-
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+        app:tabIndicatorHeight="0dp">
     </android.support.design.widget.TabLayout>
 
     <FrameLayout
         android:id="@+id/frameContent"
-        android:layout_width="376dp"
-        android:layout_height="110dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/container"

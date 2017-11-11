@@ -47,21 +47,22 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        String title = "";
-        switch (position) {
-            case 0:
-                title = "About";
-                break;
-            case 1:
-                title = "Location";
-                break;
-            case 2:
-                title = "Photos";
-                break;
-            case 3:
-                title = "Posts";
-                break;
-        }
-        return title;
+//        String title = "";
+//        switch (position) {
+//            case 0:
+//                title = "About";
+//                break;
+//            case 1:
+//                title = "Location";
+//                break;
+//            case 2:
+//                title = "Photos";
+//                break;
+//            case 3:
+//                title = "Posts";
+//                break;
+//        }
+//        return title;
+        return null;
     }
 }

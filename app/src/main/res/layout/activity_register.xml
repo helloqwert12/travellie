@@ -48,8 +48,10 @@
         android:translationZ="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/cimgvwChangeAvatar"
         app:layout_constraintEnd_toEndOf="@+id/cimgvwChangeAvatar"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/cimgvwChangeAvatar"
         app:layout_constraintTop_toTopOf="@+id/cimgvwChangeAvatar"
+        app:layout_constraintVertical_bias="0.057"
         app:srcCompat="@drawable/img_camera" />
 
     <TextView
@@ -115,7 +117,7 @@
 
     <EditText
         android:id="@+id/etDayOfBirth"
-        android:layout_width="84dp"
+        android:layout_width="123dp"
         android:layout_height="35dp"
         android:ems="10"
         android:inputType="datetime"
@@ -123,6 +125,7 @@
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+    <!--TODO: Set default value for Spinner-->
     <Spinner
         android:id="@+id/spnGender"
         android:layout_width="100dp"

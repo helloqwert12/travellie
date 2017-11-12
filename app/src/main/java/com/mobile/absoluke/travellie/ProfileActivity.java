@@ -1,5 +1,7 @@
 package com.mobile.absoluke.travellie;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,13 +11,11 @@ import android.support.v7.widget.Toolbar;
 public class ProfileActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
-    private PagerAdapter pagerAdapter;
-    private ViewPager viewPager;
     private int[] tabIcons = {
             R.drawable.location,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background
+            R.drawable.posts,
+            R.drawable.photos,
+            R.drawable.about
     };
 
     @Override
@@ -26,9 +26,9 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
 
-        viewPager = findViewById(R.id.container);
+        ViewPager viewPager = findViewById(R.id.container);
         viewPager.setAdapter(pagerAdapter);
 
         tabLayout = findViewById(R.id.tabs);
@@ -37,6 +37,36 @@ public class ProfileActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setTabsFromPagerAdapter(pagerAdapter);
         setupTabIcons();
+
+//        Change TabItem icon color
+        tabLayout.getTabAt(0).getIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+        tabLayout.getTabAt(1).getIcon().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        tabLayout.getTabAt(2).getIcon().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        tabLayout.getTabAt(3).getIcon().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.getIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                //for removing the color of first icon when switched to next tab
+                tabLayout.getTabAt(0).getIcon().clearColorFilter();
+                //for other tabs
+                tab.getIcon().clearColorFilter();
+
+            }
+
+            //            Let it empty
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     private void setupTabIcons() {

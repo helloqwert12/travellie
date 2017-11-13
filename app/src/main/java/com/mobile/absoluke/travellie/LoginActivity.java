@@ -27,6 +27,7 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.CustomTabLoginMethodHandler;
+import com.facebook.login.Login;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -81,15 +82,15 @@ public class LoginActivity extends AppCompatActivity {
         if (currentUser != null) {
 
             //CAUTION: Code below only for testing!!!
-            Bundle bundle = new Bundle();
-            bundle.putString("ID", currentUser.getUid());
-            bundle.putString("NAME", currentUser.getDisplayName());
-            bundle.putString("EMAIL", currentUser.getEmail());
-            bundle.putString("PHONE", currentUser.getPhoneNumber());
-            bundle.putString("IMAGE", currentUser.getPhotoUrl().toString());
+//            Bundle bundle = new Bundle();
+//            bundle.putString("ID", currentUser.getUid());
+//            bundle.putString("NAME", currentUser.getDisplayName());
+//            bundle.putString("EMAIL", currentUser.getEmail());
+//            bundle.putString("PHONE", currentUser.getPhoneNumber());
+//            bundle.putString("IMAGE", currentUser.getPhotoUrl().toString());
+//            Tool.pushDataAndChangeActivity(LoginActivity.this, RegisterActivity.class, bundle);
 
-
-            Tool.pushDataAndChangeActivity(LoginActivity.this, RegisterActivity.class, bundle);
+            Tool.changeActivity(this, ProfileActivity.class);
         }
 
     }
@@ -109,8 +110,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
-
-
 
                 //Xu ly
                 handleFacebookAccessToken(loginResult.getAccessToken());

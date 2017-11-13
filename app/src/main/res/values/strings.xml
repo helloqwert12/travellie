@@ -28,7 +28,9 @@
         <item>Nữ</item>
         <item>Khác</item>
     </string-array>
+
     <string name="has_null_value">Vui lòng điền đầy đủ thông tin</string>
+    <string name="update_success">Cập nhật thành công</string>
 
     <!-- Strings related to main -->
     <string name="title_activity_main">MainActivity</string>

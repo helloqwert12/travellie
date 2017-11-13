@@ -29,5 +29,8 @@
         <item>Female</item>
         <item>Other</item>
     </string-array>
+
     <string name="has_null_value">Please complete all fields</string>
+    <string name="update_success">Upload success</string>
+
 </resources>

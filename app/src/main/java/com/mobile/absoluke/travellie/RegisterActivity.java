@@ -57,6 +57,7 @@ import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
 
+import dataobject.Comment;
 import dataobject.UserInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 import tool.FirebaseStorageTool;
@@ -89,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
     int choice; //choice of gender
 
     //Firebase
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     DatabaseReference userinfoRef;
     FirebaseStorage storage = FirebaseStorage.getInstance("gs://travellie-5884f.appspot.com");
     StorageReference storageRef = storage.getReference();
@@ -176,15 +178,10 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, R.string.has_null_value, Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    String uid = bundle.getString("ID");
-                    String phone = bundle.getString("PHONE");
-                    String email = bundle.getString("EMAIL");
+                    final String uid = bundle.getString("ID");
+                    final String phone = bundle.getString("PHONE");
+                    final String email = bundle.getString("EMAIL");
 
-                    //--TO DO:
-                    //Push data to storage and get the link
-                    //Assign the link to imageLink
-                    //(include avatar and cover)
-                    //-Push avatar to storage and get link
                     final Uri[] avatarLink = new Uri[1];
                     StorageReference avatarRef = storageRef.child(uid + "/avatar" + "/" + Tool.generateImageKey("avatar"));
                     byte[] avatarData = Tool.convertToBytes(cimgvwChangeAvatar);
@@ -199,45 +196,50 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                             avatarLink[0] = taskSnapshot.getDownloadUrl();
+
+                            //Continue with cover
+                            final Uri[] coverLink = new Uri[1];
+                            StorageReference coverRef = storageRef.child(uid + "/cover" + "/" + Tool.generateImageKey("cover"));
+                            byte[] coverData = Tool.convertToBytes(imageCover);
+                            UploadTask uploadTaskCover = coverRef.putBytes(coverData);
+                            uploadTaskCover.addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle unsuccessful uploads
+                                }
+                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                                    coverLink[0] = taskSnapshot.getDownloadUrl();
+
+                                    //Push data to database:
+                                    //-Init and set data for UserInfo instance
+                                    userInfo.setUserid(uid);
+                                    userInfo.setFirstname(etFirstName.getText().toString());
+                                    userInfo.setLastname(etLastName.getText().toString());
+                                    userInfo.setEmail(email);
+                                    userInfo.setAvatarLink(avatarLink[0].toString());
+                                    userInfo.setCoverLink(coverLink[0].toString());
+                                    userInfo.setPhone(phone);
+                                    userInfo.setDateofbirth(etDayOfBirth.getText().toString());
+                                    userInfo.setGender(choice);
+                                    userInfo.setRank("Beginner");
+
+                                    //-Push to database
+                                    userinfoRef = mDatabase.child("users_info");
+                                    userinfoRef.addChildEventListener(userInfoEventListener);
+                                    userinfoRef.child(userInfo.getUserid()).setValue(userInfo);
+
+                                    Toast.makeText(RegisterActivity.this, R.string.update_success, Toast.LENGTH_SHORT).show();
+                                    Tool.changeActivity(RegisterActivity.this, ProfileActivity.class);
+
+                                }
+                            });
+
                         }
                     });
 
-                    final Uri[] coverLink = new Uri[1];
-                    StorageReference coverRef = storageRef.child(uid + "/cover" + "/" + Tool.generateImageKey("cover"));
-                    byte[] coverData = Tool.convertToBytes(imageCover);
-                    UploadTask uploadTaskCover = coverRef.putBytes(coverData);
-                    uploadTaskCover.addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle unsuccessful uploads
-                        }
-                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                            coverLink[0] = taskSnapshot.getDownloadUrl();
-                        }
-                    });
-
-                    //Push data to database:
-                    //-Init and set data for UserInfo instance
-
-                    userInfo.setUserid(uid);
-                    userInfo.setFirstname(etFirstName.getText().toString());
-                    userInfo.setLastname(etLastName.getText().toString());
-                    userInfo.setEmail(email);
-                    userInfo.setAvatarLink(avatarLink.toString());
-                    userInfo.setCoverLink(coverLink.toString());
-                    userInfo.setPhone(phone);
-                    userInfo.setDateofbirth(etDayOfBirth.getText().toString());
-                    userInfo.setGender(choice);
-                    userInfo.setRank("Beginner");
-
-                    //-Push to database
-                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    userinfoRef = mDatabase.child("users_info");
-                    //userinfoRef.addChildEventListener(userInfoEventListener);
-                    userinfoRef.push().setValue(userInfo);
                 }
             }
         });
@@ -321,10 +323,17 @@ public class RegisterActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    ChildEventListener userInfoEventListener = new ChildEventListener() {
+
+    public ChildEventListener userInfoEventListener = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
+            String uid = dataSnapshot.getValue(UserInfo.class).getUserid();
+            mDatabase.child("interactions/comments").child(uid).setValue("Registered");
+            mDatabase.child("interactions/friends").child(uid).setValue("Registered");
+            mDatabase.child("interactions/likes").child(uid).setValue("Registered");
+            mDatabase.child("interactions/posts").child(uid).setValue("Registered");
+            mDatabase.child("interactions/shares").child(uid).setValue("Registered");
+            mDatabase.child("interactions/comments").child(uid).setValue("Registered");
         }
 
         @Override

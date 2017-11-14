@@ -37,13 +37,14 @@
 
     <ImageButton
         android:id="@+id/imgbtnTakePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"
         android:background="@null"
         android:elevation="3dp"
+        android:scaleType="fitCenter"
         android:stateListAnimator="@null"
         android:translationZ="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/cimgvwChangeAvatar"
@@ -51,7 +52,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/cimgvwChangeAvatar"
         app:layout_constraintTop_toTopOf="@+id/cimgvwChangeAvatar"
-        app:layout_constraintVertical_bias="0.057"
+        app:layout_constraintVertical_bias="0.044"
         app:srcCompat="@drawable/img_camera" />
 
     <TextView

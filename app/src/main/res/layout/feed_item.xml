@@ -25,7 +25,7 @@
             android:paddingRight="@dimen/feed_item_padding_left_right">
 
             <com.android.volley.toolbox.NetworkImageView
-                android:id="@+id/profilePic"
+                android:id="@+id/nimgvwAvatar"
                 android:layout_width="@dimen/feed_item_profile_pic"
                 android:layout_height="@dimen/feed_item_profile_pic"
                 android:scaleType="fitCenter"></com.android.volley.toolbox.NetworkImageView>
@@ -37,14 +37,14 @@
                 android:paddingLeft="@dimen/feed_item_profile_info_padd">
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/tvUsername"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/feed_item_profile_name"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/timestamp"
+                    android:id="@+id/tvTimestamp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/timestamp"
@@ -53,7 +53,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txtStatusMsg"
+            android:id="@+id/tvContent"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -62,7 +62,7 @@
             android:paddingTop="@dimen/feed_item_status_pad_top" />
 
         <TextView
-            android:id="@+id/txtUrl"
+            android:id="@+id/tvLink"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:linksClickable="true"
@@ -72,7 +72,7 @@
             android:textColorLink="@color/link" />
 
         <info.androidhive.listviewfeed.FeedImageView
-            android:id="@+id/feedImage1"
+            android:id="@+id/fimgvwPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"

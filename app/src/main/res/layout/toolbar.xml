@@ -4,7 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
+    android:background="@android:color/white"
     app:layout_collapseMode="pin"
     app:layout_scrollFlags="scroll|enterAlways"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
@@ -20,7 +20,7 @@
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="start|center_vertical"
-            android:layout_marginRight="?attr/actionBarSize"
+            android:layout_marginEnd="?attr/actionBarSize"
             android:src="@drawable/more"
             android:visibility="invisible" />
 
@@ -31,7 +31,7 @@
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="end"
-            android:src="@drawable/friend_add_white" />
+            android:src="@drawable/friend_add_black" />
 
     </FrameLayout>
 </Toolbar>

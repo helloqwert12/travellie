@@ -1,50 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--app:layout_behavior="@string/appbar_scrolling_view_behavior"--><!--tools:context="com.mobile.absoluke.travellie.ProfileActivity"--><!--tools:showIn="@layout/activity_profile">-->
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_marginTop="100dp"--><!--app:layout_behavior="@string/appbar_scrolling_view_behavior"--><!--tools:context="com.mobile.absoluke.travellie.ProfileActivity"--><!--tools:showIn="@layout/activity_profile">-->
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="100dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.mobile.absoluke.travellie.ProfileActivity"
     tools:showIn="@layout/activity_profile">
 
-    <!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--<ImageView-->
+    <!--android:id="@+id/imageCover"-->
     <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context="com.mobile.absoluke.travellie.ProfileActivity"-->
-    <!--tools:showIn="@layout/activity_profile">-->
+    <!--android:layout_height="@dimen/app_bar_height"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:stateListAnimator="@null"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:srcCompat="@drawable/no_cover" />-->
 
-    <ImageView
-        android:id="@+id/imageCover"
-        android:layout_width="411dp"
-        android:layout_height="@dimen/app_bar_height"
-        android:scaleType="centerCrop"
-        android:stateListAnimator="@null"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/no_cover" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/cimgvwChangeAvatar"
-        android:layout_width="105dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="156dp"
-        android:background="@null"
-        android:elevation="3dp"
-        android:src="@drawable/img_placeholder"
-        android:stateListAnimator="@null"
-        android:translationZ="3dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageCover"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageCover"
-        app:layout_constraintTop_toTopOf="@+id/imageCover" />
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+    <!--android:id="@+id/cimgvwChangeAvatar"-->
+    <!--android:layout_width="105dp"-->
+    <!--android:layout_height="105dp"-->
+    <!--android:layout_marginTop="156dp"-->
+    <!--android:background="@null"-->
+    <!--android:elevation="3dp"-->
+    <!--android:src="@drawable/img_placeholder"-->
+    <!--android:stateListAnimator="@null"-->
+    <!--android:translationZ="3dp"-->
+    <!--app:layout_constraintEnd_toEndOf="@+id/imageCover"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="@+id/imageCover"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/imageCover" />-->
 
     <TextView
         android:id="@+id/username"
@@ -56,8 +49,8 @@
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cimgvwChangeAvatar" />
+        app:layout_constraintRight_toRightOf="parent" />
+    <!--app:layout_constraintTop_toBottomOf="@+id/cimgvwChangeAvatar" />-->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout3"
@@ -161,7 +154,6 @@
         android:layout_margin="@dimen/text_margin"
         android:text="@string/large_text" />
 
-    <!--</android.support.constraint.ConstraintLayout>-->
 </android.support.constraint.ConstraintLayout>
 
     <!--</ScrollView>-->

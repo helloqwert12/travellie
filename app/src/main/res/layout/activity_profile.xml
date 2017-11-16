@@ -11,9 +11,19 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:background="@android:color/transparent"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+        android:fitsSystemWindows="true">
+        <!--android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">-->
+
+        <ImageView
+            android:id="@+id/imageCover"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:scaleType="centerCrop"
+            android:stateListAnimator="@null"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/no_cover" />
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -35,5 +45,18 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_profile" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cimgvwChangeAvatar"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="156dp"
+        android:background="@null"
+        android:elevation="3dp"
+        android:src="@drawable/img_placeholder"
+        android:stateListAnimator="@null"
+        android:translationZ="3dp"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|center" />
 
 </android.support.design.widget.CoordinatorLayout>

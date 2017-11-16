@@ -12,23 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true">
-        <!--android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">-->
-
-        <ImageView
-            android:id="@+id/imageCover"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/app_bar_height"
-            android:scaleType="centerCrop"
-            android:stateListAnimator="@null"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/no_cover" />
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -39,12 +27,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_profile" />
+    <!--<ImageView-->
+    <!--android:id="@+id/imageCover"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/app_bar_height"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:stateListAnimator="@null"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:srcCompat="@drawable/no_cover" />-->
+
+    <ImageView
+        android:id="@+id/imageCover"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:scaleType="centerCrop"
+        android:stateListAnimator="@null"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/no_cover" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cimgvwChangeAvatar"

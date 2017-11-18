@@ -35,6 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imageCover;
     CircleImageView cimgvwChangeAvatar;
     TextView tvUsername;
+    RoundedImage roundedImageChangeAvatar;
 
     //Firebase
     FirebaseAuth auth;
@@ -123,6 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
         imageCover = findViewById(R.id.imageCover);
         cimgvwChangeAvatar = findViewById(R.id.cimgvwChangeAvatar);
         tvUsername = findViewById(R.id.username);
+        roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
     }
 
     private void initFirabase(){
@@ -155,7 +157,8 @@ public class ProfileActivity extends AppCompatActivity {
                 Glide.with(ProfileActivity.this)
                         .using(new FirebaseImageLoader())
                         .load(avatarRef)
-                        .into(cimgvwChangeAvatar);
+                        .into(roundedImageChangeAvatar);
+                //            .into(cimgvwChangeAvatar);
 
                 StorageReference coverRef = storage.getReferenceFromUrl(userInfo.getCoverLink());
                 Log.i(TAG, "coverRef: " + coverRef);

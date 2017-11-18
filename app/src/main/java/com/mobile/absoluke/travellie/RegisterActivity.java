@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner spnGender;
     Button btnUpdate;
     ImageButton imgbtnTakePicture;
-    CircleImageView cimgvwChangeAvatar;
+    RoundedImage roundedImageChangeAvatar;
     ImageView imageCover;
 
     //DataObject
@@ -91,6 +91,38 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Firebase
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    public ChildEventListener userInfoEventListener = new ChildEventListener() {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            String uid = dataSnapshot.getValue(UserInfo.class).getUserid();
+            mDatabase.child("interactions/comments").child(uid).setValue("Registered");
+            mDatabase.child("interactions/friends").child(uid).setValue("Registered");
+            mDatabase.child("interactions/likes").child(uid).setValue("Registered");
+            mDatabase.child("interactions/posts").child(uid).setValue("Registered");
+            mDatabase.child("interactions/shares").child(uid).setValue("Registered");
+            mDatabase.child("interactions/comments").child(uid).setValue("Registered");
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
     DatabaseReference userinfoRef;
     FirebaseStorage storage = FirebaseStorage.getInstance("gs://travellie-5884f.appspot.com");
     StorageReference storageRef = storage.getReference();
@@ -121,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
         etFirstName.setText(firstName);
         etLastName.setText(lastName);
 
-        Picasso.with(RegisterActivity.this).load(profileUri).into(cimgvwChangeAvatar, new Callback() {
+        Picasso.with(RegisterActivity.this).load(profileUri).into(roundedImageChangeAvatar, new Callback() {
             @Override
             public void onSuccess() {
 
@@ -146,7 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnUpdate = findViewById(R.id.btnUpdate);
 
         imgbtnTakePicture = findViewById(R.id.imgbtnTakePicture);
-        cimgvwChangeAvatar = findViewById(R.id.cimgvwChangeAvatar);
+        roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
         imageCover = findViewById(R.id.imageCover);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -184,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     final Uri[] avatarLink = new Uri[1];
                     StorageReference avatarRef = storageRef.child(uid + "/avatar" + "/" + Tool.generateImageKey("avatar"));
-                    byte[] avatarData = Tool.convertToBytes(cimgvwChangeAvatar);
+                    byte[] avatarData = Tool.convertToBytes(roundedImageChangeAvatar);
                     UploadTask uploadTaskAvatar = avatarRef.putBytes(avatarData);
                     uploadTaskAvatar.addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -253,7 +285,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        cimgvwChangeAvatar.setOnClickListener(new View.OnClickListener() {
+        roundedImageChangeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent()
@@ -297,7 +329,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            cimgvwChangeAvatar.setImageBitmap(bitmap);
+            roundedImageChangeAvatar.setImageBitmap(bitmap);
         }
         else if(requestCode == REQUEST_CODE_FILE_AVATAR && resultCode == RESULT_OK && data != null) {
             Uri selectedfile = data.getData(); //The uri with the location of the file
@@ -307,7 +339,7 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            cimgvwChangeAvatar.setImageBitmap(bitmap);
+            roundedImageChangeAvatar.setImageBitmap(bitmap);
         }
         else if (requestCode == REQUEST_CODE_FILE_COVER && resultCode == RESULT_OK && data != null){
             Uri selectedfile = data.getData(); //The uri with the location of the file
@@ -322,40 +354,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
-    public ChildEventListener userInfoEventListener = new ChildEventListener() {
-        @Override
-        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            String uid = dataSnapshot.getValue(UserInfo.class).getUserid();
-            mDatabase.child("interactions/comments").child(uid).setValue("Registered");
-            mDatabase.child("interactions/friends").child(uid).setValue("Registered");
-            mDatabase.child("interactions/likes").child(uid).setValue("Registered");
-            mDatabase.child("interactions/posts").child(uid).setValue("Registered");
-            mDatabase.child("interactions/shares").child(uid).setValue("Registered");
-            mDatabase.child("interactions/comments").child(uid).setValue("Registered");
-        }
-
-        @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-        }
-
-        @Override
-        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    };
 
     //Kiểm tra có components nào null hay không
     private boolean hasNull(){

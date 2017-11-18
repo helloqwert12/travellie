@@ -145,6 +145,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                userInfo = dataSnapshot.getValue(UserInfo.class);
                Log.i(TAG, "Avatar link: " + userInfo.getAvatarLink());
+                Log.i(TAG, "User id: " + userInfo.getUserid());
 
                //Load info to UI
                 //-Load avatar and cover

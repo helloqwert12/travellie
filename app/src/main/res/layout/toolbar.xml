@@ -30,7 +30,7 @@
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="end"></ImageButton>
+            android:layout_gravity="end" />
             <!--android:src="@drawable/friend_add_black" />-->
 
     </FrameLayout>

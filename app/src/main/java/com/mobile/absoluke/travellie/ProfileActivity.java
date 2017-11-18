@@ -2,6 +2,7 @@ package com.mobile.absoluke.travellie;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import dataobject.UserInfo;
 
@@ -32,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     //Components
     ImageView imageCover;
-    //CircleImageView cimgvwChangeAvatar;
+    //undedImage cimgvwChangeAvatar; //???
     TextView tvUsername;
     RoundedImage roundedImageChangeAvatar;
 
@@ -121,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void matchComponents(){
         imageCover = findViewById(R.id.imageCover);
-        //cimgvwChangeAvatar = findViewById(R.id.cimgvwChangeAvatar);
+        //cimgvwChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
         tvUsername = findViewById(R.id.username);
         roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
     }
@@ -153,19 +155,21 @@ public class ProfileActivity extends AppCompatActivity {
                 StorageReference avatarRef = storage.getReferenceFromUrl(userInfo.getAvatarLink());
                 Log.i(TAG, "avatarRef: " + avatarRef);
 
-                Glide.with(ProfileActivity.this)
-                        .using(new FirebaseImageLoader())
-                        .load(avatarRef)
-                        .into(roundedImageChangeAvatar);
+//                Glide.with(ProfileActivity.this)
+//                        .using(new FirebaseImageLoader())
+//                        .load(avatarRef)
+//                        .into(roundedImageChangeAvatar);
                 //            .into(cimgvwChangeAvatar);
+                Picasso.with(ProfileActivity.this).load(Uri.parse(userInfo.getAvatarLink())).into(roundedImageChangeAvatar);
 
                 StorageReference coverRef = storage.getReferenceFromUrl(userInfo.getCoverLink());
                 Log.i(TAG, "coverRef: " + coverRef);
 
-                Glide.with(ProfileActivity.this)
-                        .using(new FirebaseImageLoader())
-                        .load(coverRef)
-                        .into(imageCover);
+//                Glide.with(ProfileActivity.this)
+//                        .using(new FirebaseImageLoader())
+//                        .load(coverRef)
+//                        .into(imageCover);
+                Picasso.with(ProfileActivity.this).load(Uri.parse(userInfo.getCoverLink())).into(imageCover);
 
                 //-Load info
                 String fullName = userInfo.getLastname() + " " + userInfo.getFirstname();

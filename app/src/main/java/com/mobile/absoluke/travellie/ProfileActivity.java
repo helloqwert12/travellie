@@ -33,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     //Components
     ImageView imageCover;
-    CircleImageView cimgvwChangeAvatar;
+    //CircleImageView cimgvwChangeAvatar;
     TextView tvUsername;
     RoundedImage roundedImageChangeAvatar;
 

@@ -57,9 +57,9 @@
     <!--app:layout_anchorGravity="top|center" />-->
 
     <com.mobile.absoluke.travellie.RoundedImage
-        android:id="@+id/singleCompLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/roundImageChangeAvatar"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
         android:layout_margin="16dp"
         android:clickable="true"
         android:padding="5dp"

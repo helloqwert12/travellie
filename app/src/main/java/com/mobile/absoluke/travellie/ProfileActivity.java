@@ -122,7 +122,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void matchComponents(){
         imageCover = findViewById(R.id.imageCover);
-        cimgvwChangeAvatar = findViewById(R.id.cimgvwChangeAvatar);
+        //cimgvwChangeAvatar = findViewById(R.id.cimgvwChangeAvatar);
         tvUsername = findViewById(R.id.username);
         roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
     }

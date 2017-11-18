@@ -57,27 +57,17 @@
     <!--app:layout_anchorGravity="top|center" />-->
 
     <com.mobile.absoluke.travellie.RoundedImage
-        android:id="@+id/roundImageChangeAvatar"
-        android:layout_width="105dp"
-        android:layout_height="105dp"
+        android:id="@+id/singleCompLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
         android:clickable="true"
         android:padding="5dp"
         android:src="@drawable/img_placeholder"
         app:civ_border_width="2dp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="top|center"
+        app:layout_anchor="@+id/app_bar"
+        app:layout_anchorGravity="bottom|center"
         app:layout_collapseMode="parallax"
         app:layout_collapseParallaxMultiplier="0.4" />
-
-    <!--<android.support.design.widget.FloatingActionButton-->
-    <!--android:id="@+id/fabChangeAvatar"-->
-    <!--android:layout_width="105dp"-->
-    <!--android:layout_height="105dp"-->
-    <!--android:layout_margin="@dimen/fab_margin"-->
-    <!--android:src="@drawable/img_placeholder"-->
-    <!--app:backgroundTint="@color/colorPrimary"-->
-    <!--app:borderWidth="0dp"-->
-    <!--app:layout_anchor="@+id/app_bar"-->
-    <!--app:layout_anchorGravity="bottom|center"/>-->
 
 </android.support.design.widget.CoordinatorLayout>

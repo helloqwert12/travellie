@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageCover"
-        android:layout_width="411dp"
-        android:layout_height="177dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
         android:scaleType="centerCrop"
         android:stateListAnimator="@null"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -19,36 +19,17 @@
 
     <com.mobile.absoluke.travellie.RoundedImage
         android:id="@+id/roundImageChangeAvatar"
-        android:layout_width="112dp"
-        android:layout_height="112dp"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
         android:layout_marginTop="152dp"
         android:clickable="true"
         android:padding="5dp"
         android:src="@drawable/img_placeholder"
-        app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="@+id/imageCover"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageCover"
         app:layout_constraintTop_toTopOf="@+id/imageCover" />
-
-    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-    <!--android:id="@+id/cimgvwChangeAvatar"-->
-    <!--android:layout_width="112dp"-->
-    <!--android:layout_height="112dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="152dp"-->
-    <!--android:background="@null"-->
-    <!--android:elevation="3dp"-->
-    <!--android:src="@drawable/img_placeholder"-->
-    <!--android:stateListAnimator="@null"-->
-    <!--android:translationZ="3dp"-->
-    <!--app:layout_constraintEnd_toEndOf="@+id/imageCover"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="@+id/imageCover"-->
-    <!--app:layout_constraintTop_toTopOf="@+id/imageCover" />-->
 
     <ImageButton
         android:id="@+id/imgbtnTakePicture"

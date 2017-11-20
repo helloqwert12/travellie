@@ -24,6 +24,14 @@
             android:paddingLeft="@dimen/feed_item_padding_left_right"
             android:paddingRight="@dimen/feed_item_padding_left_right">
 
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/cimgvwChangeAvatar"-->
+            <!--android:layout_width="@dimen/feed_item_profile_pic"-->
+            <!--android:layout_height="@dimen/feed_item_profile_pic"-->
+            <!--android:background="@null"-->
+            <!--android:src="@drawable/img_placeholder"-->
+            <!--android:stateListAnimator="@null" />-->
+
             <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/nimgvwAvatar"
                 android:layout_width="@dimen/feed_item_profile_pic"

@@ -6,6 +6,8 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="avatar_size">112dp</dimen>
+    <dimen name="avatar_feed_size">50dp</dimen>
+
 
     <!--Custom ListView Feed-->
     <dimen name="feed_item_margin">10dp</dimen>

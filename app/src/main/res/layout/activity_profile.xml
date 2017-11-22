@@ -51,7 +51,6 @@
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
         android:clickable="true"
-        android:padding="5dp"
         android:src="@drawable/img_placeholder"
         app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="bottom|center_horizontal" />

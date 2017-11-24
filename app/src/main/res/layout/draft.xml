@@ -34,6 +34,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
+            android:maxLines="2"
+            android:minLines="1"
             android:text="Username"
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/feed_item_profile_name"

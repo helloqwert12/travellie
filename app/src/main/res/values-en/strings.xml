@@ -20,9 +20,9 @@
     <string name="last_name">Last name</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="gender">Gender</string>
-    <string name="male">male</string>
-    <string name="female">female</string>
-    <string name="other">other</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
     <string name="update_profile">Update profile</string>
     <string-array name="gender_list">
         <item>Male</item>
@@ -32,5 +32,9 @@
 
     <string name="has_null_value">Please complete all fields</string>
     <string name="update_success">Upload success</string>
+
+    <!-- Strings related to draft -->
+    <string name="draft_hello">What\'s on your mind?</string>
+    <string name="at">at</string>
 
 </resources>

@@ -47,22 +47,23 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@id/ratingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_panel">
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@android:color/transparent"
-                android:ems="10"
-                android:hint="@string/draft_hello"
-                android:inputType="textMultiLine"
-                android:paddingStart="@dimen/feed_item_padding_left_right"
-                android:textSize="20sp"
-                tools:ignore="RtlSymmetry" />
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/draft_hello"
+            android:inputType="textMultiLine"
+            android:paddingStart="@dimen/feed_item_padding_left_right"
+            android:textSize="20sp"
+            tools:ignore="RtlSymmetry" />
 
     </ScrollView>
 
@@ -87,7 +88,7 @@
 
         <ImageButton
             android:id="@+id/btnChoosePic"
-            style="@style/draft_icon"
+            style="@style/bottom_icon"
             android:layout_width="30dp"
             android:layout_marginStart="@dimen/feed_item_padding_left_right"
             android:tint="@android:color/holo_green_dark"
@@ -99,7 +100,7 @@
 
         <ImageButton
             android:id="@+id/btnGetLocation"
-            style="@style/draft_icon"
+            style="@style/bottom_icon"
             android:layout_width="20dp"
             android:tint="@android:color/holo_red_light"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -110,7 +111,7 @@
 
         <ImageButton
             android:id="@+id/btnPost"
-            style="@style/draft_icon"
+            style="@style/bottom_icon"
             android:layout_width="25dp"
             android:layout_marginEnd="18dp"
             android:tint="@color/colorAccent"

@@ -5,7 +5,7 @@ package dataobject;
  */
 
 public enum POST_TYPE {
-    NEWFEEDS ,
+    GENERAL ,
     FOOD,
     HOTEL,
     ENTERTAINMENT

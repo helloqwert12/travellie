@@ -18,7 +18,7 @@ import dataobject.Post;
  * Created by tranminhquan on 11/15/2017.
  */
 
-public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.RecyclerViewHolder> {
+public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.RecyclerViewHolder>{
 
     private List<Post> listPost = new ArrayList<>();
 
@@ -40,8 +40,10 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder viewHolder, int position) {
-
+        viewHolder.tvUseranme.setText(listPost.get(position).getUserid());
+        viewHolder.tvContent.setText(listPost.get(position).getContent());
     }
+
 
     public void addItem(int position, Post post){
         listPost.add(position, post);
@@ -56,7 +58,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
         //Declare components
-        ImageView nimgvwAvatar; //--TO DO: change to NetworkImageView
+        ImageView cimgvwAvatar; //--TO DO: change to NetworkImageView
         TextView tvUseranme;
         TextView tvTimestamp;
         TextView tvContent;
@@ -68,7 +70,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             super(itemView);
 
             //match components
-            nimgvwAvatar = itemView.findViewById(R.id.nimgvwAvatar);
+            //cimgvwAvatar = itemView.findViewById(R.id.cimgvwAvatar);
             tvUseranme = itemView.findViewById(R.id.tvUsername);
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
             tvContent = itemView.findViewById(R.id.tvContent);

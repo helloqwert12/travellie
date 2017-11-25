@@ -30,8 +30,18 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="post_type">
+        <item>Entertainment</item>
+        <item>Hotel</item>
+        <item>Food</item>
+        <item>General</item>
+    </string-array>
+
     <string name="has_null_value">Please complete all fields</string>
     <string name="update_success">Upload success</string>
+    <string name="update_post_success">Your post has been complete</string>
+
+    <string name="empty_content">You did not write anything</string>
 
     <!-- Strings related to draft -->
     <string name="draft_hello">What\'s on your mind?</string>

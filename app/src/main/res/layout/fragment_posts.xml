@@ -4,10 +4,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyvwPosts"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fbtnAddPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<EditText-->
+                <!--android:id="@+id/etEditPost"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+            <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<Spinner-->
+                    <!--android:id="@+id/spnPostType"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content">-->
+                <!--</Spinner>-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/imgbtnChoosePic"-->
+                    <!--android:layout_gravity="left"-->
+                    <!--android:text="Choose Picture"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+
+
+                <!--<Button-->
+                    <!--android:id="@+id/imgbtnPost"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="POST" />-->
+            <!--</LinearLayout>-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyvwPosts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

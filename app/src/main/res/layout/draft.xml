@@ -15,7 +15,7 @@
             android:id="@+id/roundImageAvatar"
             android:layout_width="@dimen/avatar_feed_size"
             android:layout_height="@dimen/avatar_feed_size"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/feed_item_padding_left_right"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:clickable="true"
@@ -52,11 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_panel">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
@@ -65,10 +60,10 @@
                 android:ems="10"
                 android:hint="@string/draft_hello"
                 android:inputType="textMultiLine"
-                android:paddingStart="10dp"
+                android:paddingStart="@dimen/feed_item_padding_left_right"
                 android:textSize="20sp"
                 tools:ignore="RtlSymmetry" />
-        </LinearLayout>
+
     </ScrollView>
 
     <!--TODO: https://github.com/sujithkanna/SmileyRating-->
@@ -94,7 +89,7 @@
             android:id="@+id/btnChoosePic"
             style="@style/draft_icon"
             android:layout_width="30dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="@dimen/feed_item_padding_left_right"
             android:tint="@android:color/holo_green_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +103,7 @@
             android:layout_width="20dp"
             android:tint="@android:color/holo_red_light"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/btnChoosePic"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/location" />
@@ -117,7 +112,7 @@
             android:id="@+id/btnPost"
             style="@style/draft_icon"
             android:layout_width="25dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="18dp"
             android:tint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

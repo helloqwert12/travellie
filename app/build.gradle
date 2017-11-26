@@ -39,6 +39,7 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-storage:0.6.0'       // FirebaseUI Storage only
 
     compile 'com.github.sujithkanna:smileyrating:1.6.8'      // Custom Rating Bar
+    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta3'      // Beta Constraint Layout
 }
 
 

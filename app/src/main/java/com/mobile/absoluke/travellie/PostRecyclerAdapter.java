@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,12 +56,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
         //Declare components
-        ImageView cimgvwAvatar; //--TO DO: change to NetworkImageView
+        ImageView cimgvwAvatar; //--TODO: change to NetworkImageView
         TextView tvUseranme;
         TextView tvTimestamp;
         TextView tvContent;
         TextView tvLink;
-        ImageView fimgvwPhoto; //--TO DO: change to FeedImageView
+        ImageView fimgvwPhoto; //--TODO: change to FeedImageView
 
 
         public RecyclerViewHolder(View itemView) {
@@ -73,9 +71,9 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             //cimgvwAvatar = itemView.findViewById(R.id.cimgvwAvatar);
             tvUseranme = itemView.findViewById(R.id.tvUsername);
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
-            tvContent = itemView.findViewById(R.id.tvContent);
-            tvLink = itemView.findViewById(R.id.tvLink);
-            fimgvwPhoto = itemView.findViewById(R.id.fimgvwPhoto);
+//            tvContent = itemView.findViewById(R.id.tvContent);
+//            tvLink = itemView.findViewById(R.id.tvLink);
+//            fimgvwPhoto = itemView.findViewById(R.id.fimgvwPhoto);
         }
 
     }

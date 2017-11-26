@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/feed_item_padding_left_right"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_timestamp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editText"
@@ -11,14 +20,12 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/transparent"
         android:ems="10"
-        android:hint="@string/draft_hello"
         android:inputType="textMultiLine"
         android:paddingStart="@dimen/feed_item_padding_left_right"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTimestamp" />
 
     <!--TODO: https://github.com/sujithkanna/SmileyRating-->
     <com.hsalf.smilerating.SmileRating

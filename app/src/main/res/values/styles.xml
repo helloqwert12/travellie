@@ -13,8 +13,8 @@
     </style>
 
     <style name="sign_in_btn">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">260dp</item>
+        <item name="android:layout_height">20dp</item>
         <item name="android:background">@drawable/round_btn</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>

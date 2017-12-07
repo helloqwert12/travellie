@@ -56,8 +56,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-//        Comment lines below for testing
         // Check if user is signed in (non-null) and update UI accordingly.
+//        Comment lines below for testing
         FirebaseUser currentUser = mAuth.getCurrentUser();
         Log.i(TAG, "userid: " + currentUser.getUid());
         if (currentUser != null) {
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Tool.changeActivity(this, ProfileActivity.class);
         }
-
+//        Stop comment
     }
 
     @Override

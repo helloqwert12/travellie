@@ -46,5 +46,6 @@
     <!-- Strings related to draft -->
     <string name="draft_hello">What\'s on your mind?</string>
     <string name="at">at</string>
+    <string name="search_for_places">Search for places</string>
 
 </resources>

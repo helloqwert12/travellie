@@ -140,5 +140,6 @@
     <!-- Strings related to draft -->
     <string name="draft_hello">Bạn đang nghĩ gì?</string>
     <string name="at">tại</string>
+    <string name="search_for_places">Tìm kiếm địa điểm</string>
 
 </resources>

@@ -242,7 +242,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     Toast.makeText(RegisterActivity.this, R.string.update_success, Toast.LENGTH_SHORT).show();
                                     Tool.changeActivity(RegisterActivity.this, ProfileActivity.class);
-
                                 }
                             });
 

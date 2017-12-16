@@ -11,8 +11,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/appbar_padding_top">
+        android:layout_height="wrap_content">
         <!--android:theme="@style/AppTheme.AppBarOverlay">-->
 
         <include
@@ -20,18 +19,50 @@
             layout="@layout/toolbar" />
     </android.support.design.widget.AppBarLayout>
 
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/container"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_above="@+id/tabs"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+            <FrameLayout
+                android:id="@+id/frameContent"
+                android:layout_width="match_parent"
+                android:layout_height="1200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/containerMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v4.view.ViewPager>
+            </FrameLayout>
+        </RelativeLayout>
+    </ScrollView>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="50dp"
+        app:layout_anchor="@+id/scrollView2"
+        app:layout_anchorGravity="bottom|center">
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/tabsMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -56,7 +87,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/accommodation" />
-
         </android.support.design.widget.TabLayout>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

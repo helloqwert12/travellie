@@ -1,7 +1,6 @@
 package com.mobile.absoluke.travellie;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,11 +9,10 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -102,7 +100,7 @@ public class AddPostActivity extends AppCompatActivity {
         tvUsername = findViewById(R.id.tvUsername);
         editText = findViewById(R.id.editText);
         btnChoosePic = findViewById(R.id.btnChoosePic);
-        btnGetLocation = findViewById(R.id.btnGetLocation);
+        //btnGetLocation = findViewById(R.id.btnGetLocation);
         btnPost = findViewById(R.id.btnPost);
 
         //Set event
@@ -119,18 +117,18 @@ public class AddPostActivity extends AppCompatActivity {
             }
         });
 
-        btnGetLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    buildAlertMessageNoGps();
-
-                } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    getLocation();
-                }
-            }
-        });
+//        btnGetLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+//                    buildAlertMessageNoGps();
+//
+//                } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+//                    getLocation();
+//                }
+//            }
+//        });
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override

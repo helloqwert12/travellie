@@ -33,7 +33,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     //Components
     ImageView imageCover;
-    //undedImage cimgvwChangeAvatar; //???
     TextView tvUsername;
     RoundedImage roundedImageChangeAvatar;
 
@@ -63,7 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
         initFirabase();
         matchComponents();
         loadDataFromFirebase();
-
     }
 
     private void createTabFragment(){
@@ -81,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
 
-        ViewPager viewPager = findViewById(R.id.container);
+        ViewPager viewPager = findViewById(R.id.containerProfile);
         viewPager.setAdapter(pagerAdapter);
 
         tabLayout = findViewById(R.id.tabs);
@@ -131,7 +129,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void matchComponents(){
         imageCover = findViewById(R.id.imageCover);
-        //cimgvwChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
         tvUsername = findViewById(R.id.username);
         roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
     }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@android:color/white"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:contentInsetStart="0dp"
     app:layout_collapseMode="pin"
     app:layout_scrollFlags="scroll|enterAlways"
@@ -19,7 +20,7 @@
         <ImageButton
             android:id="@+id/btn_search"
             style="@style/Widget.AppCompat.ActionButton"
-            android:layout_width="45dp"
+            android:layout_width="46dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|start"
             android:scaleType="fitCenter"

@@ -11,8 +11,8 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <include
             android:id="@+id/toolbar"
@@ -23,7 +23,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="55dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -40,10 +40,7 @@
             <FrameLayout
                 android:id="@+id/frameContent"
                 android:layout_width="match_parent"
-                android:layout_height="1200dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_height="1000dp">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/containerMain"
@@ -58,8 +55,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_gravity="bottom"
         app:layout_anchor="@+id/scrollView2"
-        app:layout_anchorGravity="bottom|center">
+        app:layout_anchorGravity="bottom|center"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabsMain"

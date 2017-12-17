@@ -23,7 +23,8 @@
             android:layout_height="50dp"
             android:layout_gravity="bottom|start"
             android:scaleType="fitCenter"
-            android:src="@drawable/search" />
+            android:src="@drawable/location"
+            android:tint="@android:color/black" />
 
         <!-- This is a custom center image -->
         <ImageView

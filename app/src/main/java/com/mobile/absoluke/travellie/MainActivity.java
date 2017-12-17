@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createTabFragment();
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+//        Toolbar main_toolbar = findViewById(R.id.main_toolbar);
+//        setSupportActionBar(main_toolbar);
 //        // Create the adapter that will return a fragment for each of the three
 //        // primary sections of the activity.
 //        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         //ab.setHomeAsUpIndicator(R.drawable.ic_menu); // set a custom icon for the default home button
 //        ab.setDisplayShowHomeEnabled(true); // show or hide the default home button
 //        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowCustomEnabled(true); // enable overriding the default toolbar layout
+        ab.setDisplayShowCustomEnabled(true); // enable overriding the default main_toolbar layout
         ab.setDisplayShowTitleEnabled(false); // disable the default title element here
 
         PagerAdapterMain pagerAdapterMain = new PagerAdapterMain(getSupportFragmentManager());

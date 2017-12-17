@@ -74,7 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
         //ab.setHomeAsUpIndicator(R.drawable.ic_menu); // set a custom icon for the default home button
 //        ab.setDisplayShowHomeEnabled(true); // show or hide the default home button
 //        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowCustomEnabled(true); // enable overriding the default toolbar layout
+        ab.setDisplayShowCustomEnabled(true); // enable overriding the default main_toolbar layout
         ab.setDisplayShowTitleEnabled(false); // disable the default title element here
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());

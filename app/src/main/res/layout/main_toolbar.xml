@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@android:color/white"
+    app:contentInsetStart="0dp"
     app:layout_collapseMode="pin"
     app:layout_scrollFlags="scroll|enterAlways"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
@@ -14,25 +15,36 @@
         android:layout_height="match_parent">
 
         <!-- This is a custom left side button -->
-        <ImageButton
-            android:id="@+id/btn_settings"
-            style="@style/Widget.AppCompat.ActionButton"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="start|center_vertical"
-            android:layout_marginEnd="?attr/actionBarSize"
-            android:scaleType="fitCenter"
-            android:src="@drawable/loved" />
-
-        <!-- This is a custom right side button -->
+        <!--location filter-->
         <ImageButton
             android:id="@+id/btn_search"
             style="@style/Widget.AppCompat.ActionButton"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="end"
+            android:layout_width="45dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|start"
             android:scaleType="fitCenter"
-            android:src="@drawable/friend_add_black" />
+            android:src="@drawable/search" />
+
+        <!-- This is a custom center image -->
+        <ImageView
+            android:id="@+id/imgView_logo"
+            android:layout_width="80dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_black" />
+
+        <!-- This is a custom right side button -->
+        <com.mobile.absoluke.travellie.RoundedImage
+            android:id="@+id/roundImageAvatar"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="12dp"
+            android:clickable="true"
+            android:src="@drawable/img_placeholder"
+            app:elevation="0dp" />
 
     </FrameLayout>
 </android.support.v7.widget.Toolbar>

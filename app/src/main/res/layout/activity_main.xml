@@ -14,13 +14,18 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/main_toolbar"
-            app:layout_scrollFlags="scroll|enterAlways" />
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <include layout="@layout/main_toolbar" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,41 +56,87 @@
                 </android.support.v4.view.ViewPager>
             </FrameLayout>
         </RelativeLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/bar_background"
-        app:layout_anchor="@+id/scrollView2"
-        app:layout_anchorGravity="bottom|center">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabsMain"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/bottom_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:tabIndicatorHeight="0dp">
+            android:layout_height="match_parent"
+            android:background="@drawable/bar_background">
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabsMain"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/home" />
+                android:layout_alignParentBottom="true"
+                app:tabIndicatorHeight="0dp">
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/entertainment" />
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/home" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/food" />
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/entertainment" />
 
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/accommodation" />
-        </android.support.design.widget.TabLayout>
-    </RelativeLayout>
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/food" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/accommodation" />
+            </android.support.design.widget.TabLayout>
+            <!--</RelativeLayout>-->
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="@drawable/bar_background"-->
+    <!--app:layout_anchor="@+id/scrollView2"-->
+    <!--app:layout_anchorGravity="bottom|center"-->
+    <!--app:layout_scrollFlags="scroll|enterAlways">-->
+
+    <!--<android.support.design.widget.TabLayout-->
+    <!--android:id="@+id/tabsMain"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--app:tabIndicatorHeight="0dp">-->
+
+    <!--<android.support.design.widget.TabItem-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:icon="@drawable/home" />-->
+
+    <!--<android.support.design.widget.TabItem-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:icon="@drawable/entertainment" />-->
+
+    <!--<android.support.design.widget.TabItem-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:icon="@drawable/food" />-->
+
+    <!--<android.support.design.widget.TabItem-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:icon="@drawable/accommodation" />-->
+    <!--</android.support.design.widget.TabLayout>-->
+    <!--</RelativeLayout>-->
 </android.support.design.widget.CoordinatorLayout>

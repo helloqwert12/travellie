@@ -6,7 +6,6 @@
     android:layout_height="@dimen/toolbar_height"
     android:background="@drawable/bar_background"
     app:contentInsetStart="0dp"
-    app:layout_collapseMode="pin"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
     <FrameLayout

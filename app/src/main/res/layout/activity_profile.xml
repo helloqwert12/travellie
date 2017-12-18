@@ -28,6 +28,7 @@
                 android:stateListAnimator="@null"
                 app:layout_anchor="@id/app_bar"
                 app:layout_anchorGravity="center"
+                app:layout_collapseMode="parallax"
                 app:srcCompat="@drawable/no_cover" />
 
             <android.support.v7.widget.Toolbar

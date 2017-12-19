@@ -10,14 +10,15 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -25,14 +26,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_height"
                 android:scaleType="centerCrop"
-                android:stateListAnimator="@null"
-                app:layout_anchor="@id/app_bar"
-                app:layout_anchorGravity="center"
+                app:layout_collapseMode="parallax"
                 app:srcCompat="@drawable/no_cover" />
 
+            <!--TODO : still bug-->
             <include
                 layout="@layout/main_toolbar"
                 app:layout_collapseMode="pin" />
+
+            <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/toolbar_height"-->
+            <!--android:background="@drawable/bar_background"-->
+            <!--app:layout_collapseMode="pin"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+
+            <!--<FrameLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--&lt;!&ndash; This is a custom left side button &ndash;&gt;-->
+            <!--&lt;!&ndash;location filter&ndash;&gt;-->
+            <!--<ImageButton-->
+            <!--android:id="@+id/btn_search"-->
+            <!--style="@style/Widget.AppCompat.ActionButton"-->
+            <!--android:layout_width="46dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_gravity="bottom|start"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:src="@drawable/location"-->
+            <!--android:tint="@android:color/black" />-->
+
+            <!--&lt;!&ndash; This is a custom center image &ndash;&gt;-->
+            <!--<ImageView-->
+            <!--android:id="@+id/imgView_logo"-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:src="@drawable/logo_black" />-->
+
+            <!--&lt;!&ndash; This is a custom right side button &ndash;&gt;-->
+            <!--<com.mobile.absoluke.travellie.RoundedImage-->
+            <!--android:id="@+id/roundImageAvatar"-->
+            <!--style="@style/Widget.AppCompat.ActionButton"-->
+            <!--android:layout_width="33dp"-->
+            <!--android:layout_height="33dp"-->
+            <!--android:layout_gravity="end|center_vertical"-->
+            <!--android:layout_marginEnd="12dp"-->
+            <!--android:clickable="true"-->
+            <!--android:src="@drawable/img_placeholder"-->
+            <!--app:elevation="0dp" />-->
+
+            <!--</FrameLayout>-->
+            <!--</android.support.v7.widget.Toolbar>-->
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

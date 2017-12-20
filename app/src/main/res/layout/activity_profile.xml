@@ -7,7 +7,9 @@
     android:fitsSystemWindows="true"
     tools:context="com.mobile.absoluke.travellie.ProfileActivity">
 
-    <include layout="@layout/profile_toolbar" />
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/profile_toolbar" />
 
     <include layout="@layout/content_profile" />
 
@@ -17,7 +19,7 @@
         android:layout_height="@dimen/avatar_size"
         android:clickable="true"
         android:src="@drawable/img_placeholder"
-        app:layout_anchor="@+id/app_bar"
+        app:layout_anchor="@+id/appbar"
         app:layout_anchorGravity="bottom|center_horizontal" />
 
 </android.support.design.widget.CoordinatorLayout>

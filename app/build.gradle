@@ -40,6 +40,7 @@ dependencies {
 
     compile 'com.github.sujithkanna:smileyrating:1.6.8'      // Custom Rating Bar
     compile 'com.android.support.constraint:constraint-layout:1.1.0-beta3'      // Beta Constraint Layout
+    compile 'com.aurelhubert:ahbottomnavigation:2.1.0'
 }
 
 

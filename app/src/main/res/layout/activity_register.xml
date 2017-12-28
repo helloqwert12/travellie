@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mobile.absoluke.travellie.RegisterActivity">
+    tools:context="com.mobile.absoluke.travelie.RegisterActivity">
 
     <ImageView
         android:id="@+id/imageCover"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/no_cover" />
 
-    <com.mobile.absoluke.travellie.RoundedImage
+    <com.mobile.absoluke.travelie.RoundedImage
         android:id="@+id/roundImageChangeAvatar"
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"

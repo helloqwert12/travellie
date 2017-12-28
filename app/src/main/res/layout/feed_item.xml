@@ -11,7 +11,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.mobile.absoluke.travellie.RoundedImage
+        <com.mobile.absoluke.travelie.RoundedImage
             android:id="@+id/roundImageAvatar"
             android:layout_width="@dimen/avatar_feed_size"
             android:layout_height="@dimen/avatar_feed_size"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context="com.mobile.absoluke.travellie.LoginActivity">
+    tools:context="com.mobile.absoluke.travelie.LoginActivity">
 
     <!-- Login progress -->
 
@@ -70,8 +70,8 @@
         <com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"
             android:id="@+id/fb_sign_in_button"
             style="@style/sign_in_btn"
-            android:paddingBottom="14dp"
-            android:paddingTop="8dp"
+            android:paddingBottom="11dp"
+            android:paddingTop="11dp"
             android:textColor="#39579b"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"

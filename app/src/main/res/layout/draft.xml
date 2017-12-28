@@ -10,7 +10,7 @@
         android:layout_height="68dp"
         android:orientation="horizontal">
 
-        <com.mobile.absoluke.travellie.RoundedImage
+        <com.mobile.absoluke.travelie.RoundedImage
             android:id="@+id/roundImageAvatar"
             android:layout_width="@dimen/avatar_feed_size"
             android:layout_height="@dimen/avatar_feed_size"

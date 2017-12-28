@@ -1,4 +1,4 @@
-package com.mobile.absoluke.travellie;
+package com.mobile.absoluke.travelie;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

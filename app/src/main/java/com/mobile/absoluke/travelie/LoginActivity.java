@@ -1,4 +1,4 @@
-package com.mobile.absoluke.travellie;
+package com.mobile.absoluke.travelie;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -70,8 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 //            bundle.putString("PHONE", currentUser.getPhoneNumber());
 //            bundle.putString("IMAGE", currentUser.getPhotoUrl().toString());
 //            Tool.pushDataAndChangeActivity(LoginActivity.this, RegisterActivity.class, bundle);
-            Tool.changeActivity(this, ProfileActivity.class);
-//            Tool.changeActivity(this, ProfileActivity.class);
+            Tool.changeActivity(this, MainActivity.class);
         }
 //        Stop comment
     }

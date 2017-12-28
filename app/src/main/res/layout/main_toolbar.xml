@@ -45,7 +45,7 @@
                     android:src="@drawable/logo_black" />
 
                 <!-- This is a custom right side button -->
-                <com.mobile.absoluke.travellie.RoundedImage
+                <com.mobile.absoluke.travelie.RoundedImage
                     android:id="@+id/roundImageAvatar"
                     style="@style/Widget.AppCompat.ActionButton"
                     android:layout_width="33dp"

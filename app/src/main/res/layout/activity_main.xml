@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.mobile.absoluke.travellie.MainActivity">
+    tools:context="com.mobile.absoluke.travelie.MainActivity">
 
     <include
         android:id="@+id/appbar"
@@ -38,42 +38,6 @@
     </android.support.v4.widget.NestedScrollView>
 
     <include
-        android:id="@+id/bottom_appbar"
+        android:id="@+id/bottom_toolbar"
         layout="@layout/main_bottom_bar" />
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="50dp"-->
-    <!--android:layout_gravity="bottom"-->
-    <!--android:background="@drawable/bar_background"-->
-    <!--app:layout_scrollFlags="scroll|enterAlways">-->
-
-    <!--<android.support.design.widget.TabLayout-->
-    <!--android:id="@+id/tabsMain"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--app:tabIndicatorHeight="0dp">-->
-
-    <!--<android.support.design.widget.TabItem-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:icon="@drawable/home" />-->
-
-    <!--<android.support.design.widget.TabItem-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:icon="@drawable/entertainment" />-->
-
-    <!--<android.support.design.widget.TabItem-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:icon="@drawable/food" />-->
-
-    <!--<android.support.design.widget.TabItem-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:icon="@drawable/accommodation" />-->
-    <!--</android.support.design.widget.TabLayout>-->
-    <!--</RelativeLayout>-->
 </android.support.design.widget.CoordinatorLayout>

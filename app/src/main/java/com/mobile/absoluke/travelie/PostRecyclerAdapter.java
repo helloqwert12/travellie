@@ -1,4 +1,4 @@
-package com.mobile.absoluke.travellie;
+package com.mobile.absoluke.travelie;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

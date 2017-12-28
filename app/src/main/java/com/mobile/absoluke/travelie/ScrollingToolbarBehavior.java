@@ -1,4 +1,4 @@
-package com.mobile.absoluke.travellie;
+package com.mobile.absoluke.travelie;
 
 import android.content.Context;
 import android.support.design.widget.AppBarLayout;
@@ -10,7 +10,7 @@ import android.view.View;
 /**
  * Created by SAGER on 20-Dec-17.
  */
-class ScrollingToolbarBehavior extends CoordinatorLayout.Behavior<Toolbar> {
+public class ScrollingToolbarBehavior extends CoordinatorLayout.Behavior<Toolbar> {
 
     public ScrollingToolbarBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);

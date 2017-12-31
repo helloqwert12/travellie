@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.home,
             R.drawable.entertainment,
             R.drawable.food,
-            R.drawable.accommodation
+            R.drawable.accommodation,
+            R.drawable.notification,
     };
 
     @Override
@@ -44,21 +45,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createTabFragment();
-
-//        Toolbar main_toolbar = findViewById(R.id.main_toolbar);
-//        setSupportActionBar(main_toolbar);
-//        // Create the adapter that will return a fragment for each of the three
-//        // primary sections of the activity.
-//        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-//
-//        // Set up the ViewPager with the sections adapter.
-//        mViewPager = findViewById(R.id.container);
-//        mViewPager.setAdapter(mSectionsPagerAdapter);
-//
-//        TabLayout tabLayout = findViewById(R.id.tabs);
-//
-//        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-//        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
     }
 
     private void createTabFragment() {
@@ -91,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).getIcon().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(2).getIcon().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(3).getIcon().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-
+        tabLayout.getTabAt(4).getIcon().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -118,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+        tabLayout.getTabAt(4).setIcon(tabIcons[4]);
     }
 
     /**

@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/topPanel"
@@ -27,15 +27,7 @@
 
         <TextView
             android:id="@+id/tvUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="6dp"
-            android:maxLines="2"
-            android:minLines="1"
-            android:text="Username"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="@dimen/feed_item_profile_name"
+            style="@style/feed_item_profile_name"
             app:layout_constraintStart_toEndOf="@+id/roundImageAvatar"
             app:layout_constraintTop_toTopOf="@+id/roundImageAvatar" />
 
@@ -50,37 +42,29 @@
             app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
     </android.support.constraint.ConstraintLayout>
 
-    <com.hsalf.smilerating.SmileRating
-        android:id="@+id/ratingBar"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        app:layout_constraintBottom_toTopOf="@id/bottomPanel"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topPanel" />
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/contentPanel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomPanel"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar">
+        app:layout_constraintTop_toBottomOf="@+id/topPanel">
 
         <TextView
-            android:id="@+id/editText"
+            android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:paddingEnd="@dimen/feed_item_profile_name"
             android:paddingStart="@dimen/feed_item_padding_left_right"
-            android:textSize="20sp"
+            android:textSize="@dimen/feed_item_profile_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
-
-    <!--TODO: https://github.com/sujithkanna/SmileyRating-->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/bottomPanel"
@@ -90,24 +74,39 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            style="@style/bottom_icon"
-            android:layout_width="30dp"
+        <!--<ImageButton-->
+        <!--android:id="@+id/imageButton"-->
+        <!--style="@style/bottom_icon"-->
+        <!--android:layout_width="30dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:srcCompat="@drawable/love" />-->
+
+        <!--TODO: https://github.com/jd-alexander/LikeButton-->
+        <com.like.LikeButton
+            android:id="@+id/heart_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            app:anim_scale_factor="3"
+            app:icon_size="30dp"
+            app:icon_type="heart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/love" />
+            app:like_drawable="@drawable/loved"
+            app:unlike_drawable="@drawable/love" />
 
         <ImageButton
             android:id="@+id/imageButton2"
             style="@style/bottom_icon"
             android:layout_width="30dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/heart_button"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/comment" />
 

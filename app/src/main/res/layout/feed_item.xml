@@ -4,60 +4,24 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/topPanel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.mobile.absoluke.travelie.RoundedImage
-            android:id="@+id/roundImageAvatar"
-            android:layout_width="@dimen/avatar_feed_size"
-            android:layout_height="@dimen/avatar_feed_size"
-            android:layout_marginStart="@dimen/feed_item_padding_left_right"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            android:src="@drawable/img_placeholder"
-            app:elevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvUsername"
-            style="@style/feed_item_profile_name"
-            app:layout_constraintStart_toEndOf="@+id/roundImageAvatar"
-            app:layout_constraintTop_toTopOf="@+id/roundImageAvatar" />
-
-        <TextView
-            android:id="@+id/tvTimestamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/feed_item_padding_left_right"
-            android:textColor="@color/timestamp"
-            android:textSize="@dimen/feed_item_timestamp"
-            app:layout_constraintStart_toStartOf="@+id/tvUsername"
-            app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
-    </android.support.constraint.ConstraintLayout>
+    <include layout="@layout/profile_panel" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/contentPanel"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:paddingTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topPanel">
+        app:layout_constraintTop_toBottomOf="@+id/profile_panel">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:paddingEnd="@dimen/feed_item_profile_name"
             android:paddingStart="@dimen/feed_item_padding_left_right"
             android:textSize="@dimen/feed_item_profile_name"
@@ -119,5 +83,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/share" />
+
+        <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>

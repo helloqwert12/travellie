@@ -118,7 +118,6 @@ public class AddPostActivity extends AppCompatActivity {
         recyclerViewImages.setHasFixedSize(true);
         recyclerViewImages.setLayoutManager(gridLayoutManager);
 
-
         mMultiImageSelector = MultiImageSelector.create();
 
         //Set event

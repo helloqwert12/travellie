@@ -35,30 +35,49 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/contentPanel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/ratingBar"
+    <!--<ScrollView-->
+    <!--android:id="@+id/contentPanel"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--app:layout_constraintBottom_toTopOf="@id/ratingBar"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/topPanel">-->
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:ems="10"
+        android:hint="@string/draft_hello"
+        android:inputType="textMultiLine"
+        android:paddingEnd="@dimen/feed_item_profile_name"
+        android:paddingStart="@dimen/feed_item_padding_left_right"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/feed_item_profile_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topPanel">
+        app:layout_constraintTop_toBottomOf="@+id/topPanel" />
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@android:color/transparent"
-            android:ems="10"
-            android:hint="@string/draft_hello"
-            android:inputType="textMultiLine"
-            android:paddingEnd="@dimen/feed_item_profile_name"
-            android:paddingStart="@dimen/feed_item_padding_left_right"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/feed_item_profile_name" />
-
-    </ScrollView>
+    <include
+        android:id="@+id/Gallery"
+        layout="@layout/content_pick_multiple_image"
+        android:layout_width="match_parent"
+        android:layout_height="244dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintVertical_bias="1.0" />
+    <!--</ScrollView>-->
 
     <!--TODO: https://github.com/sujithkanna/SmileyRating-->
     <com.hsalf.smilerating.SmileRating

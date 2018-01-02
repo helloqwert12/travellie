@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +22,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import dataobject.POST_TYPE;
 import dataobject.Post;
+import dataobject.UserInfo;
 import tool.Tool;
 
 /**
@@ -54,9 +58,12 @@ public class FragmentPosts extends Fragment {
     //Firebase
     FirebaseAuth auth;
     FirebaseUser currentUser;
-    DatabaseReference mDatabase, postUserRef;
+    DatabaseReference mDatabase, postUserRef, curUserRef;
     FirebaseStorage storage;
     StorageReference storageRef;
+
+    //dataobject
+    UserInfo userInfo;
 
     POST_TYPE postTypeChoice;
 
@@ -127,23 +134,28 @@ public class FragmentPosts extends Fragment {
 
             }
         });
+
+        // Lấy user info
+        curUserRef = mDatabase.child("users_info").child(currentUser.getUid());
     }
 
     public void initRecyclerView(){
         listPost = new ArrayList<>();
 
+        //Log.i("Avatar link -- ", ((ProfileActivity)getActivity()).userInfo.getAvatarLink());
+
         //[Test] set up list post
-//        Post post1 = new Post("Demo content 1", null, "userid1", "123", null, null, null, null, null, POST_TYPE.NEWFEEDS);
-//        Post post2 = new Post("Demo content 2", null, "userid2", "456", null, null, null, null, null, POST_TYPE.NEWFEEDS);
-//        Post post3 = new Post("Demo content 3", null, "userid3", "789", null, null, null, null, null, POST_TYPE.NEWFEEDS);
-//        Post post4 = new Post("Demo content 4", null, "userid4", "112", null, null, null, null, null, POST_TYPE.NEWFEEDS);
-//        Post post5 = new Post("Demo content 5", null, "userid5", "223", null, null, null, null, null, POST_TYPE.NEWFEEDS);
-//
-//        listPost.add(post1);
-//        listPost.add(post2);
-//        listPost.add(post3);
-//        listPost.add(post4);
-//        listPost.add(post5);
+        Post post1 = new Post("Demo content 1", null, null, "userid1", currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
+        Post post2 = new Post("Demo content 2", null, null, "userid2",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
+        Post post3 = new Post("Demo content 3", null, null, "userid3",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
+        Post post4 = new Post("Demo content 4", null, null, "userid4",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
+        Post post5 = new Post("Demo content 5", null, null, "userid5",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
+
+        listPost.add(post1);
+        listPost.add(post2);
+        listPost.add(post3);
+        listPost.add(post4);
+        listPost.add(post5);
 
         recyvwPosts.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
@@ -156,7 +168,7 @@ public class FragmentPosts extends Fragment {
         });
 
         //setting the adapter
-        adapter = new PostRecyclerAdapter(listPost);
+        adapter = new PostRecyclerAdapter(getContext(), curUserRef, listPost);
         recyvwPosts.setAdapter(adapter);
     }
 

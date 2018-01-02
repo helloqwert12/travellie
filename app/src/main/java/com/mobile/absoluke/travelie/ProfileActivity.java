@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageRef;
 
-    UserInfo userInfo;
+    public UserInfo userInfo;
 
 
     private int[] tabIcons = {

@@ -8,16 +8,30 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <com.mobile.absoluke.travelie.RoundedImage
+    <!--<com.mobile.absoluke.travelie.RoundedImage-->
+        <!--android:id="@+id/roundImageAvatar"-->
+        <!--android:layout_width="@dimen/avatar_feed_size"-->
+        <!--android:layout_height="@dimen/avatar_feed_size"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginStart="@dimen/feed_item_padding_left_right"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:clickable="true"-->
+        <!--android:src="@drawable/ic_launcher_background"-->
+        <!--app:elevation="0dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <ImageView
         android:id="@+id/roundImageAvatar"
         android:layout_width="@dimen/avatar_feed_size"
         android:layout_height="@dimen/avatar_feed_size"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="@dimen/feed_item_padding_left_right"
         android:layout_marginTop="8dp"
-        android:clickable="true"
         android:src="@drawable/img_placeholder"
-        app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

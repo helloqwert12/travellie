@@ -146,4 +146,8 @@
     <string name="at">tại</string>
     <string name="search_for_places">Tìm kiếm địa điểm</string>
 
+    <!--Error message-->
+    <string name="loading_image">Error when loading image</string>
+    <string name="a">Bạn đang nghĩ gì?</string>
+
 </resources>

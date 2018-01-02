@@ -140,8 +140,10 @@
                 android:id="@+id/etDayOfBirth"
                 android:layout_width="123dp"
                 android:layout_height="35dp"
+                android:clickable="true"
                 android:ems="10"
-                android:inputType="datetime"
+                android:focusable="false"
+                android:inputType="none"
                 android:theme="@style/TextLabel"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />

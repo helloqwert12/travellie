@@ -17,8 +17,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +69,7 @@ public class AddPostActivity extends AppCompatActivity {
     ImageButton btnChoosePic;
     ImageButton btnGetLocation;
     ImageButton btnPost;
+    Spinner spnTag;
     //Firebase
     FirebaseUser currentUser;
     DatabaseReference mDatabase, curUserRef;
@@ -79,6 +83,8 @@ public class AddPostActivity extends AppCompatActivity {
     List<Address> addresses;
     String[] infoLocation = new String[3];
     String info = "";
+
+    int choice; //choice of TAG
     private RecyclerView recyclerViewImages;
     private GridLayoutManager gridLayoutManager;
     private ArrayList<String> mSelectedImagesList = new ArrayList<>();
@@ -112,6 +118,25 @@ public class AddPostActivity extends AppCompatActivity {
         btnChoosePic = findViewById(R.id.btnChoosePic);
         //btnGetLocation = findViewById(R.id.btnGetLocation);
         btnPost = findViewById(R.id.btnPost);
+        spnTag = findViewById(R.id.spinnerTag);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.Tag_list, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spnTag.setAdapter(adapter);
+        spnTag.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                choice = spnTag.getSelectedItemPosition();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         recyclerViewImages = findViewById(R.id.recycler_view_images);
         gridLayoutManager = new GridLayoutManager(this, 2);

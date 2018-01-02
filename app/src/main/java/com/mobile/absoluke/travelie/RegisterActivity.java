@@ -1,5 +1,6 @@
 package com.mobile.absoluke.travelie;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,6 +38,9 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import dataobject.UserInfo;
 import tool.Tool;
@@ -65,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
     Bundle bundle;
     
     int choice; //choice of gender
-
+    Calendar myCalendar = Calendar.getInstance();
     //Firebase
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     public ChildEventListener userInfoEventListener = new ChildEventListener() {
@@ -103,6 +108,16 @@ public class RegisterActivity extends AppCompatActivity {
     DatabaseReference userinfoRef;
     FirebaseStorage storage = FirebaseStorage.getInstance("gs://travellie-5884f.appspot.com");
     StorageReference storageRef = storage.getReference();
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,6 +299,17 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Select a file"), REQUEST_CODE_FILE_COVER);
             }
         });
+
+
+        etDayOfBirth.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(RegisterActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
 
     // Kiểm tra việc người dùng có cho phép mở Camera trên Android 6.0 hay không
@@ -341,4 +367,10 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
+    private void updateLabel() {
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        etDayOfBirth.setText(sdf.format(myCalendar.getTime()));
+    }
 }

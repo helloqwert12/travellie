@@ -16,9 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import tool.Tool;
+
 public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
+    RoundedImage roundImageAvatar;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -45,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createTabFragment();
+        matchComponents();
+    }
+
+    private void matchComponents() {
+        roundImageAvatar = findViewById(R.id.roundImageAvatar);
+
+        roundImageAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tool.changeActivity(MainActivity.this, ProfileActivity.class);
+            }
+        });
     }
 
     private void createTabFragment() {

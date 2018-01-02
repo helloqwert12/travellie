@@ -28,7 +28,11 @@
         <item>Nữ</item>
         <item>Khác</item>
     </string-array>
-
+    <string-array name="Tag_list">
+        <item>Entertainment</item>
+        <item>Food</item>
+        <item>Accomodation</item>
+    </string-array>
     <string-array name="post_type">
         <item>Địa điểm</item>
         <item>Nơi ở</item>

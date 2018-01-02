@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class Post {
-    //private String postid;
+    private String postid;
     private String content;
     private String avatarLink;
     private List<String> imageLinks;
@@ -24,13 +24,16 @@ public class Post {
     private List<String> shares; //chua cac shareid
     private List<String> comments; //chua cac commentid
     private POST_TYPE type; //type cua bai post
+    private int rating;
+    private int likeCount;
+    private int cmtCount;
 
     public Post(){
         //default constructor for firebase
     }
 
     public Post(String ctn, String avaLink, List<String> imglinks, String uid, String uname, long ts, List<String> lk,
-                List<String> tg, List<String> lik, List<String> shrs, List<String> cmts, POST_TYPE tp){
+                List<String> tg, List<String> lik, List<String> shrs, List<String> cmts, POST_TYPE tp, int rt){
         //postid = pid;
         content = ctn;
         avatarLink = avaLink;
@@ -44,10 +47,13 @@ public class Post {
         shares = shrs;
         comments = cmts;
         type = tp;
+        rating = rt;
+        likeCount = 0;
+        cmtCount = 0;
     }
 
     //Get-set
-    //public String getPostid() { return postid; }
+    public String getPostid() { return postid; }
     public String getContent() { return content; }
     public String getAvatarLink() { return avatarLink; }
     public List<String> getImageLinks() { return imageLinks; }
@@ -60,9 +66,13 @@ public class Post {
     public List<String> getShares() { return shares; }
     public List<String> getComments() { return comments; }
     public POST_TYPE getType() { return type; }
+    public int getRating() { return rating; }
+    public int getLikeCount() { return likeCount; }
+    public int getCmtCount() { return cmtCount; }
 
-    //public void setPostid(String value) { postid = value; }
+    public void setPostid(String value) { postid = value; }
     public void setContent(String value) { content = value; }
+    public void setAvatarLink(String value) { avatarLink = value; }
     public void setImageLinks(List<String> value) { imageLinks = value; }
     public void setTimestamp(long value) { timestamp = value; }
     public void setUserid(String value) { userid = value; }
@@ -73,6 +83,9 @@ public class Post {
     public void setShares(List<String> value) { shares = value; }
     public void setComments(List<String> value) { comments = value; }
     public void setType(POST_TYPE value) { type = value; }
+    public void setRating(int value) { rating = value; }
+    public void setLikeCount(int value) { likeCount = value; }
+    public void setCmtCount(int value) { cmtCount = value; }
 
     //add
     public void addImageLink(String element) { imageLinks.add(element); }
@@ -81,5 +94,9 @@ public class Post {
     public void addLike(String element) { likes.add(element); }
     public void addShare(String element) { shares.add(element); }
     public void addComment(String element) { comments.add(element); }
+    public void increaseLike() { likeCount++; }
+    public void decreaseLike() { if (likeCount < 0) return; likeCount--;}
+    public void increaseCmt() { cmtCount++; }
+    public void decreaseCmt() { if (cmtCount < 0) return; cmtCount--; }
 
 }

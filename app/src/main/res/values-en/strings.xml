@@ -37,6 +37,13 @@
         <item>General</item>
     </string-array>
 
+    <string-array name="Tag_list">
+        <item>Entertainment</item>
+        <item>Food</item>
+        <item>Accomodation</item>
+        <item>General</item>
+    </string-array>
+
     <string name="has_null_value">Please complete all fields</string>
     <string name="update_success">Upload success</string>
     <string name="update_post_success">Your post has been complete</string>
@@ -47,5 +54,8 @@
     <string name="draft_hello">What\'s on your mind?</string>
     <string name="at">at</string>
     <string name="search_for_places">Search for places</string>
+    <string name="rating_reminder">Let friends know your feeling by rating this review</string>
+    <string name="category_reminder">Please category your post</string>
+    <string name="post_success">Your post is now commited</string>
 
 </resources>

@@ -29,9 +29,10 @@
         <item>Khác</item>
     </string-array>
     <string-array name="Tag_list">
-        <item>Entertainment</item>
-        <item>Food</item>
-        <item>Accomodation</item>
+        <item>Địa điểm du lịch</item>
+        <item>Thức ăn</item>
+        <item>Chỗ ở</item>
+        <item>Tổng quát</item>
     </string-array>
     <string-array name="post_type">
         <item>Địa điểm</item>
@@ -145,5 +146,7 @@
     <string name="draft_hello">Bạn đang nghĩ gì?</string>
     <string name="at">tại</string>
     <string name="search_for_places">Tìm kiếm địa điểm</string>
-
+    <string name="rating_reminder">Hãy cho người khác biết cảm nhận của bạn về review này</string>
+    <string name="category_reminder">Vui lòng chọn mục cho bài viết</string>
+    <string name="post_success">Đăng bài viết thành công</string>
 </resources>

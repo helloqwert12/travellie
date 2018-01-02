@@ -88,53 +88,6 @@ public class FragmentPosts extends Fragment {
         storage = FirebaseStorage.getInstance("gs://travellie-5884f.appspot.com");
         storageRef = storage.getReference();
 
-        //set listener for postUserRef
-        postUserRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Post post = dataSnapshot.getValue(Post.class);
-                DatabaseReference postRef = mDatabase.child("newsfeed");
-                //Check type of post
-                switch (post.getType()){
-                    case FOOD:
-                        postRef = postRef.child("food");
-                        break;
-                    case HOTEL:
-                        postRef = postRef.child("hotel");
-                        break;
-                    case ENTERTAINMENT:
-                        postRef = postRef.child("entertainment");
-                        break;
-                }
-
-                //push to type of post
-                postRef.push().setValue(post);
-
-                //push to general
-                mDatabase.child("newsfeed/general").push().setValue(post);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
         // Lấy user info
         curUserRef = mDatabase.child("users_info").child(currentUser.getUid());
     }
@@ -145,11 +98,11 @@ public class FragmentPosts extends Fragment {
         //Log.i("Avatar link -- ", ((ProfileActivity)getActivity()).userInfo.getAvatarLink());
 
         //[Test] set up list post
-        Post post1 = new Post("Demo content 1", null, null, "userid1", currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
-        Post post2 = new Post("Demo content 2", null, null, "userid2",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
-        Post post3 = new Post("Demo content 3", null, null, "userid3",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
-        Post post4 = new Post("Demo content 4", null, null, "userid4",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
-        Post post5 = new Post("Demo content 5", null, null, "userid5",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD);
+        Post post1 = new Post("Demo content 1", null, null, "userid1", currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD, 1);
+        Post post2 = new Post("Demo content 2", null, null, "userid2",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD, 2);
+        Post post3 = new Post("Demo content 3", null, null, "userid3",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD, 1);
+        Post post4 = new Post("Demo content 4", null, null, "userid4",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD, 2);
+        Post post5 = new Post("Demo content 5", null, null, "userid5",currentUser.getDisplayName(), Calendar.getInstance().getTimeInMillis(), null, null, null, null, null, POST_TYPE.FOOD, 4);
 
         listPost.add(post1);
         listPost.add(post2);
@@ -184,63 +137,10 @@ public class FragmentPosts extends Fragment {
                 R.array.post_type, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-//        spnPostType.setAdapter(adapter);
-//        spnPostType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                switch (i){
-//                    case 0:
-//                        postTypeChoice = POST_TYPE.ENTERTAINMENT;
-//                        break;
-//                    case 1:
-//                        postTypeChoice = POST_TYPE.HOTEL;
-//                        break;
-//                    case 2:
-//                        postTypeChoice = POST_TYPE.FOOD;
-//                        break;
-//                    case 3:
-//                        postTypeChoice = POST_TYPE.GENERAL;
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
     }
 
     public void setEventComponents(){
-//        imgbtnChoosePic.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
 
-//        imgbtnPost.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (etEditPost.getText().toString().replace(" ","").length() == 0){
-//                    Toast.makeText(view.getContext(), R.string.empty_content, Toast.LENGTH_SHORT).show();
-//                }
-//                else{
-//                    //Push to firebase database
-//                    //-TO DO: handle images, links, tags
-//
-//                    Post newPost = new Post(etEditPost.getText().toString(), null,
-//                            currentUser.getUid(), Calendar.getInstance().getTimeInMillis(),
-//                            null, null, null, null, null, postTypeChoice);
-//                    postUserRef.push().setValue(newPost);
-//
-//                    Toast.makeText(getContext(), R.string.update_post_success, Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
-//
         fbtnAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

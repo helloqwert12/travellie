@@ -96,7 +96,7 @@
 
         <!--Horizontal Line-->
         <View
-            android:layout_width="380dp"
+            android:layout_width="360dp"
             android:layout_height="0.5dp"
             android:layout_gravity="center"
             android:background="#c0c0c0"

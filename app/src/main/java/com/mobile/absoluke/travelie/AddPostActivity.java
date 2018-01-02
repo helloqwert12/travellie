@@ -35,14 +35,19 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.haresh.multipleimagepickerlibrary.MultiImageSelector;
+import com.hsalf.smilerating.SmileRating;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import dataobject.POST_TYPE;
+import dataobject.Post;
 import dataobject.UserInfo;
+import tool.Tool;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -70,13 +75,17 @@ public class AddPostActivity extends AppCompatActivity {
     ImageButton btnGetLocation;
     ImageButton btnPost;
     Spinner spnTag;
+    SmileRating ratingBar;
+
     //Firebase
     FirebaseUser currentUser;
     DatabaseReference mDatabase, curUserRef;
     FirebaseStorage storage;
     StorageReference storageRef;
+
     //Dataobject
     UserInfo userInfo;
+
     //Location GPS
     LocationManager locationManager;
     Geocoder geocoder;
@@ -85,6 +94,7 @@ public class AddPostActivity extends AppCompatActivity {
     String info = "";
 
     int choice; //choice of TAG
+
     private RecyclerView recyclerViewImages;
     private GridLayoutManager gridLayoutManager;
     private ArrayList<String> mSelectedImagesList = new ArrayList<>();
@@ -118,6 +128,8 @@ public class AddPostActivity extends AppCompatActivity {
         btnChoosePic = findViewById(R.id.btnChoosePic);
         //btnGetLocation = findViewById(R.id.btnGetLocation);
         btnPost = findViewById(R.id.btnPost);
+        ratingBar = findViewById(R.id.ratingBar);
+
         spnTag = findViewById(R.id.spinnerTag);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -126,17 +138,17 @@ public class AddPostActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spnTag.setAdapter(adapter);
-        spnTag.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                choice = spnTag.getSelectedItemPosition();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//        spnTag.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                choice = spnTag.getSelectedItemPosition();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
         recyclerViewImages = findViewById(R.id.recycler_view_images);
         gridLayoutManager = new GridLayoutManager(this, 2);
@@ -163,7 +175,83 @@ public class AddPostActivity extends AppCompatActivity {
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Kiểm tra xem rating chưa
+                if (ratingBar.getRating() == 0) {
+                    Toast.makeText(AddPostActivity.this, R.string.rating_reminder, Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+
+                //Kiểm tra xem chọn mục chưa?
+                POST_TYPE ptype = POST_TYPE.GENERAL;
+                switch (spnTag.getSelectedItemPosition())
+                {
+                    case 0:
+                        ptype = POST_TYPE.ENTERTAINMENT;
+                        break;
+                    case 1:
+                        ptype = POST_TYPE.FOOD;
+                        break;
+                    case 2:
+                        ptype = POST_TYPE.HOTEL;
+                        break;
+                    case 3:
+                        ptype = POST_TYPE.GENERAL;
+                        break;
+                }
+
+
+                //Push dữ liệu lên
+                //++status
+                String status = editText.getText().toString();
+                //++rating
+                int rating = ratingBar.getRating();
+                //++avatar link
+                String avatarLink = userInfo.getAvatarLink();
+                //++get timestamp
+                long timestamp = Calendar.getInstance().getTimeInMillis();
+
+                //++Lấy ảnh
+                //--TO DO
+
+                Post newPost = new Post();
+                newPost.setContent(status);
+                newPost.setRating(rating);
+                newPost.setAvatarLink(avatarLink);
+                newPost.setTimestamp(timestamp);
+                newPost.setLikeCount(0);
+                newPost.setCmtCount(0);
+                newPost.setType(ptype);
+
+                //Push để lấy key trước
+                String postId = mDatabase.child("interactions/posts").child(currentUser.getUid()).push().getKey();
+                newPost.setPostid(postId);
+
+                //Set value
+                mDatabase.child("interactions/posts").child(currentUser.getUid()).child(postId).setValue(newPost);
+                // Đồng thời cập nhật cho database ở tag tương ứng
+                // ++Add vào newsfeed
+                mDatabase.child("newsfeed/general").child(postId).setValue(newPost);
+                // ++Add vào tab tương ứng
+                switch (newPost.getType())
+                {
+                    case ENTERTAINMENT:
+                        mDatabase.child("newsfeed/entertainment").child(postId).setValue(newPost);
+                        break;
+                    case FOOD:
+                        mDatabase.child("newsfeed/food").child(postId).setValue(newPost);
+                        break;
+                    case HOTEL:
+                        mDatabase.child("newsfeed/hotel").child(postId).setValue(newPost);
+                        break;
+
+                }
+
+                //Thông báo post thành công
+                Toast.makeText(AddPostActivity.this, R.string.post_success, Toast.LENGTH_SHORT).show();
+
+                // Trở về profile activity
+                Tool.changeActivity(AddPostActivity.this, ProfileActivity.class);
             }
         });
 

@@ -20,6 +20,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
     private Context mContext;
     private ArrayList<String> mImagesList;
 
+
     public ImagesAdapter(Context context, ArrayList<String> imagesList) {
         mContext = context;
         mImagesList = imagesList;

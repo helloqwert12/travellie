@@ -55,7 +55,11 @@
         <activity android:name="com.mobile.absoluke.travelie.RegisterActivity" />
         <activity android:name="com.mobile.absoluke.travelie.MainActivity" />
         <activity android:name="com.mobile.absoluke.travelie.ProfileActivity" />
-        <!--<activity android:name="com.mobile.absoluke.travelie.MainActivity" />-->
+        <activity
+            android:name="com.mobile.absoluke.travelie.PopupBio"
+            android:theme="@style/AppTheme.CustomPopupTheme" />
+
+
         <!-- <activity -->
         <!-- android:name=".ProfileActivity" -->
         <!-- android:label="@string/title_activity_profile" -->

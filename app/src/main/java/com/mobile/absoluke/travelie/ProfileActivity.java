@@ -1,5 +1,6 @@
 package com.mobile.absoluke.travelie;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
@@ -10,6 +11,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imageCover;
     TextView tvUsername;
     RoundedImage roundedImageChangeAvatar;
+    Button btnBio;
 
     //Firebase
     FirebaseAuth auth;
@@ -131,6 +135,15 @@ public class ProfileActivity extends AppCompatActivity {
         imageCover = findViewById(R.id.imageCover);
         tvUsername = findViewById(R.id.username);
         roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
+        btnBio = findViewById(R.id.btn_bio);
+
+        // Set a click listener for the Popup Bio
+        btnBio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, PopupBio.class));
+            }
+        });
     }
 
     private void initFirabase(){

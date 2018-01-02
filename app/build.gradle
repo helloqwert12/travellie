@@ -43,6 +43,7 @@ dependencies {
     compile 'com.aurelhubert:ahbottomnavigation:2.1.0'
     compile 'com.github.jd-alexander:LikeButton:0.2.3'
     compile project(path: ':multipleimagepickerlibrary')
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 }
 
 

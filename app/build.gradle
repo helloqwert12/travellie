@@ -42,7 +42,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.1.0-beta4'      // Beta Constraint Layout
     compile 'com.aurelhubert:ahbottomnavigation:2.1.0'
     compile 'com.github.jd-alexander:LikeButton:0.2.3'
-    compile 'de.hdodenhof:circleimageview:2.2.0'
+    compile project(path: ':multipleimagepickerlibrary')
 }
 
 

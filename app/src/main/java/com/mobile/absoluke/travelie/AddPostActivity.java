@@ -12,7 +12,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,9 +31,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.haresh.multipleimagepickerlibrary.MultiImageSelector;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,6 +56,9 @@ public class AddPostActivity extends AppCompatActivity {
     static final String TAG = "AddPostActivity";
     private static final int REQUEST_CODE_FILE_PICTURE = 1;
     private static final int REQUEST_LOCATION = 2;
+    private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 401;
+    private final int MAX_IMAGE_SELECTION_LIMIT = 10;
+    private final int REQUEST_IMAGE = 301;
     //Components
     RoundedImage roundedImageAvatar;
     TextView tvUsername;
@@ -58,22 +66,24 @@ public class AddPostActivity extends AppCompatActivity {
     ImageButton btnChoosePic;
     ImageButton btnGetLocation;
     ImageButton btnPost;
-
     //Firebase
     FirebaseUser currentUser;
     DatabaseReference mDatabase, curUserRef;
     FirebaseStorage storage;
     StorageReference storageRef;
-
     //Dataobject
     UserInfo userInfo;
-
     //Location GPS
     LocationManager locationManager;
     Geocoder geocoder;
     List<Address> addresses;
     String[] infoLocation = new String[3];
     String info = "";
+    private RecyclerView recyclerViewImages;
+    private GridLayoutManager gridLayoutManager;
+    private ArrayList<String> mSelectedImagesList = new ArrayList<>();
+    private MultiImageSelector mMultiImageSelector;
+    private ImagesAdapter mImagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,17 +113,32 @@ public class AddPostActivity extends AppCompatActivity {
         //btnGetLocation = findViewById(R.id.btnGetLocation);
         btnPost = findViewById(R.id.btnPost);
 
+        recyclerViewImages = findViewById(R.id.recycler_view_images);
+        gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerViewImages.setHasFixedSize(true);
+        recyclerViewImages.setLayoutManager(gridLayoutManager);
+
+        mMultiImageSelector = MultiImageSelector.create();
+
         //Set event
         btnChoosePic.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent()
-                        .addCategory(Intent.CATEGORY_OPENABLE)
-                        .setType("image/*")
-                        .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                        .setAction(Intent.ACTION_OPEN_DOCUMENT);
+            public void onClick(View v) {
 
-                startActivityForResult(Intent.createChooser(intent, "Select Pictures"), REQUEST_CODE_FILE_PICTURE);
+                if (checkAndRequestPermissions()) {
+                    mMultiImageSelector.showCamera(true);
+                    mMultiImageSelector.count(MAX_IMAGE_SELECTION_LIMIT);
+                    mMultiImageSelector.multi();
+                    mMultiImageSelector.origin(mSelectedImagesList);
+                    mMultiImageSelector.start(AddPostActivity.this, REQUEST_IMAGE);
+                }
+            }
+        });
+
+        btnPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -129,13 +154,42 @@ public class AddPostActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+    }
 
-        btnPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE) {
+            try {
+                mSelectedImagesList = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
+                mImagesAdapter = new ImagesAdapter(this, mSelectedImagesList);
+                recyclerViewImages.setAdapter(mImagesAdapter);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        });
+        }
+    }
+
+    private boolean checkAndRequestPermissions() {
+        int externalStoragePermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if (externalStoragePermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == REQUEST_ID_MULTIPLE_PERMISSIONS) {
+            btnChoosePic.performClick();
+        }
     }
 
     void updateUI(){

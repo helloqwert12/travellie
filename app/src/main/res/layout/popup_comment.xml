@@ -53,6 +53,8 @@
         android:id="@+id/commentsListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/feed_item_padding_left_right"
+        android:layout_marginStart="@dimen/feed_item_padding_left_right"
         app:layout_constraintTop_toBottomOf="@id/firstHorizontalLine" />
 
     <View

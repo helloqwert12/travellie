@@ -3,6 +3,7 @@ package com.mobile.absoluke.travelie;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,12 +17,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import dataobject.UserInfo;
 import tool.Tool;
 
 public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     RoundedImage roundImageAvatar;
+    FloatingActionButton fabAddPost;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -58,6 +69,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Tool.changeActivity(MainActivity.this, ProfileActivity.class);
+            }
+        });
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("users_info").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
+                Picasso.with(MainActivity.this).load(userInfo.getAvatarLink()).into(roundImageAvatar);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        fabAddPost = findViewById(R.id.fabAddPost);
+        fabAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tool.changeActivity(MainActivity.this, AddPostActivity.class);
             }
         });
     }

@@ -1,7 +1,9 @@
 package com.mobile.absoluke.travelie;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +40,7 @@ import dataobject.Like;
 import dataobject.Notification;
 import dataobject.Post;
 import dataobject.UserInfo;
+import tool.Tool;
 
 /**
  * Created by tranminhquan on 11/15/2017.
@@ -101,10 +104,37 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         String dateFormatted = formatter.format(date);
         viewHolder.tvTimestamp.setText(dateFormatted);
 
+        viewHolder.roundedImageAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("ID", listPost.get(position).getUserid());
+                Tool.pushDataAndChangeActivity(context, ProfileActivity.class, bundle);
+            }
+        });
+
+        switch(listPost.get(position).getRating()){
+            case 1:
+                viewHolder.ivRating.setImageResource(R.drawable.terrible);
+                break;
+            case 2:
+                viewHolder.ivRating.setImageResource(R.drawable.bad);
+                break;
+            case 3:
+                viewHolder.ivRating.setImageResource(R.drawable.ok);
+                break;
+            case 4:
+                viewHolder.ivRating.setImageResource(R.drawable.good);
+                break;
+            case 5:
+                viewHolder.ivRating.setImageResource(R.drawable.great);
+                break;
+        }
+
         viewHolder.imgbtnLike.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                Toast.makeText(context, "You like post " + listPost.get(position).getContent(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "You like post " + listPost.get(position).getContent(), Toast.LENGTH_SHORT).show();
                 String likeid = mDatabase.child("interactions/likes").child(listPost.get(position).getPostid()).push().getKey();
                 Like newLike = new Like();
                 newLike.setLikeid(likeid);
@@ -118,6 +148,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 //tăng like
                 DatabaseReference postRef = mDatabase.child("interactions/posts").child(listPost.get(position).getUserid())
                         .child(listPost.get(position).getPostid());
+
+                postRef.child("likeCount").setValue(listPost.get(position).getLikeCount());
 
 //                postRef.runTransaction(new Transaction.Handler() {
 //                    @Override
@@ -175,7 +207,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
             @Override
             public void unLiked(LikeButton likeButton) {
-                Toast.makeText(context, "You unliked post " + listPost.get(position).getContent(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "You unliked post " + listPost.get(position).getContent(), Toast.LENGTH_SHORT).show();
                 // Tìm id của người gửi trong likes để xóa
                 String idToRemove = currentUser.getUid();
                 mDatabase.child("interactions/likes")
@@ -184,8 +216,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                         .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Like rlike = dataSnapshot.getValue(Like.class);
-                        Toast.makeText(context, "Your like id is " + rlike.getLikeid(), Toast.LENGTH_SHORT).show();
+                        //Like rlike = dataSnapshot.getValue(Like.class);
+                        //Toast.makeText(context, "Your like id is " + rlike.getLikeid(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -269,6 +301,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         ImageButton imgbtnCmt;
         ImageButton imgbtnShare;
         LikeButton imgbtnLike;
+        ImageView ivRating;
 
 
         public RecyclerViewHolder(final View itemView) {
@@ -282,6 +315,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             imgbtnCmt = itemView.findViewById(R.id.imgbtnCmt);
             imgbtnShare = itemView.findViewById(R.id.imgbtnShare);
             imgbtnLike = itemView.findViewById(R.id.imgbtnLike);
+            ivRating = itemView.findViewById(R.id.ivRating);
 
 
 //            tvLink = itemView.findViewById(R.id.tvLink);

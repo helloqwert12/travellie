@@ -8,7 +8,7 @@
     <string name="fb_login_protocol_scheme">fb122046885142484</string>
 
     <!-- Strings related to login -->
-    <string name="intro">
+    <string name="login_intro">
         <font color="white">Find incredible\nplaces you\nwill</font>
         <font color="#f9d641">love</font>
     </string>
@@ -61,5 +61,6 @@
 
     <!-- Strings related to draft -->
     <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
+    <string name="intro">Intro</string>
+    <string name="edit_intro">edit intro</string>
 </resources>

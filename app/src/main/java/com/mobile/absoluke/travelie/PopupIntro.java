@@ -14,7 +14,7 @@ import android.widget.Toast;
  * Created by Yul Lucia on 01/02/2018.
  */
 
-public class PopupBio extends Activity {
+public class PopupIntro extends Activity {
 
     Button btnSaveBio;
     EditText edtBio;
@@ -24,7 +24,7 @@ public class PopupBio extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.popup_bio);
+        setContentView(R.layout.popup_intro);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -35,16 +35,16 @@ public class PopupBio extends Activity {
         getWindow().setLayout((int) (width * .8), (int) (height * .4));
 
         btnSaveBio = findViewById(R.id.btnSaveBio);
-        bio = findViewById(R.id.bio);
+        bio = findViewById(R.id.tvIntro);
         edtBio = findViewById(R.id.editBio);
 
         btnSaveBio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (edtBio.getText().length() <= 0) {
-                    Toast.makeText(PopupBio.this, "Bạn chưa nhập Bio!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PopupIntro.this, "Bạn chưa nhập Bio!!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(PopupBio.this, "Đã cập nhật Bio!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PopupIntro.this, "Đã cập nhật Bio!!!", Toast.LENGTH_SHORT).show();
                     /////////////////////////////////
                     //Chuyển Bio info lên firebase, sau đó từ firebase chuyển lại xuống TextView bên ProfileActivity
                     // ======> thuộc tính Bio bên ProfileActivity sẽ luôn nhận giá trị từ Firebase.

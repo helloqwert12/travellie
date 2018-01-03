@@ -36,11 +36,11 @@
             app:layout_constraintTop_toBottomOf="@+id/username">
 
             <TextView
-                android:id="@+id/bio"
+                android:id="@+id/tvIntro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:text="Bio"
+                android:text="@string/intro"
                 android:textAlignment="center"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,17 +49,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_bio"
+                android:id="@+id/btnIntro"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="8dp"
                 android:background="@null"
                 android:gravity="top|center"
-                android:text="edit bio"
+                android:text="@string/edit_intro"
                 android:textSize="12sp"
+                android:textColor="@color/colorAccent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bio" />
+                app:layout_constraintTop_toBottomOf="@+id/tvIntro" />
 
         </android.support.constraint.ConstraintLayout>
 

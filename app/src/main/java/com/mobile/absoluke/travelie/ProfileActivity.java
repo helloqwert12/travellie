@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imageCover;
     TextView tvUsername;
     RoundedImage roundedImageChangeAvatar;
-    Button btnBio;
+    Button btnIntro;
     //Firebase
     FirebaseAuth auth;
     FirebaseUser currentUser;
@@ -135,13 +135,13 @@ public class ProfileActivity extends AppCompatActivity {
         imageCover = findViewById(R.id.imageCover);
         tvUsername = findViewById(R.id.username);
         roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
-        btnBio = findViewById(R.id.btn_bio);
+        btnIntro = findViewById(R.id.btnIntro);
 
-        // Set a click listener for the Popup Bio
-        btnBio.setOnClickListener(new View.OnClickListener() {
+        // Set a click listener for the Popup Intro
+        btnIntro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, PopupBio.class));
+                startActivity(new Intent(ProfileActivity.this, PopupIntro.class));
             }
         });
 

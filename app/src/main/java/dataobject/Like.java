@@ -6,19 +6,19 @@ package dataobject;
  */
 
 public class Like extends Interaction {
-    //private String likeid;
+    private String likeid;
 
     public Like(){
         super();
     }
 
-    public Like(String pid, String uid){
-        super(pid, uid);
-        //likeid = lid;
+    public Like(String lid, String pid, String uid, String uname, long ts){
+        super(pid, uid, uname, ts);
+        likeid = lid;
     }
 
     //Get-Set
-    //public String getLikeid() { return likeid; }
+    public String getLikeid() { return likeid; }
 
-    //public void setLikeid(String value) { likeid = value; }
+    public void setLikeid(String value) { likeid = value; }
 }

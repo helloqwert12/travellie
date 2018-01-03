@@ -17,12 +17,12 @@ public class Comment extends Interaction {
     private Image image;
 
     public Comment(){
-        super();
+
     }
 
-    public Comment(String pid, String uid, String cnt,
+    public Comment(String pid, String uid, String uname, long ts, String cnt,
                    List<String> tgs, List<String> lks, Image img){
-        super(pid, uid);
+        super(pid, uid, uname, ts);
         //commentid = cmtid;
         content = cnt;
         tags = tgs;

@@ -12,8 +12,8 @@ public class Share extends Interaction {
 
     }
 
-    public Share(String pid, String uid, String sid){
-        super(pid, uid);
+    public Share(String pid, String uid, String uname, long ts, String sid){
+        super(pid, uid, uname, ts);
         //shareid = sid;
     }
 

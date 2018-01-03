@@ -215,6 +215,8 @@ public class AddPostActivity extends AppCompatActivity {
                 //--TO DO
 
                 Post newPost = new Post();
+                newPost.setUserid(currentUser.getUid());
+                newPost.setUsername(currentUser.getDisplayName());
                 newPost.setContent(status);
                 newPost.setRating(rating);
                 newPost.setAvatarLink(avatarLink);

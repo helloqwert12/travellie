@@ -82,7 +82,7 @@ public class FragmentPosts extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
 
         listPost = new ArrayList<>();
-        adapter = new PostRecyclerAdapter(getContext(), curUserRef, listPost);
+        adapter = new PostRecyclerAdapter(getContext(), listPost);
 
         indexTurn = 0;
         isLoading = false;

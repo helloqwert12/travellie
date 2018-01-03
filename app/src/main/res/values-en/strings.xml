@@ -24,23 +24,24 @@
     <string name="female">Female</string>
     <string name="other">Other</string>
     <string name="update_profile">Update profile</string>
+
     <string-array name="gender_list">
         <item>Male</item>
         <item>Female</item>
         <item>Other</item>
     </string-array>
 
-    <string-array name="post_type">
-        <item>Entertainment</item>
-        <item>Hotel</item>
-        <item>Food</item>
-        <item>General</item>
-    </string-array>
-
     <string-array name="Tag_list">
         <item>Entertainment</item>
         <item>Food</item>
         <item>Accomodation</item>
+        <item>General</item>
+    </string-array>
+
+    <string-array name="post_type">
+        <item>Entertainment</item>
+        <item>Hotel</item>
+        <item>Food</item>
         <item>General</item>
     </string-array>
 
@@ -54,8 +55,11 @@
     <string name="draft_hello">What\'s on your mind?</string>
     <string name="at">at</string>
     <string name="search_for_places">Search for places</string>
-    <string name="rating_reminder">Let friends know your feeling by rating this review</string>
+    <string name="rating_reminder">Let friends know your feelings by rating this review</string>
     <string name="category_reminder">Please category your post</string>
-    <string name="post_success">Your post is now commited</string>
+    <string name="post_success">Your post is now committed</string>
 
+    <!-- Strings related to draft -->
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 </resources>

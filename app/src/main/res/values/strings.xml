@@ -23,17 +23,20 @@
     <string name="female">Nữ</string>
     <string name="other">Khác</string>
     <string name="update_profile">Cập nhật</string>
+
     <string-array name="gender_list">
         <item>Nam</item>
         <item>Nữ</item>
         <item>Khác</item>
     </string-array>
+
     <string-array name="Tag_list">
         <item>Địa điểm du lịch</item>
         <item>Thức ăn</item>
         <item>Chỗ ở</item>
         <item>Tổng quát</item>
     </string-array>
+
     <string-array name="post_type">
         <item>Địa điểm</item>
         <item>Nơi ở</item>
@@ -149,4 +152,9 @@
     <string name="rating_reminder">Hãy cho người khác biết cảm nhận của bạn về review này</string>
     <string name="category_reminder">Vui lòng chọn mục cho bài viết</string>
     <string name="post_success">Đăng bài viết thành công</string>
+
+    <!-- Strings related to profile -->
+    <string name="cancel">Hủy</string>
+    <string name="save">Lưu</string>
+
 </resources>

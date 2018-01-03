@@ -3,36 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ab2fc4"
-    android:padding="2dp">
+    android:background="@color/white"
+    android:paddingBottom="@dimen/feed_item_padding_left_right"
+    android:paddingEnd="@dimen/feed_item_padding_left_right"
+    android:paddingStart="@dimen/feed_item_padding_left_right"
+    android:paddingTop="@dimen/feed_item_padding_left_right">
 
     <EditText
         android:id="@+id/editBio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:minLines="1"
+        android:maxLines="2"
+        android:theme="@style/TextLabel"
         android:maxLength="101"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnSaveBio"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="SAVE"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBio"
-        app:layout_constraintVertical_bias="0.028" />
+        app:layout_constraintTop_toBottomOf="@+id/editBio">
+
+        <Button
+            android:id="@+id/btnCancelBio"
+            style="@style/bio_btn"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/btnSaveBio"
+            style="@style/bio_btn"
+            android:text="@string/save" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

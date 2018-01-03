@@ -20,7 +20,6 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
     private Context mContext;
     private ArrayList<String> mImagesList;
 
-
     public ImagesAdapter(Context context, ArrayList<String> imagesList) {
         mContext = context;
         mImagesList = imagesList;
@@ -35,11 +34,16 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Glide.with(mContext).load(mImagesList.get(holder.getAdapterPosition())).placeholder(R.drawable.cancel).centerCrop().into(holder.getImage());
+
     }
 
     @Override
     public int getItemCount() {
         return mImagesList.size();
+    }
+
+    public ArrayList<String> getListImage(){
+        return mImagesList;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

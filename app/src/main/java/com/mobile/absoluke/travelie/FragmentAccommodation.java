@@ -152,7 +152,7 @@ public class FragmentAccommodation extends Fragment {
                 if (!isLoading && ((lastVisibleItem + itemPerTurn) >= totalItem))
                 {
                     isLoading = true;
-                    Toast.makeText(getActivity(), "Load more", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Load more", Toast.LENGTH_SHORT).show();
                     // tiếp tục load từ firebase
                     Query querydb = postUserRef.orderByKey().endAt(keystart).limitToLast(itemPerTurn);
                     querydb.addValueEventListener(new ValueEventListener() {

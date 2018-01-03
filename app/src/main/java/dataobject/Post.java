@@ -1,6 +1,7 @@
 package dataobject;
 import android.media.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public class Post {
 
     public Post(String ctn, String avaLink, List<String> imglinks, String uid, String uname, long ts, List<String> lk,
                 List<String> tg, List<String> lik, List<String> shrs, List<String> cmts, POST_TYPE tp, int rt){
+        links = new ArrayList<>();
         //postid = pid;
         content = ctn;
         avatarLink = avaLink;

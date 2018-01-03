@@ -1,5 +1,6 @@
 package com.mobile.absoluke.travelie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -45,6 +46,12 @@ import tool.Tool;
 
 public class FragmentPosts extends Fragment {
 
+    String userID;
+
+    //Intent
+    Intent intent;
+    Bundle bundle;
+
     //List Post
     RecyclerView recyvwPosts;
     PostRecyclerAdapter adapter;
@@ -81,6 +88,8 @@ public class FragmentPosts extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
 
+
+
         listPost = new ArrayList<>();
         listPost.clear();
         adapter = new PostRecyclerAdapter(getContext(), listPost);
@@ -94,19 +103,33 @@ public class FragmentPosts extends Fragment {
         initFirebase();
         initRecyclerView();
         loadPosts();
+
+
+
         return rootView;
     }
 
     public void initFirebase(){
         auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
+
+        intent = getActivity().getIntent();
+        bundle = intent.getBundleExtra("BUNDLE");
+
+        if (bundle == null){
+            userID = currentUser.getUid();
+        }
+        else{
+            userID = bundle.getString("ID");
+        }
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        postUserRef = mDatabase.child("interactions/posts").child(currentUser.getUid());
+        postUserRef = mDatabase.child("interactions/posts").child(userID);
         storage = FirebaseStorage.getInstance("gs://travellie-5884f.appspot.com");
         storageRef = storage.getReference();
 
         // Lấy user info
-        curUserRef = mDatabase.child("users_info").child(currentUser.getUid());
+        curUserRef = mDatabase.child("users_info").child(userID);
 
         //Load newsfeed
         Query query = postUserRef.orderByKey().startAt("").limitToLast(itemPerTurn);
@@ -177,7 +200,7 @@ public class FragmentPosts extends Fragment {
                 if (!isLoading && ((lastVisibleItem + itemPerTurn) >= totalItem))
                 {
                     isLoading = true;
-                    Toast.makeText(getActivity(), "Load more", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Load more", Toast.LENGTH_SHORT).show();
                     // tiếp tục load từ firebase
                     Query querydb = postUserRef.orderByKey().endAt(keystart).limitToLast(itemPerTurn);
                     querydb.addValueEventListener(new ValueEventListener() {

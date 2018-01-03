@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,11 +36,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.haresh.multipleimagepickerlibrary.MultiImageSelector;
 import com.hsalf.smilerating.SmileRating;
 import com.squareup.picasso.Picasso;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -132,7 +138,7 @@ public class AddPostActivity extends AppCompatActivity {
 
         spnTag = findViewById(R.id.spinnerTag);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.Tag_list, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -201,6 +207,8 @@ public class AddPostActivity extends AppCompatActivity {
                 }
 
 
+
+
                 //Push dữ liệu lên
                 //++status
                 String status = editText.getText().toString();
@@ -214,7 +222,7 @@ public class AddPostActivity extends AppCompatActivity {
                 //++Lấy ảnh
                 //--TO DO
 
-                Post newPost = new Post();
+                final Post newPost = new Post();
                 newPost.setUserid(currentUser.getUid());
                 newPost.setUsername(currentUser.getDisplayName());
                 newPost.setContent(status);
@@ -228,6 +236,27 @@ public class AddPostActivity extends AppCompatActivity {
                 //Push để lấy key trước
                 String postId = mDatabase.child("interactions/posts").child(currentUser.getUid()).push().getKey();
                 newPost.setPostid(postId);
+
+                //Kiểm tra hình
+                ArrayList<String> listImg = mImagesAdapter.getListImage();
+                for(int i=0; i<listImg.size(); i++){
+                    try {
+                        InputStream stream = new FileInputStream(listImg.get(i));
+                        UploadTask uploadTask = storageRef.child(currentUser.getUid()).child("posts").child(newPost.getPostid()).putStream(stream);
+                        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                // Thêm vào post
+                                newPost.addImageLink(taskSnapshot.getDownloadUrl().toString());
+
+                                // Thêm vào để sau này load trong fragment photos
+                                mDatabase.child("photos").child(currentUser.getUid()).push().setValue(taskSnapshot.getDownloadUrl().toString());
+                            }
+                        });
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
 
                 //Set value
                 mDatabase.child("interactions/posts").child(currentUser.getUid()).child(postId).setValue(newPost);

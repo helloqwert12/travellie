@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -32,6 +33,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 
 import dataobject.UserInfo;
+import tool.Tool;
 
 public class ProfileActivity extends AppCompatActivity {
     static final String TAG = "ProfileActivity";
@@ -39,11 +41,20 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_FILE_COVER = 3;
     public UserInfo userInfo;
     TabLayout tabLayout;
+
+    Intent intent;
+    Bundle bundle;
+    String userID;
+
+
+
     //Components
     ImageView imageCover;
     TextView tvUsername;
     RoundedImage roundedImageChangeAvatar;
     Button btnIntro;
+    FloatingActionButton fabAddPost;
+
     //Firebase
     FirebaseAuth auth;
     FirebaseUser currentUser;
@@ -170,6 +181,14 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Select a file"), REQUEST_CODE_FILE_COVER);
             }
         });
+
+        fabAddPost = findViewById(R.id.fabAddPost);
+        fabAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tool.changeActivity(ProfileActivity.this, AddPostActivity.class);
+            }
+        });
     }
 
     // Lấy hình vừa chọn gán vào
@@ -210,10 +229,20 @@ public class ProfileActivity extends AppCompatActivity {
         //Storage
         storage = FirebaseStorage.getInstance("gs://travellie-5884f.appspot.com");
         storageRef = storage.getReference();
+
+        intent = getIntent();
+        bundle = intent.getBundleExtra("BUNDLE");
+
+        if (bundle == null){
+            userID = currentUser.getUid();
+        }
+        else{
+            userID = bundle.getString("ID");
+        }
     }
 
     private  void loadDataFromFirebase(){
-        curUserRef = mDatabase.child("users_info").child(currentUser.getUid());
+        curUserRef = mDatabase.child("users_info").child(userID);
         curUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

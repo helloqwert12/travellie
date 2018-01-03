@@ -1,10 +1,12 @@
 package com.mobile.absoluke.travelie;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -27,29 +29,27 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+
 import dataobject.UserInfo;
 
 public class ProfileActivity extends AppCompatActivity {
     static final String TAG = "ProfileActivity";
-
+    private static final int REQUEST_CODE_FILE_AVATAR = 2;
+    private static final int REQUEST_CODE_FILE_COVER = 3;
+    public UserInfo userInfo;
     TabLayout tabLayout;
-
     //Components
     ImageView imageCover;
     TextView tvUsername;
     RoundedImage roundedImageChangeAvatar;
     Button btnBio;
-
     //Firebase
     FirebaseAuth auth;
     FirebaseUser currentUser;
     DatabaseReference mDatabase, curUserRef;
     FirebaseStorage storage;
     StorageReference storageRef;
-
-    public UserInfo userInfo;
-
-
     private int[] tabIcons = {
             R.drawable.location,
             R.drawable.posts,
@@ -144,6 +144,59 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(ProfileActivity.this, PopupBio.class));
             }
         });
+
+        // Thay đổi hình cho Avatar
+        roundedImageChangeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent()
+                        .addCategory(Intent.CATEGORY_OPENABLE)
+                        .setType("image/*")
+                        .setAction(Intent.ACTION_OPEN_DOCUMENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), REQUEST_CODE_FILE_AVATAR);
+            }
+        });
+
+        // Thay đổi hình cho Background Cover
+        imageCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent()
+                        .addCategory(Intent.CATEGORY_OPENABLE)
+                        .setType("image/*")
+                        .setAction(Intent.ACTION_OPEN_DOCUMENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), REQUEST_CODE_FILE_COVER);
+            }
+        });
+    }
+
+    // Lấy hình vừa chọn gán vào
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_CODE_FILE_AVATAR && resultCode == RESULT_OK && data != null) {
+            Uri selectedfile = data.getData(); //The uri with the location of the file
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            roundedImageChangeAvatar.setImageBitmap(bitmap);
+        } else if (requestCode == REQUEST_CODE_FILE_COVER && resultCode == RESULT_OK && data != null) {
+            Uri selectedfile = data.getData(); //The uri with the location of the file
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageCover.setImageBitmap(bitmap);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void initFirabase(){

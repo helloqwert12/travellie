@@ -19,7 +19,7 @@
             android:id="@+id/imageCover"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
-            android:scaleType="center"
+            android:scaleType="centerCrop"
             app:layout_collapseMode="parallax"
             app:srcCompat="@drawable/no_cover" />
 

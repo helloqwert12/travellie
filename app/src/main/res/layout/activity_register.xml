@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:paddingLeft="3dp"
+                android:paddingStart="3dp"
                 android:text="@string/date_of_birth"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="76dp"
-                android:paddingLeft="3dp"
+                android:paddingStart="3dp"
                 android:text="@string/gender"
                 app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="@+id/textView3" />

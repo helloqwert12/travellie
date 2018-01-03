@@ -55,7 +55,7 @@
         <activity android:name="com.mobile.absoluke.travelie.RegisterActivity" />
         <activity android:name="com.mobile.absoluke.travelie.MainActivity" />
         <activity android:name="com.mobile.absoluke.travelie.ProfileActivity" />
-        <activity android:name="com.mobile.absoluke.travelie.AddPostActivity"></activity>
+        <activity android:name="com.mobile.absoluke.travelie.AddPostActivity" />
         <activity
             android:name="com.mobile.absoluke.travelie.PopupIntro"
             android:theme="@style/AppTheme.CustomPopupTheme" />

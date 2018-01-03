@@ -105,7 +105,7 @@
             android:id="@+id/imgbtnShare"
             style="@style/bottom_icon"
             android:layout_width="17dp"
-            android:layout_marginEnd="@dimen/feed_item_padding_left_right"
+            android:layout_marginEnd="20dp"
             android:layout_marginStart="@dimen/feed_item_padding_left_right"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgbtnCmt"

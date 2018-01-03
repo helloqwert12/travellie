@@ -24,24 +24,31 @@
     <string name="female">Female</string>
     <string name="other">Other</string>
     <string name="update_profile">Update profile</string>
+
     <string-array name="gender_list">
         <item>Male</item>
         <item>Female</item>
         <item>Other</item>
     </string-array>
 
+    <!--<string-array name="Tag_list">-->
+        <!--<item>Entertainment</item>-->
+        <!--<item>Food</item>-->
+        <!--<item>Accomodation</item>-->
+        <!--<item>General</item>-->
+    <!--</string-array>-->
+
+    <!--<string-array name="post_type">-->
+        <!--<item>Entertainment</item>-->
+        <!--<item>Hotel</item>-->
+        <!--<item>Food</item>-->
+        <!--<item>General</item>-->
+    <!--</string-array>-->
+
     <string-array name="post_type">
         <item>Entertainment</item>
-        <item>Hotel</item>
         <item>Food</item>
-        <item>General</item>
-    </string-array>
-
-    <string-array name="Tag_list">
-        <item>Entertainment</item>
-        <item>Food</item>
-        <item>Accomodation</item>
-        <item>General</item>
+        <item>Accommodation</item>
     </string-array>
 
     <string name="has_null_value">Please complete all fields</string>
@@ -58,4 +65,7 @@
     <string name="category_reminder">Please category your post</string>
     <string name="post_success">Your post is now commited</string>
 
+    <!-- Strings related to draft -->
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 </resources>

@@ -33,7 +33,6 @@ import java.util.List;
 import dataobject.POST_TYPE;
 import dataobject.Post;
 import dataobject.UserInfo;
-import tool.Tool;
 
 /**
  * Created by Yul Lucia on 11/07/2017.
@@ -256,12 +255,6 @@ public class FragmentPosts extends Fragment {
 
     public void setEventComponents(){
 
-        fbtnAddPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Tool.changeActivity(getContext(), AddPostActivity.class);
-            }
-        });
     }
 
     public void loadPosts(){

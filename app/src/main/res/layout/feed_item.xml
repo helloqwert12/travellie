@@ -5,9 +5,26 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <include
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/profile_panel"
-        layout="@layout/profile_panel" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/feed_item_padding_left_right">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/profile_panel" />
+
+        <ImageButton
+            android:id="@+id/imgbtnOption"
+            style="@style/bottom_icon"
+            android:layout_width="20dp"
+            android:layout_marginEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/more" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/contentPanel"
@@ -37,8 +54,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/bottomPanel"
         android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:elevation="1dp"
+        android:layout_height="@dimen/toolbar_height"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/feed_item_padding_left_right"
             app:anim_scale_factor="3"
-            app:icon_size="30dp"
+            app:icon_size="@dimen/imgbtn_size"
             app:icon_type="heart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +87,7 @@
         <ImageButton
             android:id="@+id/imgbtnCmt"
             style="@style/bottom_icon"
-            android:layout_width="30dp"
+            android:layout_width="@dimen/imgbtn_size"
             android:layout_marginEnd="@dimen/feed_item_padding_top_bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgbtnLike"

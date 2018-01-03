@@ -82,6 +82,7 @@ public class FragmentPosts extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
 
         listPost = new ArrayList<>();
+        listPost.clear();
         adapter = new PostRecyclerAdapter(getContext(), listPost);
 
         indexTurn = 0;
@@ -130,8 +131,6 @@ public class FragmentPosts extends Fragment {
 
             }
         });
-////
-//        indexTurn += itemPerTurn;
     }
 
     public void initRecyclerView(){
@@ -187,6 +186,7 @@ public class FragmentPosts extends Fragment {
                             int counter = 0;
                             long length = dataSnapshot.getChildrenCount();
                             Log.i("LIST", "length " + length);
+                            if (length == 1) return;
                             for(DataSnapshot data:dataSnapshot.getChildren()) {
 
 
@@ -196,15 +196,23 @@ public class FragmentPosts extends Fragment {
                                 }
 
                                 if (counter == length - 1) {
+                                    isLoading = false;
                                     Log.i("LIST", "key not add " + data.getKey());
                                     break;
                                 }
+                                boolean isTr = false;
+                                Post p = data.getValue(Post.class);
+//                                for(int i=0; i<listPost.size(); i++){
+//                                    if (p.getPostid().equals(listPost.get(i).getPostid())){
+//                                        isTr = true;
+//                                        break;
+//                                    }
+//                                }
+                                adapter.addItem(p);
 
-                                listPost.add(data.getValue(Post.class));
                                 counter++;
                             }
                             adapter.notifyDataSetChanged();
-                            isLoading = false;
                         }
 
                         @Override
@@ -246,13 +254,5 @@ public class FragmentPosts extends Fragment {
 
     public void loadPosts(){
 
-    }
-
-    boolean checkEqual(String key){
-        for(int i=0; i<listPost.size(); i++){
-            if (listPost.get(i).getPostid().equals(key))
-                return true;
-        }
-        return false;
     }
 }

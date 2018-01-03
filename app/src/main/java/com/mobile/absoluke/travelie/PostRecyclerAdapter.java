@@ -3,6 +3,7 @@ package com.mobile.absoluke.travelie;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -111,24 +113,45 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 newLike.setUserid(currentUser.getUid());
                 newLike.setUsername(currentUser.getDisplayName());
 
+                listPost.get(position).increaseLike();
+                int count = listPost.get(position).getLikeCount();
                 //tăng like
-//                DatabaseReference postRef = mDatabase.child("posts").child(listPost.get(position).getUserid())
-//                        .child(listPost.get(position).getPostid()).runTransaction(new Transaction.Handler() {
-//                            @Override
-//                            public Transaction.Result doTransaction(MutableData mutableData) {
+                DatabaseReference postRef = mDatabase.child("interactions/posts").child(listPost.get(position).getUserid())
+                        .child(listPost.get(position).getPostid());
+
+//                postRef.runTransaction(new Transaction.Handler() {
+//                    @Override
+//                    public Transaction.Result doTransaction(MutableData mutableData) {
+//                        Post post = mutableData.getValue(Post.class);
+//                        if (post == null)
+//                            return Transaction.success(mutableData);
 //
-//                                if (mutableData.getValue() != null){
-//                                    Post p = mutableData.getValue(Post.class);
-//                                }
+//                        post.increaseLike();
 //
-//                                //return Transaction.success(mutableData);
-//                            }
+//                        mutableData.setValue(post);
 //
-//                            @Override
-//                            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+////                        String path = null;
+////                        switch (post.getType()){
+////                            case ENTERTAINMENT:
+////                                path = "newsfeed/entertainment";
+////                                break;
+////                            case FOOD:
+////                                path = "newsfeed/food";
+////                                break;
+////                            case HOTEL:
+////                                path = "newsfeed/hotel";
+////                                break;
+////                        }
+////                        mDatabase.child("newsfeed/general").child(post.getPostid()).setValue(post);
+////                        mDatabase.child(path).child(post.getPostid()).setValue(post);
+//                        return Transaction.success(mutableData);
+//                    }
 //
-//                            }
-//                        });
+//                    @Override
+//                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+//
+//                    }
+//                });
 
                 //Push to database
                 mDatabase.child("interactions/likes").child(listPost.get(position).getPostid()).child(likeid).setValue(newLike);
@@ -153,6 +176,60 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             @Override
             public void unLiked(LikeButton likeButton) {
                 Toast.makeText(context, "You unliked post " + listPost.get(position).getContent(), Toast.LENGTH_SHORT).show();
+                // Tìm id của người gửi trong likes để xóa
+                String idToRemove = currentUser.getUid();
+                mDatabase.child("interactions/likes")
+                        .child(listPost.get(position).getPostid())
+                        .orderByChild("userid").equalTo(idToRemove)
+                        .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Like rlike = dataSnapshot.getValue(Like.class);
+                        Toast.makeText(context, "Your like id is " + rlike.getLikeid(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                // Giảm like
+                DatabaseReference postRef = mDatabase.child("interactions/posts").child(listPost.get(position).getUserid())
+                        .child(listPost.get(position).getPostid());
+//                postRef.runTransaction(new Transaction.Handler() {
+//                    @Override
+//                    public Transaction.Result doTransaction(MutableData mutableData) {
+//                        Post post = mutableData.getValue(Post.class);
+//                        if (post == null)
+//                            return Transaction.success(mutableData);
+//
+//                        post.decreaseLike();
+//                        mutableData.setValue(post);
+//
+//                        String path = null;
+//                        switch (post.getType()){
+//                            case ENTERTAINMENT:
+//                                path = "newsfeed/entertainment";
+//                                break;
+//                            case FOOD:
+//                                path = "newsfeed/food";
+//                                break;
+//                            case HOTEL:
+//                                path = "newsfeed/hotel";
+//                                break;
+//                        }
+//                        mDatabase.child("newsfeed/general").child(post.getPostid()).setValue(post);
+//                        mDatabase.child(path).child(post.getPostid()).setValue(post);
+//                        return Transaction.success(mutableData);
+//                    }
+//
+//                    @Override
+//                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+//
+//                    }
+//                });
+
             }
         });
 
@@ -166,9 +243,13 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     }
 
 
-    public void addItem(int position, Post post){
-        listPost.add(position, post);
-        notifyItemInserted(position);
+    public void addItem(Post post){
+        for(int i=0; i<listPost.size(); i++){
+            if (post.getPostid().equals(listPost.get(i).getPostid()))
+                return;
+        }
+        listPost.add(post);
+        notifyItemInserted(listPost.size() - 1);
     }
 
     public void updateList(List<Post> lstPost){

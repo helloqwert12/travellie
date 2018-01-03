@@ -5,13 +5,18 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <include layout="@layout/profile_panel" />
+    <include
+        android:id="@+id/profile_panel"
+        layout="@layout/profile_panel" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/contentPanel"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/feed_item_padding_top_bottom"
+        android:layout_marginTop="@dimen/feed_item_padding_top_bottom"
+        android:paddingEnd="@dimen/feed_item_padding_left_right"
+        android:paddingStart="@dimen/feed_item_padding_left_right"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,11 +27,9 @@
             android:id="@+id/tvContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:paddingEnd="@dimen/feed_item_profile_name"
             android:paddingStart="@dimen/feed_item_padding_left_right"
             android:textSize="@dimen/feed_item_profile_name"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
@@ -51,47 +54,47 @@
         <!--app:srcCompat="@drawable/love" />-->
 
         <!--TODO: https://github.com/jd-alexander/LikeButton-->
-        <!--<com.like.LikeButton-->
-            <!--android:id="@+id/imgbtnLike"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="@dimen/feed_item_padding_left_right"-->
-            <!--app:anim_scale_factor="3"-->
-            <!--app:icon_size="30dp"-->
-            <!--app:icon_type="heart"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:like_drawable="@drawable/loved"-->
-            <!--app:unlike_drawable="@drawable/love" />-->
+        <com.like.LikeButton
+            android:id="@+id/imgbtnLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/feed_item_padding_left_right"
+            app:anim_scale_factor="3"
+            app:icon_size="30dp"
+            app:icon_type="heart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:like_drawable="@drawable/loved"
+            app:unlike_drawable="@drawable/love" />
 
-        <!--<ImageButton-->
-            <!--android:id="@+id/imgbtnCmt"-->
-            <!--style="@style/bottom_icon"-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toStartOf="@+id/imgbtnLike"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:srcCompat="@drawable/comment" />-->
+        <ImageButton
+            android:id="@+id/imgbtnCmt"
+            style="@style/bottom_icon"
+            android:layout_width="30dp"
+            android:layout_marginEnd="@dimen/feed_item_padding_top_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgbtnLike"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/comment" />
 
-        <!--<ImageButton-->
-            <!--android:id="@+id/imgbtnShare"-->
-            <!--style="@style/bottom_icon"-->
-            <!--android:layout_width="25dp"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toStartOf="@+id/imgbtnCmt"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintVertical_bias="0.0"-->
-            <!--app:srcCompat="@drawable/share" />-->
+        <ImageButton
+            android:id="@+id/imgbtnShare"
+            style="@style/bottom_icon"
+            android:layout_width="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgbtnCmt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/share" />
 
         <TextView
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/feed_item_padding_top_bottom"
+            android:layout_marginStart="@dimen/feed_item_padding_left_right"
+            android:layout_marginTop="@dimen/feed_item_padding_top_bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -6,14 +6,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 /**
  * Created by SAGER on 03-Jan-18.
  */
 
-public class FAB_Hide_on_Scroll extends FloatingActionButton.Behavior {
+public class FAB_Float_on_Scroll extends FloatingActionButton.Behavior {
 
-    public FAB_Hide_on_Scroll(Context context, AttributeSet attrs) {
+    public FAB_Float_on_Scroll(Context context, AttributeSet attrs) {
         super();
     }
 
@@ -22,10 +23,12 @@ public class FAB_Hide_on_Scroll extends FloatingActionButton.Behavior {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
 
         //child -> Floating Action Button
-        if (child.getVisibility() == View.VISIBLE && dyConsumed > 0) {
-            child.hide();
-        } else if (child.getVisibility() == View.GONE && dyConsumed < 0) {
-            child.show();
+        if (dyConsumed > 0) {
+            CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
+            int fab_bottomMargin = layoutParams.bottomMargin;
+            child.animate().translationY(child.getHeight() + fab_bottomMargin).setInterpolator(new LinearInterpolator()).start();
+        } else if (dyConsumed < 0) {
+            child.animate().translationY(0).setInterpolator(new LinearInterpolator()).start();
         }
     }
 

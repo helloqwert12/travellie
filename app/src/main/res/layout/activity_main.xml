@@ -44,7 +44,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="56dp"
         android:layout_marginEnd="@dimen/fab_margin"
-        app:layout_behavior="com.mobile.absoluke.travelie.FAB_Hide_on_Scroll"
+        app:layout_behavior="com.mobile.absoluke.travelie.FAB_Float_on_Scroll"
         android:src="@drawable/pen"
         app:backgroundTint="@color/colorAccent"
         app:layout_anchor="@id/nsvContent"

@@ -16,9 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,10 +39,8 @@ import com.haresh.multipleimagepickerlibrary.MultiImageSelector;
 import com.hsalf.smilerating.SmileRating;
 import com.squareup.picasso.Picasso;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -89,6 +85,8 @@ public class AddPostActivity extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageRef;
 
+    int counter;
+
     //Dataobject
     UserInfo userInfo;
 
@@ -127,7 +125,7 @@ public class AddPostActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    void matchComponents(){
+    void matchComponents() {
         roundedImageAvatar = findViewById(R.id.roundImageAvatar);
         tvUsername = findViewById(R.id.tvUsername);
         editText = findViewById(R.id.editText);
@@ -181,17 +179,16 @@ public class AddPostActivity extends AppCompatActivity {
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Kiểm tra xem rating chưa
+                //Ki?m tra xem rating chua
                 if (ratingBar.getRating() == 0) {
                     Toast.makeText(AddPostActivity.this, R.string.rating_reminder, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
 
-                //Kiểm tra xem chọn mục chưa?
+                //Ki?m tra xem ch?n m?c chua?
                 POST_TYPE ptype = POST_TYPE.GENERAL;
-                switch (spnTag.getSelectedItemPosition())
-                {
+                switch (spnTag.getSelectedItemPosition()) {
                     case 0:
                         ptype = POST_TYPE.ENTERTAINMENT;
                         break;
@@ -207,9 +204,7 @@ public class AddPostActivity extends AppCompatActivity {
                 }
 
 
-
-
-                //Push dữ liệu lên
+                //Push d? li?u lên
                 //++status
                 String status = editText.getText().toString();
                 //++rating
@@ -219,10 +214,11 @@ public class AddPostActivity extends AppCompatActivity {
                 //++get timestamp
                 long timestamp = Calendar.getInstance().getTimeInMillis();
 
-                //++Lấy ảnh
+                //++L?y ?nh
                 //--TO DO
 
                 final Post newPost = new Post();
+                newPost.init();
                 newPost.setUserid(currentUser.getUid());
                 newPost.setUsername(currentUser.getDisplayName());
                 newPost.setContent(status);
@@ -233,58 +229,106 @@ public class AddPostActivity extends AppCompatActivity {
                 newPost.setCmtCount(0);
                 newPost.setType(ptype);
 
-                //Push để lấy key trước
+                //Push d? l?y key tru?c
                 String postId = mDatabase.child("interactions/posts").child(currentUser.getUid()).push().getKey();
                 newPost.setPostid(postId);
 
-                //Kiểm tra hình
-                ArrayList<String> listImg = mImagesAdapter.getListImage();
-                for(int i=0; i<listImg.size(); i++){
-                    try {
-                        InputStream stream = new FileInputStream(listImg.get(i));
-                        UploadTask uploadTask = storageRef.child(currentUser.getUid()).child("posts").child(newPost.getPostid()).putStream(stream);
+                final ArrayList<String> listImg = mImagesAdapter.getListImage();
+
+                // Kiểm tra xem có tồn tại hình không
+                if (listImg.size() > 0) {
+                    counter = 0;
+                    for (int i = 0; i < listImg.size(); i++) {
+//                    try {
+//                        InputStream stream = new FileInputStream(listImg.get(i));
+//                        UploadTask uploadTask = storageRef.child(currentUser.getUid()).child("posts").child(newPost.getPostid()).putStream(stream);
+//                        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                // Thêm vào post
+//                                newPost.addImageLink(taskSnapshot.getDownloadUrl().toString());
+//
+//                                // Thêm vào d? sau này load trong fragment photos
+//                                mDatabase.child("photos").child(currentUser.getUid()).push().setValue(taskSnapshot.getDownloadUrl().toString());
+//                            }
+//                        });
+//                    } catch (FileNotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+
+                        Uri file = Uri.fromFile(new File(listImg.get(i)));
+                        UploadTask uploadTask = storageRef.child(currentUser.getUid()).child("posts").child(newPost.getPostid()).putFile(file);
                         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                // Thêm vào post
-                                newPost.addImageLink(taskSnapshot.getDownloadUrl().toString());
+                                Uri link = taskSnapshot.getDownloadUrl();
 
-                                // Thêm vào để sau này load trong fragment photos
+                                // Thêm vào post
+                                newPost.addImageLink(link.toString());
                                 mDatabase.child("photos").child(currentUser.getUid()).push().setValue(taskSnapshot.getDownloadUrl().toString());
+
+
+                                if (counter == listImg.size() - 1) {
+                                    //Set value
+                                    mDatabase.child("interactions/posts").child(currentUser.getUid()).child(newPost.getPostid()).setValue(newPost);
+                                    // Ð?ng th?i c?p nh?t cho database ? tag tuong ?ng
+                                    // ++Add vào newsfeed
+                                    mDatabase.child("newsfeed/general").child(newPost.getPostid()).setValue(newPost);
+                                    // ++Add vào tab tuong ?ng
+                                    switch (newPost.getType()) {
+                                        case ENTERTAINMENT:
+                                            mDatabase.child("newsfeed/entertainment").child(newPost.getPostid()).setValue(newPost);
+                                            break;
+                                        case FOOD:
+                                            mDatabase.child("newsfeed/food").child(newPost.getPostid()).setValue(newPost);
+                                            break;
+                                        case HOTEL:
+                                            mDatabase.child("newsfeed/hotel").child(newPost.getPostid()).setValue(newPost);
+                                            break;
+
+                                    }
+
+                                    //Thông báo post thành công
+                                    Toast.makeText(AddPostActivity.this, R.string.post_success, Toast.LENGTH_SHORT).show();
+
+                                    // Tr? v? profile activity
+                                    Tool.changeActivity(AddPostActivity.this, ProfileActivity.class);
+                                }
+
+                                counter++;
                             }
                         });
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
                     }
+                } else {
+                    //Set value
+                    mDatabase.child("interactions/posts").child(currentUser.getUid()).child(newPost.getPostid()).setValue(newPost);
+                    // Ð?ng th?i c?p nh?t cho database ? tag tuong ?ng
+                    // ++Add vào newsfeed
+                    mDatabase.child("newsfeed/general").child(newPost.getPostid()).setValue(newPost);
+                    // ++Add vào tab tuong ?ng
+                    switch (newPost.getType()) {
+                        case ENTERTAINMENT:
+                            mDatabase.child("newsfeed/entertainment").child(newPost.getPostid()).setValue(newPost);
+                            break;
+                        case FOOD:
+                            mDatabase.child("newsfeed/food").child(newPost.getPostid()).setValue(newPost);
+                            break;
+                        case HOTEL:
+                            mDatabase.child("newsfeed/hotel").child(newPost.getPostid()).setValue(newPost);
+                            break;
+
+                    }
+
+                    //Thông báo post thành công
+                    Toast.makeText(AddPostActivity.this, R.string.post_success, Toast.LENGTH_SHORT).show();
+
+                    // Tr? v? profile activity
+                    Tool.changeActivity(AddPostActivity.this, ProfileActivity.class);
                 }
 
-                //Set value
-                mDatabase.child("interactions/posts").child(currentUser.getUid()).child(postId).setValue(newPost);
-                // Đồng thời cập nhật cho database ở tag tương ứng
-                // ++Add vào newsfeed
-                mDatabase.child("newsfeed/general").child(postId).setValue(newPost);
-                // ++Add vào tab tương ứng
-                switch (newPost.getType())
-                {
-                    case ENTERTAINMENT:
-                        mDatabase.child("newsfeed/entertainment").child(postId).setValue(newPost);
-                        break;
-                    case FOOD:
-                        mDatabase.child("newsfeed/food").child(postId).setValue(newPost);
-                        break;
-                    case HOTEL:
-                        mDatabase.child("newsfeed/hotel").child(postId).setValue(newPost);
-                        break;
-
-                }
-
-                //Thông báo post thành công
-                Toast.makeText(AddPostActivity.this, R.string.post_success, Toast.LENGTH_SHORT).show();
-
-                // Trở về profile activity
-                Tool.changeActivity(AddPostActivity.this, ProfileActivity.class);
             }
         });
+    }
 
 //        btnGetLocation.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -298,7 +342,6 @@ public class AddPostActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

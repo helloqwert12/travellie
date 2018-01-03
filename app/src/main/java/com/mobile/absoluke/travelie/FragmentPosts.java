@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,11 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +28,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import dataobject.POST_TYPE;
@@ -46,37 +42,31 @@ import tool.Tool;
 
 public class FragmentPosts extends Fragment {
 
+    //Pagnition - partial load newsfeed
+    final int itemPerTurn = 3;    // số item mỗi lượt
     String userID;
-
     //Intent
     Intent intent;
     Bundle bundle;
-
     //List Post
     RecyclerView recyvwPosts;
     PostRecyclerAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
     List<Post> listPost;    //test
-
     //Component
     Button imgbtnPost;
     Button imgbtnChoosePic;
     EditText etEditPost;
     Spinner spnPostType;
     FloatingActionButton fbtnAddPost;
-
     //Firebase
     FirebaseAuth auth;
     FirebaseUser currentUser;
     DatabaseReference mDatabase, postUserRef, curUserRef;
     FirebaseStorage storage;
     StorageReference storageRef;
-
     //dataobject
     UserInfo userInfo;
-
-    //Pagnition - partial load newsfeed
-    final int itemPerTurn = 3;    // số item mỗi lượt
     int indexTurn = 0;      // số turn hiện tại
     boolean isLoading;
     String keystart = "";
@@ -257,7 +247,6 @@ public class FragmentPosts extends Fragment {
 
     public void matchComponent(View rootView){
         recyvwPosts = rootView.findViewById(R.id.recyvwPosts);
-        fbtnAddPost = rootView.findViewById(R.id.fbtnAddPost);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(rootView.getContext(),
                 R.array.post_type, android.R.layout.simple_spinner_item);

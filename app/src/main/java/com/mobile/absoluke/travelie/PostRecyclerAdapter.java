@@ -61,19 +61,20 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     // Dùng để bind dữ liệu từ dataobject Post vào components feed_item
     @Override
     public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position) {
-        userinfoRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userInfo = dataSnapshot.getValue(UserInfo.class);
-                Picasso.with(context).load(userInfo.getAvatarLink()).into(viewHolder.roundedImageAvatar);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+//        userinfoRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                userInfo = dataSnapshot.getValue(UserInfo.class);
+//                Picasso.with(context).load(userInfo.getAvatarLink()).into(viewHolder.roundedImageAvatar);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+        Uri link = Uri.parse(listPost.get(position).getAvatarLink());
+        Picasso.with(context).load(link).into(viewHolder.roundedImageAvatar);
         viewHolder.tvUseranme.setText(listPost.get(position).getUsername());
         viewHolder.tvContent.setText(listPost.get(position).getContent());
         viewHolder.tvContent.setText(listPost.get(position).getContent());

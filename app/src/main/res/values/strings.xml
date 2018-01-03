@@ -7,7 +7,7 @@
     <string name="fb_login_protocol_scheme" translatable="false">fb122046885142484</string>
 
     <!-- Strings related to login -->
-    <string name="intro">
+    <string name="login_intro">
         <font color="white">Khám phá những\nđiểm đến\ncực</font>
         <font color="#f9d641">chất</font>
     </string>
@@ -156,5 +156,7 @@
     <!-- Strings related to profile -->
     <string name="cancel">Hủy</string>
     <string name="save">Lưu</string>
+    <string name="intro">Giới thiệu</string>
+    <string name="edit_intro">Chỉnh sửa</string>
 
 </resources>

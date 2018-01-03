@@ -24,7 +24,7 @@ public class PopupBio extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.popup_bio);
+        setContentView(R.layout.popup_intro);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -35,7 +35,7 @@ public class PopupBio extends Activity {
         getWindow().setLayout((int) (width * .8), (int) (height * .4));
 
         btnSaveBio = findViewById(R.id.btnSaveBio);
-        bio = findViewById(R.id.bio);
+        bio = findViewById(R.id.tvIntro);
         edtBio = findViewById(R.id.editBio);
 
         btnSaveBio.setOnClickListener(new View.OnClickListener() {

@@ -19,7 +19,7 @@
             android:padding="10dp"
             android:shape="rectangle">
             <!-- Use the solid tag to define the background color you want -->
-            <solid android:color="@android:color/transparent" />
+            <solid android:color="@android:color/white" />
             <corners android:radius="100dp" />
         </shape>
     </item>

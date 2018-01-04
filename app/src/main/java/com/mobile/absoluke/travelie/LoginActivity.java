@@ -58,20 +58,20 @@ public class LoginActivity extends AppCompatActivity {
 
         // Check if user is signed in (non-null) and update UI accordingly.
 //        Comment lines below for testing
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        Log.i(TAG, "userid: " + currentUser.getUid());
-//        if (currentUser != null) {
-//
-//            //CAUTION: Code below only for testing!!!
-////            Bundle bundle = new Bundle();
-////            bundle.putString("ID", currentUser.getUid());
-////            bundle.putString("NAME", currentUser.getDisplayName());
-////            bundle.putString("EMAIL", currentUser.getEmail());
-////            bundle.putString("PHONE", currentUser.getPhoneNumber());
-////            bundle.putString("IMAGE", currentUser.getPhotoUrl().toString());
-////            Tool.pushDataAndChangeActivity(LoginActivity.this, RegisterActivity.class, bundle);
-//            Tool.changeActivity(this, MainActivity.class);
-//        }
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        Log.i(TAG, "userid: " + currentUser.getUid());
+        if (currentUser != null) {
+
+            //CAUTION: Code below only for testing!!!
+//            Bundle bundle = new Bundle();
+//            bundle.putString("ID", currentUser.getUid());
+//            bundle.putString("NAME", currentUser.getDisplayName());
+//            bundle.putString("EMAIL", currentUser.getEmail());
+//            bundle.putString("PHONE", currentUser.getPhoneNumber());
+//            bundle.putString("IMAGE", currentUser.getPhotoUrl().toString());
+//            Tool.pushDataAndChangeActivity(LoginActivity.this, RegisterActivity.class, bundle);
+            Tool.changeActivity(this, MainActivity.class);
+        }
 //        Stop comment
     }
 

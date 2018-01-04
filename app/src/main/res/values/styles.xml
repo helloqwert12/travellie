@@ -53,10 +53,16 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="bio_btn" parent="Widget.AppCompat.Button.Colored">
+    <style name="btn_theme" parent="btn_ripple">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/btn_ripple</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="btn_ripple" parent="Widget.AppCompat.Button.Colored">
         <item name="android:background">@drawable/btn_ripple</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/colorAccent</item>

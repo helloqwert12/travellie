@@ -33,12 +33,12 @@
 
         <Button
             android:id="@+id/btnCancelBio"
-            style="@style/bio_btn"
+            style="@style/btn_theme"
             android:text="@string/cancel" />
 
         <Button
             android:id="@+id/btnSaveBio"
-            style="@style/bio_btn"
+            style="@style/btn_theme"
             android:text="@string/save" />
 
     </LinearLayout>

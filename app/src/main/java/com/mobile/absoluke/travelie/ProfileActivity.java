@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
     RoundedImage roundedImageChangeAvatar;
     Button btnIntro;
     FloatingActionButton fabAddPost;
+    ImageButton btnLeft;
 
     //Firebase
     FirebaseAuth auth;
@@ -142,7 +144,7 @@ public class ProfileActivity extends AppCompatActivity {
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
     }
 
-    private void matchComponents(){
+    private void matchComponents() {
         imageCover = findViewById(R.id.imageCover);
         tvUsername = findViewById(R.id.username);
         roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
@@ -187,6 +189,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Tool.changeActivity(ProfileActivity.this, AddPostActivity.class);
+            }
+        });
+
+        // Button back
+        btnLeft = findViewById(R.id.btn_left);
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tool.changeActivity(ProfileActivity.this, MainActivity.class);
             }
         });
     }

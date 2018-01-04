@@ -34,7 +34,7 @@ public class ImageLinkAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHol
     @Override
     public void onBindViewHolder(ImagesAdapter.ViewHolder holder, int position) {
         Uri link = Uri.parse(listLink.get(position));
-        Picasso.with(mContext).load(link).into(holder.getImage());
+        Picasso.with(mContext).load(link).fit().centerCrop().into(holder.getImage());
     }
 
     @Override

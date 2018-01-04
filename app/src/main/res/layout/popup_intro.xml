@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_parent_rounded_corner"
     android:paddingBottom="@dimen/feed_item_padding_left_right"
     android:paddingEnd="@dimen/feed_item_padding_left_right"
     android:paddingStart="@dimen/feed_item_padding_left_right"
@@ -25,11 +25,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="64dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBio">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/btnCancelBio"

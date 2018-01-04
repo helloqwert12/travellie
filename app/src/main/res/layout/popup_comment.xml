@@ -53,8 +53,10 @@
 
     <View
         android:id="@+id/firstHorizontalLine"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_gravity="center"
         android:background="#c0c0c0"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,8 +73,10 @@
 
     <View
         android:id="@+id/secondHorizontalLine"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_gravity="center"
         android:background="#c0c0c0"
         app:layout_constraintBottom_toTopOf="@+id/comment_section"

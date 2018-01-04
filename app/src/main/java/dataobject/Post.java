@@ -14,7 +14,7 @@ public class Post {
     private String postid;
     private String content;
     private String avatarLink;
-    private List<String> imageLinks;
+    private ArrayList<String> imageLinks;
     private String userid;
     private String username;
     private long timestamp;
@@ -32,7 +32,7 @@ public class Post {
         //default constructor for firebase
     }
 
-    public Post(String ctn, String avaLink, List<String> imglinks, String uid, String uname, long ts, List<String> lk,
+    public Post(String ctn, String avaLink, ArrayList<String> imglinks, String uid, String uname, long ts, List<String> lk,
                 List<String> tg, List<String> lik, List<String> shrs, List<String> cmts, POST_TYPE tp, int rt){
         links = new ArrayList<>();
         //postid = pid;
@@ -53,6 +53,9 @@ public class Post {
         cmtCount = 0;
     }
 
+    public void init(){
+        imageLinks = new ArrayList<>();
+    }
     //Get-set
     public String getPostid() { return postid; }
 
@@ -72,9 +75,9 @@ public class Post {
         avatarLink = value;
     }
 
-    public List<String> getImageLinks() { return imageLinks; }
+    public ArrayList<String> getImageLinks() { return imageLinks; }
 
-    public void setImageLinks(List<String> value) {
+    public void setImageLinks(ArrayList<String> value) {
         imageLinks = value;
     }
 
@@ -148,9 +151,6 @@ public class Post {
 
     public void setCmtCount(int value) { cmtCount = value; }
 
-    public void init() {
-        imageLinks = new ArrayList<>();
-    }
 
     //add
     public void addImageLink(String element) { imageLinks.add(element); }

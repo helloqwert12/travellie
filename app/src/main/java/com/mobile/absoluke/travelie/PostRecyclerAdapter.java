@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -129,6 +130,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             case 5:
                 viewHolder.ivRating.setImageResource(R.drawable.great);
                 break;
+        }
+
+        // Lấy ảnh nếu có
+        if (!listPost.get(position).getImageLinks().get(0).equals("noimage")){
+            viewHolder.imgAdapter = new ImageLinkAdapter(viewHolder.itemView.getContext(), listPost.get(position).getImageLinks());
+            viewHolder.recyclerViewImages.setAdapter(viewHolder.imgAdapter);
         }
 
         viewHolder.imgbtnLike.setOnLikeListener(new OnLikeListener() {
@@ -302,6 +309,9 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         ImageButton imgbtnShare;
         LikeButton imgbtnLike;
         ImageView ivRating;
+        RecyclerView recyclerViewImages;
+        ImageLinkAdapter imgAdapter;
+        GridLayoutManager gridLayoutManager;
 
 
         public RecyclerViewHolder(final View itemView) {
@@ -316,6 +326,10 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             imgbtnShare = itemView.findViewById(R.id.imgbtnShare);
             imgbtnLike = itemView.findViewById(R.id.imgbtnLike);
             ivRating = itemView.findViewById(R.id.ivRating);
+            recyclerViewImages = itemView.findViewById(R.id.recycler_view_images);
+            gridLayoutManager = new GridLayoutManager(itemView.getContext(), 2);
+            recyclerViewImages.setHasFixedSize(true);
+            recyclerViewImages.setLayoutManager(gridLayoutManager);
 
 
 //            tvLink = itemView.findViewById(R.id.tvLink);

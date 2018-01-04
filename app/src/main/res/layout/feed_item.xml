@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/feed_item_padding_top_bottom"
     android:layout_marginBottom="@dimen/feed_item_padding_top_bottom"
+    android:layout_marginTop="@dimen/feed_item_padding_top_bottom"
     android:background="@color/white">
 
     <android.support.constraint.ConstraintLayout
@@ -63,8 +62,6 @@
             layout="@layout/content_pick_multiple_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvContent" />
@@ -79,15 +76,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentPanel">
-
-        <!--<ImageButton-->
-        <!--android:id="@+id/imageButton"-->
-        <!--style="@style/bottom_icon"-->
-        <!--android:layout_width="30dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@drawable/love" />-->
 
         <!--TODO: https://github.com/jd-alexander/LikeButton-->
         <com.like.LikeButton

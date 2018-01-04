@@ -9,11 +9,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:paddingEnd="@dimen/feed_item_padding_left_right"
-        android:paddingStart="@dimen/feed_item_padding_left_right"
         android:background="@color/white"
         android:elevation="1dp"
         android:orientation="horizontal"
+        android:paddingEnd="@dimen/feed_item_padding_left_right"
+        android:paddingStart="@dimen/feed_item_padding_left_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -71,12 +71,12 @@
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingEnd="@dimen/feed_item_padding_left_right"
-        android:paddingStart="@dimen/feed_item_padding_left_right"
         android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:hint="@string/draft_hello"
         android:inputType="textMultiLine"
+        android:paddingEnd="@dimen/feed_item_padding_left_right"
+        android:paddingStart="@dimen/feed_item_padding_left_right"
         android:textColor="@android:color/black"
         android:textSize="@dimen/feed_item_profile_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,15 +88,12 @@
         layout="@layout/content_pick_multiple_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
         android:paddingEnd="@dimen/feed_item_padding_left_right"
         android:paddingStart="@dimen/feed_item_padding_left_right"
         app:layout_constraintBottom_toTopOf="@+id/ratingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
     <!--</ScrollView>-->
 
     <!--TODO: https://github.com/sujithkanna/SmileyRating-->
@@ -133,7 +130,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/photo" />
 
         <!--<android.support.v7.widget.SearchView.SearchAutoComplete-->
@@ -195,4 +191,5 @@
             app:srcCompat="@drawable/send" />
 
     </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>

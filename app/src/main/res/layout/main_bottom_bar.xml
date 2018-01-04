@@ -42,4 +42,5 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:icon="@drawable/notification" />-->
     </android.support.design.widget.TabLayout>
+
 </android.support.v7.widget.Toolbar>

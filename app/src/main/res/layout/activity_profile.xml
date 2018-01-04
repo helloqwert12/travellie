@@ -155,7 +155,6 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAddPost"
-        app:layout_behavior="com.mobile.absoluke.travelie.FAB_Float_on_Scroll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -163,6 +162,7 @@
         android:src="@drawable/pen"
         app:backgroundTint="@color/colorAccent"
         app:layout_anchor="@id/nsvContentProfile"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|end"
+        app:layout_behavior="com.mobile.absoluke.travelie.FAB_Float_on_Scroll" />
 
 </android.support.design.widget.CoordinatorLayout>

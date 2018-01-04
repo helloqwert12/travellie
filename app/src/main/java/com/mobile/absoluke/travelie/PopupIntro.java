@@ -32,7 +32,7 @@ public class PopupIntro extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .8), (int) (height * .23));
+        getWindow().setLayout((int) (width * .8), (int) (height * .24));
 
         btnSaveBio = findViewById(R.id.btnSaveBio);
         bio = findViewById(R.id.tvIntro);

@@ -58,6 +58,18 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         mDatabase = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
+
+        mDatabase.child("users_info").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userInfo = dataSnapshot.getValue(UserInfo.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -87,6 +99,25 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 //
 //            }
 //        });
+        //Lấy like
+
+        mDatabase.child("interactions/likes").child(listPost.get(position).getPostid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                viewHolder.tvCount.setText(String.valueOf(dataSnapshot.getChildrenCount()) + " votes");
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Like l = data.getValue(Like.class);
+                    if (l.getUserid().equals(currentUser.getUid()))
+                        viewHolder.imgbtnLike.setLiked(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         Uri link = Uri.parse(listPost.get(position).getAvatarLink());
         Picasso.with(context).load(link).into(viewHolder.roundedImageAvatar);
         viewHolder.tvUseranme.setText(listPost.get(position).getUsername());
@@ -135,6 +166,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         viewHolder.imgbtnLike.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
+
                 //Toast.makeText(context, "You like post " + listPost.get(position).getContent(), Toast.LENGTH_SHORT).show();
                 String likeid = mDatabase.child("interactions/likes").child(listPost.get(position).getPostid()).push().getKey();
                 Like newLike = new Like();
@@ -144,47 +176,13 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                 newLike.setUserid(currentUser.getUid());
                 newLike.setUsername(currentUser.getDisplayName());
 
-                listPost.get(position).increaseLike();
-                int count = listPost.get(position).getLikeCount();
+                //listPost.get(position).increaseLike();
+                //int count = listPost.get(position).getLikeCount();
                 //tăng like
-                DatabaseReference postRef = mDatabase.child("interactions/posts").child(listPost.get(position).getUserid())
-                        .child(listPost.get(position).getPostid());
+                //DatabaseReference postRef = mDatabase.child("interactions/posts").child(listPost.get(position).getUserid())
+                //        .child(listPost.get(position).getPostid());
 
-                postRef.child("likeCount").setValue(listPost.get(position).getLikeCount());
-
-//                postRef.runTransaction(new Transaction.Handler() {
-//                    @Override
-//                    public Transaction.Result doTransaction(MutableData mutableData) {
-//                        Post post = mutableData.getValue(Post.class);
-//                        if (post == null)
-//                            return Transaction.success(mutableData);
-//
-//                        post.increaseLike();
-//
-//                        mutableData.setValue(post);
-//
-////                        String path = null;
-////                        switch (post.getType()){
-////                            case ENTERTAINMENT:
-////                                path = "newsfeed/entertainment";
-////                                break;
-////                            case FOOD:
-////                                path = "newsfeed/food";
-////                                break;
-////                            case HOTEL:
-////                                path = "newsfeed/hotel";
-////                                break;
-////                        }
-////                        mDatabase.child("newsfeed/general").child(post.getPostid()).setValue(post);
-////                        mDatabase.child(path).child(post.getPostid()).setValue(post);
-//                        return Transaction.success(mutableData);
-//                    }
-//
-//                    @Override
-//                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-//
-//                    }
-//                });
+                //postRef.child("likeCount").setValue(listPost.get(position).getLikeCount());
 
                 //Push to database
                 mDatabase.child("interactions/likes").child(listPost.get(position).getPostid()).child(likeid).setValue(newLike);
@@ -196,7 +194,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
                 // ++Nếu ko thì thêm vào notification của người tạo post
                 Notification newNoti = new Notification();
-                newNoti.setAvatarLink(currentUser.getPhotoUrl().toString());
+                newNoti.setAvatarLink(userInfo.getAvatarLink());
                 newNoti.setSenderName(currentUser.getDisplayName());
                 newNoti.setType(INTERACTION_TYPE.LIKE);
                 newNoti.setPostid(listPost.get(position).getPostid());
@@ -209,6 +207,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
             @Override
             public void unLiked(LikeButton likeButton) {
+
                 //Toast.makeText(context, "You unliked post " + listPost.get(position).getContent(), Toast.LENGTH_SHORT).show();
                 // Tìm id của người gửi trong likes để xóa
                 String idToRemove = currentUser.getUid();
@@ -220,6 +219,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Like rlike = dataSnapshot.getValue(Like.class);
                         //Toast.makeText(context, "Your like id is " + rlike.getLikeid(), Toast.LENGTH_SHORT).show();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            mDatabase.child("interactions/likes")
+                                    .child(listPost.get(position).getPostid())
+                                    .child(data.getKey()).removeValue();
+                            viewHolder.imgbtnLike.setLiked(false);
+                        }
                     }
 
                     @Override
@@ -298,6 +303,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         TextView tvUseranme;
         TextView tvTimestamp;
         TextView tvContent;
+        TextView tvCount;
         //TextView tvLink;
         //ImageView imgvwPhoto; //--TODO: change to FeedImageView
         ImageButton imgbtnCmt;
@@ -325,7 +331,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             gridLayoutManager = new GridLayoutManager(itemView.getContext(), 2);
             recyclerViewImages.setHasFixedSize(true);
             recyclerViewImages.setLayoutManager(gridLayoutManager);
-
+            tvCount = itemView.findViewById(R.id.tvCount);
 
 //            tvLink = itemView.findViewById(R.id.tvLink);
 //            fimgvwPhoto = itemView.findViewById(R.id.fimgvwPhoto);

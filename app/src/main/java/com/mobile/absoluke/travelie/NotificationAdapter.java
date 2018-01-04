@@ -1,12 +1,15 @@
 package com.mobile.absoluke.travelie;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,6 +51,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 //        }
 
         holder.tvUsername.setText(content + " thích bài viết của bạn");
+        Uri link = Uri.parse(list.get(position).getAvatarLink());
+        Picasso.with(context).load(link).into(holder.roundImageAvatar);
     }
 
     @Override

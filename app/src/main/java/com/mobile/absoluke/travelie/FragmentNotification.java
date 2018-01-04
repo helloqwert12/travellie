@@ -56,15 +56,6 @@ public class FragmentNotification extends Fragment {
 
         recyvwNotify.setAdapter(adapter);
 
-        Notification n1 = new Notification();
-        Notification n2 = new Notification();
-        n1.setSenderName("ABC");
-        n2.setSenderName("DEF");
-
-        list.add(n1);
-        list.add(n2);
-
-
         notifyRef = mDatabase.child("notifications").child(currentUser.getUid());
         notifyRef.addChildEventListener(new ChildEventListener() {
             @Override

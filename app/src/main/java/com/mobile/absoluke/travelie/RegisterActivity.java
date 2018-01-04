@@ -248,6 +248,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     userInfo.setPhone(phone);
                                     userInfo.setDateofbirth(etDayOfBirth.getText().toString());
                                     userInfo.setGender(choice);
+                                    userInfo.setDescription("Newbie");
                                     userInfo.setRank("Beginner");
 
                                     //-Push to database

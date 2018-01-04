@@ -55,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView tvIntro;
     RoundedImage roundedImageChangeAvatar;
     Button btnIntro;
+    ImageButton btnRight;
     FloatingActionButton fabAddPost;
     ImageButton btnLeft;
 
@@ -148,9 +149,8 @@ public class ProfileActivity extends AppCompatActivity {
     private void matchComponents() {
         imageCover = findViewById(R.id.imageCover);
         tvUsername = findViewById(R.id.username);
-        tvIntro = findViewById(R.id.tvIntro);
         roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
-        btnIntro = findViewById(R.id.btnIntro);
+
 
         // Set a click listener for the Popup Intro
         btnIntro.setOnClickListener(new View.OnClickListener() {
@@ -246,12 +246,17 @@ public class ProfileActivity extends AppCompatActivity {
         intent = getIntent();
         bundle = intent.getBundleExtra("BUNDLE");
 
+        tvIntro = findViewById(R.id.tvIntro);
+        btnIntro = findViewById(R.id.btnIntro);
+        btnRight = findViewById(R.id.btn_right);
+
         if (bundle == null){
             userID = currentUser.getUid();
+            btnRight.setVisibility(View.INVISIBLE);
         }
         else{
             userID = bundle.getString("ID");
-            tvIntro.setVisibility(View.INVISIBLE);
+            btnIntro.setVisibility(View.INVISIBLE);
         }
     }
 

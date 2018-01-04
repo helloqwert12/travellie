@@ -159,4 +159,10 @@
     <string name="intro">Giới thiệu</string>
     <string name="edit_intro">Chỉnh sửa</string>
 
+    <!-- Strings related to notification -->
+    <string name="notify_like">bình chọn</string>
+    <string name="notify_cmt">bình luận</string>
+    <string name="notify_shared">chia sẻ</string>
+
+
 </resources>

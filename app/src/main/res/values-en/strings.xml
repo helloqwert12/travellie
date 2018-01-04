@@ -63,4 +63,9 @@
     <string name="cancel">Cancel</string>
     <string name="intro">Intro</string>
     <string name="edit_intro">edit intro</string>
+
+    <!-- Strings related to notification -->
+    <string name="notify_like">voted</string>
+    <string name="notify_cmt">commented</string>
+    <string name="notify_shared">shared</string>
 </resources>

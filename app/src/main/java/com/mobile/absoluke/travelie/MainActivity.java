@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     RoundedImage roundImageAvatar;
     FloatingActionButton fabAddPost;
+
+    //Firebase
+    DatabaseReference mDatabase, notifyRef;
+    FirebaseUser currentUser;
+
 
     private int[] tabIcons = {
             R.drawable.home,
@@ -54,8 +60,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users_info").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("users_info").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
@@ -67,6 +75,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+//        notifyRef = mDatabase.child("notifications").child(currentUser.getUid());
+//        notifyRef.orderByKey().limitToLast(1).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()){
+//                    for(DataSnapshot data:dataSnapshot.getChildren()){
+//                        Notification notify = data.getValue(Notification.class);
+//                        Toast.makeText(MainActivity.this, notify.getSenderName() + " đã thích bài viết", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         fabAddPost = findViewById(R.id.fabAddPost);
         fabAddPost.setOnClickListener(new View.OnClickListener() {

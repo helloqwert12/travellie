@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
                 Picasso.with(MainActivity.this).load(userInfo.getAvatarLink()).into(roundImageAvatar);
+
             }
 
             @Override

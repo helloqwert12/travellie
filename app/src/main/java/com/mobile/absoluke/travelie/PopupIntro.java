@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by Yul Lucia on 01/02/2018.
  */
@@ -48,6 +51,10 @@ public class PopupIntro extends Activity {
                     /////////////////////////////////
                     //Chuyển Bio info lên firebase, sau đó từ firebase chuyển lại xuống TextView bên ProfileActivity
                     // ======> thuộc tính Bio bên ProfileActivity sẽ luôn nhận giá trị từ Firebase.
+                    FirebaseDatabase.getInstance().getReference().child("users_info")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .child("description").setValue(edtBio.getText().toString());
+
                 }
             }
         });

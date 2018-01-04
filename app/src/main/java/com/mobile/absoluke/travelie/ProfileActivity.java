@@ -52,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
     //Components
     ImageView imageCover;
     TextView tvUsername;
+    TextView tvIntro;
     RoundedImage roundedImageChangeAvatar;
     Button btnIntro;
     FloatingActionButton fabAddPost;
@@ -147,6 +148,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void matchComponents() {
         imageCover = findViewById(R.id.imageCover);
         tvUsername = findViewById(R.id.username);
+        tvIntro = findViewById(R.id.tvIntro);
         roundedImageChangeAvatar = findViewById(R.id.roundImageChangeAvatar);
         btnIntro = findViewById(R.id.btnIntro);
 
@@ -249,6 +251,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         else{
             userID = bundle.getString("ID");
+            tvIntro.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -266,25 +269,14 @@ public class ProfileActivity extends AppCompatActivity {
                 StorageReference avatarRef = storage.getReferenceFromUrl(userInfo.getAvatarLink());
                 Log.i(TAG, "avatarRef: " + avatarRef);
 
-//                Glide.with(ProfileActivity.this)
-//                        .using(new FirebaseImageLoader())
-//                        .load(avatarRef)
-//                        .into(roundedImageChangeAvatar);
-                //            .into(cimgvwChangeAvatar);
                 Picasso.with(ProfileActivity.this).load(Uri.parse(userInfo.getAvatarLink())).into(roundedImageChangeAvatar);
 
-                StorageReference coverRef = storage.getReferenceFromUrl(userInfo.getCoverLink());
-                Log.i(TAG, "coverRef: " + coverRef);
-
-//                Glide.with(ProfileActivity.this)
-//                        .using(new FirebaseImageLoader())
-//                        .load(coverRef)
-//                        .into(imageCover);
                 Picasso.with(ProfileActivity.this).load(Uri.parse(userInfo.getCoverLink())).into(imageCover);
 
                 //-Load info
                 String fullName = userInfo.getLastname() + " " + userInfo.getFirstname();
                 tvUsername.setText(fullName);
+                tvIntro.setText(userInfo.getDescription().toString());
             }
 
             @Override
